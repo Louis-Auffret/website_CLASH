@@ -6,6 +6,8 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Trophy, Target, Zap, Shield, Users, Star, Filter } from "lucide-react";
 import { useState } from "react";
 
+import sleaz from "../assets/players/Sleaz1.jpg";
+
 interface TeamsPageProps {
     onPlayerSelect?: (playerId: string) => void;
 }
@@ -28,7 +30,7 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                     id: "Sleaz",
                     name: "Louis Auffret",
                     role: "Capitaine + Raptor",
-                    photo: "https://images.unsplash.com/photo-1586182987320-4f376d39d787?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21wZXRpdGl2ZSUyMGdhbWVyJTIwaGVhZHNob3R8ZW58MXx8fHwxNzU1MzQ2OTA5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+                    photo: sleaz,
                     performance: {
                         matchesPlayed: 38,
                         pointsTaken: 2847,
@@ -58,7 +60,7 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                     id: "Fastyou",
                     name: "Tom Herteleer",
                     role: "Raptor",
-                    photo: "https://images.unsplash.com/photo-1571169186019-18acfb7036bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlc3BvcnRzJTIwcGxheWVyJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzU1MzM0MTgyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+                    photo: sleaz,
                     performance: {
                         matchesPlayed: 38,
                         pointsTaken: 2847,

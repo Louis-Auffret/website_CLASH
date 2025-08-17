@@ -4,17 +4,48 @@ import { Trophy, Users, Calendar, MapPin, Target, Star } from "lucide-react";
 
 export function ClubPage() {
     const achievements = [
-        { year: "2025", title: "Champions de France", description: "Championnat de France - Angoulême" },
-        { year: "2024", title: "Quatrième place CDF", description: "Championnat de France - Roanne" },
-        { year: "2022", title: "Champions de ligue Nord", description: "Championnat régionnal - Ligue Nord" },
-        { year: "2021", title: "Vice-Champions de France", description: "Championnat de France - Poitiers" },
+        { year: "2025", title: "Champions de France", description: "Championnat de France - Angoulême", star: 5 },
+        { year: "2024", title: "Quatrième place CDF", description: "Championnat de France - Roanne", star: 3 },
+        { year: "2022", title: "Champions de ligue Nord", description: "Championnat régionnal - Ligue Nord", star: 2 },
+        { year: "2021", title: "Vice-Champions de France", description: "Championnat de France - Poitiers", star: 4 },
     ];
 
     const facilities = [
-        { name: "Arena Alpha", description: "Multi-level competitive arena with obstacles", capacity: "24 players" },
-        { name: "Arena Beta", description: "CQB training facility for close combat", capacity: "16 players" },
-        { name: "Training Center", description: "Practice range with target systems", capacity: "12 players" },
-        { name: "Team Rooms", description: "Strategy planning and equipment storage", capacity: "6 teams" },
+        {
+            name: "Briefing",
+            description:
+                "C'est le lieu ou les joueurs s'équipent. Très bon terrain d'entraînement, parfait pour s'entrainer à quelques joueurs.",
+            capacity: "6 joueurs en entrainement",
+        },
+        {
+            name: "Salle 1",
+            description: "Labyrinthe carré sans étage, avec deux mezzanines opposées, le rêve de tout raptor.",
+            capacity: "2 équipes ou 12 joueurs en entrainement",
+        },
+        {
+            name: "Salle 2",
+            description:
+                "Salle à double hauteur, très stratégique. Force les joueurs des équipes à jouer ensembles pour réussir leurs reprises.",
+            capacity: "2 équipes ou 18 joueurs en entrainement",
+        },
+        {
+            name: "Salle 3",
+            description:
+                "Salle à double hauteur, parfaite pour s'entrainer en petits groupes. Elle n'est pas utilisée en compétition.",
+            capacity: "2 équipes ou 8 joueurs en entrainement",
+        },
+        {
+            name: "Salle 2+3",
+            description:
+                "Ouverture de sas entre les salles 2 et 3 pour créer un immense labyrinthe. Pour varier les salles en entrainement.",
+            capacity: "4 équipes",
+        },
+        {
+            name: "Salle de repos",
+            description:
+                "Lieu de repos des joueurs, avec les plans des salles aux murs, parfait pour établir ses stratégies, se reposer et s'équiper.",
+            capacity: "30 joueurs",
+        },
     ];
 
     return (
@@ -86,8 +117,8 @@ export function ClubPage() {
                         <div className="relative">
                             <ImageWithFallback
                                 // src="https://images.unsplash.com/photo-1675310854573-c5c8e4089426?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21wZXRpdGl2ZSUyMGdhbWluZyUyMHRlYW18ZW58MXx8fHwxNzU1MzQ1OTUxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                                src="../src/assets/Pour le site 2.jpg"
-                                // src="../src/assets/Players_portrait.jpg"
+                                // src="../src/assets/Pour le site 2.jpg"
+                                src="../src/assets/Cover.jpg"
                                 alt="Competitive Gaming Team"
                                 className="w-full h-80 object-cover rounded-lg border border-primary/20"
                             />
@@ -115,7 +146,7 @@ export function ClubPage() {
                                         <div className="flex items-center space-x-3 mb-2">
                                             <span className="text-primary font-bold text-lg">{achievement.year}</span>
                                             <div className="flex space-x-1">
-                                                {[...Array(3)].map((_, i) => (
+                                                {[...Array(achievement.star)].map((_, i) => (
                                                     <Star key={i} className="h-4 w-4 text-primary fill-current" />
                                                 ))}
                                             </div>
@@ -133,7 +164,7 @@ export function ClubPage() {
             {/* Facilities Section */}
             <section className="py-16 px-4">
                 <div className="container mx-auto max-w-6xl">
-                    <h2 className="text-4xl font-bold text-center mb-12 text-primary">World-Class Facilities</h2>
+                    <h2 className="text-4xl font-bold text-center mb-12 text-primary">Nos salles</h2>
 
                     <div className="grid md:grid-cols-2 gap-8 mb-12">
                         {facilities.map((facility, index) => (
@@ -147,7 +178,7 @@ export function ClubPage() {
                                     <div className="flex-1">
                                         <h3 className="text-xl font-bold mb-2 text-primary">{facility.name}</h3>
                                         <p className="text-gray-300 mb-3">{facility.description}</p>
-                                        <div className="text-sm text-primary">Capacity: {facility.capacity}</div>
+                                        <div className="text-sm text-primary">Capacité: {facility.capacity}</div>
                                     </div>
                                 </div>
                             </Card>
@@ -156,17 +187,15 @@ export function ClubPage() {
 
                     <div className="relative">
                         <ImageWithFallback
-                            src="https://images.unsplash.com/photo-1620705914357-a9d11009e068?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZW9uJTIwZ2FtaW5nJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NTUzNDU5NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                            // src="../src/assets/Pour le site 2.jpg"
+                            // src="https://images.unsplash.com/photo-1620705914357-a9d11009e068?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZW9uJTIwZ2FtaW5nJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NTUzNDU5NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                            src="../src/assets/Pour le site 2.jpg"
                             alt="Neon Gaming Technology"
                             className="w-full h-60 object-cover rounded-lg border border-primary/20"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg flex items-end p-6">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent rounded-lg flex items-end p-6">
                             <div>
-                                <h3 className="text-2xl font-bold text-white mb-2">State-of-the-Art Technology</h3>
-                                <p className="text-gray-300">
-                                    Advanced laser tag systems with real-time tracking and analytics
-                                </p>
+                                <h3 className="text-2xl font-bold text-white mb-2">Technologie de pointe</h3>
+                                <p className="text-gray-300">Entraînements avec suivi et analyse des performances !</p>
                             </div>
                         </div>
                     </div>

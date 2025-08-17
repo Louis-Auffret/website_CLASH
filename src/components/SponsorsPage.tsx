@@ -8,77 +8,23 @@ export function SponsorsPage() {
     const sponsors = [
         {
             id: 1,
-            name: "TechNova Systems",
-            tier: "Title Sponsor",
-            logo: "https://images.unsplash.com/photo-1661347998423-b15d37d6f61e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwY29tcGFueSUyMGxvZ298ZW58MXx8fHwxNzU1MjY1MjQ3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+            name: "Laser Game Evolution Le Havre",
+            tier: "Partenaire majeur",
+            logo: "https://le-havre.lasergame-evolution.fr/wp-content/uploads/sites/145/2025/08/logo-CMJN-200x50-1.webp",
             description:
-                "Leading technology solutions provider specializing in advanced laser systems and electronic equipment.",
-            partnership: "2021 - Present",
-            contribution: "Primary equipment sponsor providing cutting-edge laser tag systems and technical support.",
-            value: "$50,000+ annually",
-            website: "www.technova-systems.com",
-        },
-        {
-            id: 2,
-            name: "Nexus Gaming Gear",
-            tier: "Equipment Partner",
-            logo: "https://images.unsplash.com/photo-1581285228660-48add4794ee7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYW1pbmclMjBnZWFyJTIwYnJhbmR8ZW58MXx8fHwxNzU1MzUxMDI2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-            description: "Premium gaming accessories and professional esports equipment manufacturer.",
-            partnership: "2022 - Present",
-            contribution: "Official supplier of team uniforms, protective gear, and training accessories.",
-            value: "$25,000+ annually",
-            website: "www.nexusgaming.com",
-        },
-        {
-            id: 3,
-            name: "Atlas Sports Co.",
-            tier: "Official Partner",
-            logo: "https://images.unsplash.com/photo-1618411062366-81b4c31657cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcG9ydHMlMjBlcXVpcG1lbnQlMjBsb2dvfGVufDF8fHx8MTc1NTM1MTAzMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-            description: "Sports equipment and facility management company supporting competitive athletics.",
-            partnership: "2020 - Present",
-            contribution: "Arena facility maintenance, safety equipment, and event coordination support.",
-            value: "$15,000+ annually",
-            website: "www.atlassports.com",
-        },
-        {
-            id: 4,
-            name: "Voltage Energy",
-            tier: "Nutrition Partner",
-            logo: "https://images.unsplash.com/photo-1704278052498-70de0a66d5ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbmVyZ3klMjBkcmluayUyMGJyYW5kfGVufDF8fHx8MTc1NTM1MTAzM3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-            description: "Performance nutrition brand focused on competitive athletes and gamers.",
-            partnership: "2023 - Present",
-            contribution: "Official energy drinks and nutrition supplements for all team members and events.",
-            value: "$10,000+ annually",
-            website: "www.voltageenergy.com",
-        },
-        {
-            id: 5,
-            name: "Urban Threads",
-            tier: "Apparel Sponsor",
-            logo: "https://images.unsplash.com/photo-1738458786007-03c0c4b7a804?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcHBhcmVsJTIwYnJhbmQlMjBsb2dvfGVufDF8fHx8MTc1NTM1MTAzNnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-            description: "Contemporary streetwear brand with a focus on tech-inspired athletic apparel.",
-            partnership: "2023 - Present",
-            contribution: "Custom team jerseys, casual wear, and merchandise design.",
-            value: "$8,000+ annually",
-            website: "www.urbanthreads.com",
-        },
-        {
-            id: 6,
-            name: "Metro Business Solutions",
-            tier: "Community Partner",
-            logo: "https://images.unsplash.com/photo-1701518035272-6543c02bd2cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb2NhbCUyMGJ1c2luZXNzJTIwc3BvbnNvcnxlbnwxfHx8fDE3NTUzNTEwMzl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-            description: "Local business consulting firm supporting community sports and youth development.",
-            partnership: "2022 - Present",
-            contribution: "Financial support for youth programs and tournament expenses.",
-            value: "$5,000+ annually",
-            website: "www.metrobusiness.com",
+                "Le centre Laser Game Evolution du Havre nous accorde sa confiance depuis une décénie, et désormais il nous apporte également son soutien financier pour faire briller la renommée du Havre. Et conserver le titre de champion de France.",
+            partnership: "2024 - Présent",
+            contribution:
+                "Financement des cotisations individuelles des joueurs compétitifs pour faciliter le recrutement.",
+            value: "9 000€",
+            website: "https://le-havre.lasergame-evolution.fr/",
         },
     ];
 
     const sponsorshipTiers = [
         {
             name: "Sponsor majeur",
-            price: "4 000€",
+            price: "8 000€",
             benefits: [
                 "Logo on all team uniforms and equipment",
                 "Naming rights to main arena",
@@ -202,11 +148,12 @@ export function SponsorsPage() {
                             </div>
                         </div>
 
-                        <div className="relative">
+                        <div className="relative overflow-hidden rounded-lg">
                             <ImageWithFallback
-                                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHBhcnRuZXJzaGlwfGVufDF8fHx8MTc1NTM1MTA0M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                                // src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHBhcnRuZXJzaGlwfGVufDF8fHx8MTc1NTM1MTA0M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                                src="../src/assets/sponsor.jpg"
                                 alt="Business Partnership"
-                                className="w-full h-80 object-cover rounded-lg border border-primary/20"
+                                className="w-full h-80 object-cover border border-primary/20 scale-130"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg" />
                         </div>
@@ -223,15 +170,15 @@ export function SponsorsPage() {
                         {sponsors.map((sponsor) => (
                             <Card
                                 key={sponsor.id}
-                                className="bg-card border-primary/20 hover:border-primary/40 transition-all duration-300 group">
+                                className="bg-card border-primary/20 hover:border-primary/40 transition-all duration-300 group overflow-hidden">
                                 <div className="flex items-start">
                                     {/* Sponsor Logo */}
                                     <div className="relative flex-shrink-0">
-                                        <div className="w-32 h-32 overflow-hidden bg-white/5 flex items-center justify-center">
+                                        <div className="w-40 h-min  bg-white/5 flex items-center justify-center">
                                             <ImageWithFallback
                                                 src={sponsor.logo}
                                                 alt={`${sponsor.name} Logo`}
-                                                className="w-24 h-24 object-contain group-hover:scale-110 transition-all duration-500"
+                                                className="w-32 h-76 object-contain group-hover:scale-110 transition-all duration-500"
                                             />
                                         </div>
                                     </div>
@@ -244,10 +191,12 @@ export function SponsorsPage() {
                                                 <div className="flex items-center space-x-3 mb-2">
                                                     <Badge
                                                         variant={
-                                                            sponsor.tier === "Title Sponsor" ? "default" : "secondary"
+                                                            sponsor.tier === "Partenaire majeur"
+                                                                ? "default"
+                                                                : "secondary"
                                                         }
                                                         className={
-                                                            sponsor.tier === "Title Sponsor"
+                                                            sponsor.tier === "Partenaire majeur"
                                                                 ? "bg-primary text-black"
                                                                 : ""
                                                         }>
@@ -264,10 +213,11 @@ export function SponsorsPage() {
 
                                         <div className="grid md:grid-cols-2 gap-6">
                                             <div>
-                                                <h4 className="font-bold text-white mb-2">Partnership Contribution</h4>
+                                                <h4 className="font-bold text-white mb-2">
+                                                    Contribution du partenariat
+                                                </h4>
                                                 <p className="text-gray-400 text-sm mb-3">{sponsor.contribution}</p>
                                                 <div className="flex items-center space-x-2">
-                                                    <DollarSign className="h-4 w-4 text-primary" />
                                                     <span className="text-primary font-bold">{sponsor.value}</span>
                                                 </div>
                                             </div>
@@ -275,13 +225,17 @@ export function SponsorsPage() {
                                             <div className="flex items-center justify-between">
                                                 <div>
                                                     <h4 className="font-bold text-white mb-2">Contact</h4>
-                                                    <p className="text-gray-400 text-sm">{sponsor.website}</p>
+                                                    <p className="text-gray-400 text-sm">
+                                                        <a href={sponsor.website} target="_blank">
+                                                            {sponsor.website}
+                                                        </a>
+                                                    </p>
                                                 </div>
-                                                {sponsor.tier === "Title Sponsor" && (
+                                                {sponsor.tier === "Partenaire majeur" && (
                                                     <div className="flex items-center space-x-1 bg-primary/20 px-3 py-1 rounded-full">
                                                         <Star className="h-4 w-4 text-primary fill-current" />
                                                         <span className="text-primary font-bold text-sm">
-                                                            Premium Partner
+                                                            Partenaire majeur
                                                         </span>
                                                     </div>
                                                 )}
@@ -314,8 +268,8 @@ export function SponsorsPage() {
                                     tier.featured ? "border-primary/40 ring-1 ring-primary/20" : ""
                                 }`}>
                                 {tier.featured && (
-                                    <div className="absolute top-0 right-0 bg-primary text-black px-3 py-1 text-sm font-bold">
-                                        FEATURED
+                                    <div className="absolute top-0 right-0 bg-primary text-black px-3 py-1 text-md font-bold rounded-bl-md">
+                                        ★
                                     </div>
                                 )}
 
@@ -347,7 +301,7 @@ export function SponsorsPage() {
             <section className="py-16 px-4 bg-gradient-to-r from-primary/10 to-primary/5">
                 <div className="container mx-auto max-w-4xl text-center">
                     <h2 className="text-4xl font-bold mb-6 text-white">
-                        Prêt à devenir notre <span className="text-primary">partenaire</span> cette saison ?
+                        Envie de devenir notre <span className="text-primary">partenaire</span> cette saison ?
                     </h2>
                     <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
                         Rejoignez les marques d'élite qui soutiennent le Laser Game de compétition et rejoignez notre
@@ -362,8 +316,10 @@ export function SponsorsPage() {
                                 Obtenez des informations détaillées sur les formules de parrainage et les opportunités
                                 de partenariat.
                             </p>
-                            <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
-                                <a href="mail:asso.clash.lh@gmail.com">asso.clash.lh@gmail.com</a>
+                            <Button variant="link" className="">
+                                <a href="mail:asso.clash.lh@gmail.com" className="hover:no-underline">
+                                    asso.clash.lh@gmail.com
+                                </a>
                             </Button>
                         </Card>
 
@@ -373,7 +329,7 @@ export function SponsorsPage() {
                             <p className="text-gray-300 mb-4">
                                 Discutez directement avec notre équipe chargée du développement des partenariats.
                             </p>
-                            <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
+                            <Button variant="link">
                                 <a href="tel:+33674182045">(+33) 6 74 18 20 45</a>
                             </Button>
                         </Card>

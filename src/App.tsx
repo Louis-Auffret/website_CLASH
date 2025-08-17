@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigation } from "./components/Navigation";
 import { HomePage } from "./components/HomePage";
 import { SportPage } from "./components/SportPage";
@@ -7,6 +7,15 @@ import { TeamsPage } from "./components/TeamsPage";
 import { SponsorsPage } from "./components/SponsorsPage";
 // import { PlayerProfilePage } from "./components/PlayerProfilePage";
 import "./App.css";
+
+// fonction pour faire défiler vers le haut à chaque changement de page
+function ScrollToTop({ currentPage }: { currentPage: string }) {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [currentPage]);
+
+    return null;
+}
 
 export default function App() {
     const [currentPage, setCurrentPage] = useState("home");
@@ -46,8 +55,8 @@ export default function App() {
 
     return (
         <div className="dark min-h-screen bg-background text-foreground">
+            <ScrollToTop currentPage={currentPage} />
             <Navigation currentPage={currentPage} onPageChange={handlePageChange} />
-
             <main>{renderPage()}</main>
         </div>
     );

@@ -16,7 +16,9 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
     ];
 
     return (
-        <nav className="fixed w-full top-0 left-0 right-0 z-500 bg-black border-b border-primary/20 header">
+        <nav
+            className="fixed w-full top-0 left-0 right-0 z-500 bg-black border-b border-primary/20 header bg-primary-foreground/90 backdrop-blur-sm 
+">
             <div className="container mx-auto px-4 py-4 flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                     <img src={clashLogo} alt="CLASH Logo" className="h-10 w-10 object-contain logo" />

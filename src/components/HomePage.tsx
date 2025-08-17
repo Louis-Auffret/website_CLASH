@@ -64,7 +64,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
                     <div className="inline-flex content-center grid md:grid-cols-3 gap-8">
                         <Card className="bg-card border-primary/20 p-8 text-center hover:border-primary/40 transition-all duration-300 group">
                             <Target className="h-12 w-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform" />
-                            <h3 className="text-xl font-bold mb-4 text-primary">Formation de précision</h3>
+                            <h3 className="text-xl font-bold mb-4 text-primary">Formation d'excellence</h3>
                             <p className="text-gray-400">
                                 Ciblage avancés et coaching professionnel pour affiner vos compétences et améliorer
                                 votre précision.
@@ -105,7 +105,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
                         size="lg"
                         onClick={() => onPageChange("club")}
                         className="bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4">
-                        Aprenez en plus sur le club
+                        Apprenez en plus sur le club
                     </Button>
                 </div>
             </section>

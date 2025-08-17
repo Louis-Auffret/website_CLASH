@@ -428,7 +428,7 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                             <div>
                                                 <h3 className="text-2xl font-bold text-primary">{team.name}</h3>
                                                 <Badge variant="secondary" className="mt-1">
-                                                    {team.division} Division
+                                                    {team.division}
                                                 </Badge>
                                             </div>
                                         </div>

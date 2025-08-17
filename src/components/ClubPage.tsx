@@ -85,7 +85,9 @@ export function ClubPage() {
 
                         <div className="relative">
                             <ImageWithFallback
-                                src="https://images.unsplash.com/photo-1675310854573-c5c8e4089426?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21wZXRpdGl2ZSUyMGdhbWluZyUyMHRlYW18ZW58MXx8fHwxNzU1MzQ1OTUxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                                // src="https://images.unsplash.com/photo-1675310854573-c5c8e4089426?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21wZXRpdGl2ZSUyMGdhbWluZyUyMHRlYW18ZW58MXx8fHwxNzU1MzQ1OTUxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                                src="../src/assets/Pour le site 2.jpg"
+                                // src="../src/assets/Players_portrait.jpg"
                                 alt="Competitive Gaming Team"
                                 className="w-full h-80 object-cover rounded-lg border border-primary/20"
                             />
@@ -155,6 +157,7 @@ export function ClubPage() {
                     <div className="relative">
                         <ImageWithFallback
                             src="https://images.unsplash.com/photo-1620705914357-a9d11009e068?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZW9uJTIwZ2FtaW5nJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NTUzNDU5NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                            // src="../src/assets/Pour le site 2.jpg"
                             alt="Neon Gaming Technology"
                             className="w-full h-60 object-cover rounded-lg border border-primary/20"
                         />

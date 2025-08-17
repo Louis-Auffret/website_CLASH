@@ -8,7 +8,7 @@ interface NavigationProps {
 
 export function Navigation({ currentPage, onPageChange }: NavigationProps) {
     const navItems = [
-        { id: "home", label: "Acceuil" },
+        { id: "home", label: "Accueil" },
         { id: "sport", label: "La Discipline" },
         { id: "club", label: "Notre Club" },
         { id: "teams", label: "Équipes & Joueurs" },

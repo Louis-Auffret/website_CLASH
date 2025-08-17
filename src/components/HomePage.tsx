@@ -16,6 +16,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/90 z-10" />
                 <ImageWithFallback
                     src="https://images.unsplash.com/photo-1643398899826-2fca1e015fad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXNlciUyMHRhZyUyMGdhbWUlMjBkYXJrfGVufDF8fHx8MTc1NTM0NTk1MHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    // src="../src/assets/cover.jpg"
                     alt="Laser Tag Arena"
                     className="absolute inset-0 w-full h-full object-cover"
                 />
@@ -25,12 +26,15 @@ export function HomePage({ onPageChange }: HomePageProps) {
                         <img
                             src={clashLogo}
                             alt="CLASH Logo"
-                            className="h-24 w-24 object-contain mx-auto mb-4 animate-pulse"
+                            className="h-60 w-60 object-contain mx-auto mb-4 animate-pulse"
                         />
                     </div>
                     <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">
                         CLASH
                     </h1>
+                    <p className="text-xl font-bold md:text-2xl text-primary mb-8 max-w-2xl mx-auto">
+                        - Club de Laser Associatif et Sportif Havrais -
+                    </p>
                     <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
                         Club de compétition de laser game d'élite. Là où la précision rencontre la technologie et où
                         naissent les champions.
@@ -40,14 +44,14 @@ export function HomePage({ onPageChange }: HomePageProps) {
                         <Button
                             size="lg"
                             onClick={() => onPageChange("sport")}
-                            className="bg-primary text-black hover:bg-primary/90 text-lg px-8 py-3">
+                            className="bg-primary hover:bg-primary/90 text-lg px-8 py-3">
                             Découvrez la discipline
                         </Button>
                         <Button
                             size="lg"
                             variant="outline"
                             onClick={() => onPageChange("teams")}
-                            className="border-primary text-primary hover:bg-primary/10 text-lg px-8 py-3">
+                            className=" text-lg px-8 py-3">
                             Rencontrez nos équipes
                         </Button>
                     </div>

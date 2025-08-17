@@ -334,13 +334,7 @@ export function SponsorsPage() {
                                     ))}
                                 </div>
 
-                                <Button
-                                    className={`w-full ${
-                                        tier.featured
-                                            ? "bg-primary text-black hover:bg-primary/90"
-                                            : "border-primary text-primary hover:bg-primary/10"
-                                    }`}
-                                    variant={tier.featured ? "default" : "outline"}>
+                                <Button className={`w-full mt-auto`} variant={tier.featured ? "default" : "outline"}>
                                     En apprendre plus
                                 </Button>
                             </Card>
@@ -353,7 +347,7 @@ export function SponsorsPage() {
             <section className="py-16 px-4 bg-gradient-to-r from-primary/10 to-primary/5">
                 <div className="container mx-auto max-w-4xl text-center">
                     <h2 className="text-4xl font-bold mb-6 text-white">
-                        Prêt à devenir nôtre <span className="text-primary">partenaire</span> cette saison ?
+                        Prêt à devenir notre <span className="text-primary">partenaire</span> cette saison ?
                     </h2>
                     <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
                         Rejoignez les marques d'élite qui soutiennent le Laser Game de compétition et rejoignez notre
@@ -369,7 +363,7 @@ export function SponsorsPage() {
                                 de partenariat.
                             </p>
                             <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
-                                asso.clash.lh@gmail.com
+                                <a href="mail:asso.clash.lh@gmail.com">asso.clash.lh@gmail.com</a>
                             </Button>
                         </Card>
 
@@ -380,7 +374,7 @@ export function SponsorsPage() {
                                 Discutez directement avec notre équipe chargée du développement des partenariats.
                             </p>
                             <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
-                                (+33) 6 74 18 20 45
+                                <a href="tel:+33674182045">(+33) 6 74 18 20 45</a>
                             </Button>
                         </Card>
                     </div>

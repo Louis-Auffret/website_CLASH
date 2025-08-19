@@ -10,7 +10,7 @@ export function SocialsPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />
                 <div className="container mx-auto max-w-4xl text-center relative z-10">
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">
-                        A PROPOS
+                        À PROPOS
                     </h1>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">???</p>
                 </div>

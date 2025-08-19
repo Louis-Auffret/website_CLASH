@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -9,6 +10,31 @@ interface HomePageProps {
 }
 
 export function HomePage({ onPageChange }: HomePageProps) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                });
+            },
+            { threshold: 0.5 } // 50% de la vidéo doit être visible
+        );
+
+        observer.observe(video);
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
     return (
         <div className="pt-20">
             {/* Hero Section */}
@@ -29,10 +55,10 @@ export function HomePage({ onPageChange }: HomePageProps) {
                             className="h-60 w-60 object-contain mx-auto mb-4 animate-pulse"
                         />
                     </div>
-                    <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">
+                    <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent drop-shadow-xl/50">
                         Club de Laser Associatif et Sportif Havrais
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto drop-shadow-xl/50">
                         Club de compétition de laser game d'élite. Là où la précision rencontre la technologie et où
                         naissent les champions.
                     </p>
@@ -90,6 +116,12 @@ export function HomePage({ onPageChange }: HomePageProps) {
                             </p>
                         </Card>
                     </div>
+                    <div className="container mx-auto max-w-6xl">
+                        <video ref={videoRef} className="w-full h-auto rounded-xl my-8" controls muted playsInline>
+                            <source src="./src/assets/Trailer_Ajin_CDF.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
                 </div>
             </section>
 
@@ -97,10 +129,10 @@ export function HomePage({ onPageChange }: HomePageProps) {
             <section className="py-20 px-4 bg-gradient-to-r from-primary/10 to-primary/5">
                 <div className="container mx-auto max-w-4xl text-center">
                     <h2 className="text-4xl font-bold mb-6 text-white">
-                        Prêt à rejoindre <span className="text-primary">l'élite</span> ?
+                        Envie de faire partie <span className="text-primary">des meilleurs</span> ?
                     </h2>
                     <p className="text-xl text-gray-300 mb-8">
-                        Faites passez vos capacités au niveau surpérieur avec le CLASH
+                        Faites passez vos capacités au niveau surpérieur avec le CLASH.
                     </p>
                     <Button
                         size="lg"

@@ -1,6 +1,7 @@
 import { Card } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Shield, Zap, Timer, Award } from "lucide-react";
+import { Shield, Zap, Timer, Award, Download } from "lucide-react";
+import { Button } from "./ui/button";
 
 export function SportPage() {
     return (
@@ -130,6 +131,12 @@ export function SportPage() {
                             <div className="text-sm text-primary"></div>
                         </Card>
                     </div>
+
+                    <Button variant="link" size="lg" className="mt-8 justify-self-center flex">
+                        <a href="../src/assets/Lexis Codex 2024-2025.pdf" download className="flex items-center gap-2">
+                            Télécharger le livre de règle 2025 <Download className="h-8 w-8 text-white" />
+                        </a>
+                    </Button>
                 </div>
             </section>
 
@@ -145,7 +152,9 @@ export function SportPage() {
                     </div>
                     <div className="grid lg:grid-cols-2 gap-12">
                         <div>
-                            <h2 className="text-4xl font-bold mb-6 text-primary">Cotisation Loisir [400€]</h2>
+                            <h2 className="text-4xl font-bold mb-6 text-primary">
+                                Cotisation Loisir <span className="text-white">[400€]</span>
+                            </h2>
                             <div className="space-y-4">
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
@@ -173,7 +182,9 @@ export function SportPage() {
                         </div>
 
                         <div>
-                            <h2 className="text-4xl font-bold mb-6 text-primary">Cotisation Compétition [600€]</h2>
+                            <h2 className="text-4xl font-bold mb-6 text-primary">
+                                Cotisation Compétition <span className="text-white">[600€]</span>
+                            </h2>
                             <div className="space-y-4">
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
@@ -205,6 +216,34 @@ export function SportPage() {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Loisir Section */}
+            <section className="py-16 px-4 bg-secondary/50">
+                <div className="container mx-auto max-w-6xl">
+                    <h2 className="text-4xl font-bold text-center mb-12 text-primary">Nos créneaux</h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                        <Card className="bg-card border-primary/20 p-6 hover:border-primary/40 transition-all duration-300">
+                            <h3 className="text-xl font-bold mb-4 text-primary">Pros</h3>
+                            <p className="text-gray-400 mb-4">
+                                Pour tout les joueurs suffisament expérimentés pour jouer en compétition, le club
+                                propose un créneau le dimanche soir de 18h à 21h. Les pros peuvent venir s'entraîner
+                                librement sur le créneau du lundi soir dans un cadre plus détendu.
+                            </p>
+                            <div className="text-sm text-primary">Dimanche 18h-21h + Lundi 18h-21h</div>
+                        </Card>
+
+                        <Card className="bg-card border-primary/20 p-6 hover:border-primary/40 transition-all duration-300">
+                            <h3 className="text-xl font-bold mb-4 text-primary">Jeunes</h3>
+                            <p className="text-gray-400 mb-4">
+                                Pour les joueurs moins expérimentés, le club propose un créneau le lundi soir encadré
+                                par les pros, entraîneurs du club. L'objectif est de découvrir la discipline et ses
+                                règles, pour ensuite devenir un pro et rejoindre le créneau du dimanche.
+                            </p>
+                            <div className="text-sm text-primary">Lundi 18h-21h</div>
+                        </Card>
                     </div>
                 </div>
             </section>

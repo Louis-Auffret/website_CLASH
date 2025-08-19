@@ -13,6 +13,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
         { id: "club", label: "Notre Club" },
         { id: "teams", label: "Équipes & Joueurs" },
         { id: "sponsors", label: "Sponsors" },
+        { id: "socials", label: "Nos réseaux" },
     ];
 
     return (

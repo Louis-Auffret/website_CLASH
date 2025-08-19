@@ -6,8 +6,15 @@ export function ClubPage() {
     const achievements = [
         { year: "2025", title: "Champions de France", description: "Championnat de France - Angoulême", star: 5 },
         { year: "2024", title: "Quatrième place CDF", description: "Championnat de France - Roanne", star: 3 },
+        { year: "2023", title: "Quatrième place CDF", description: "Championnat de France - Le Mans", star: 3 },
+        { year: "2022", title: "Vice-Champions de France", description: "Championnat de France - Poitiers", star: 4 },
         { year: "2022", title: "Champions de ligue Nord", description: "Championnat régionnal - Ligue Nord", star: 2 },
-        { year: "2021", title: "Vice-Champions de France", description: "Championnat de France - Poitiers", star: 4 },
+        {
+            year: "2021",
+            title: "Champions de ligue Ouest",
+            description: "Championnat régionnal - Ligue Ouest",
+            star: 2,
+        },
     ];
 
     const facilities = [
@@ -58,7 +65,9 @@ export function ClubPage() {
                         NOTRE CLUB
                     </h1>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                        Fondé en 2016, le CLASH est un des clubs les plus expérimentés et prestigieux de France.
+                        Fondé en 2016, le CLASH -
+                        <i className="text-gray-400"> Club de Laser Associatif et Sportif Havrais</i> - est un des clubs
+                        les plus expérimentés et prestigieux de France. Actuel champion de France !
                     </p>
                 </div>
             </section>
@@ -100,7 +109,7 @@ export function ClubPage() {
                                 <div className="flex items-start space-x-3">
                                     <Trophy className="h-6 w-6 text-primary mt-1" />
                                     <div>
-                                        <h4 className="font-bold text-white">Championnats</h4>
+                                        <h4 className="font-bold text-white">Classement</h4>
                                         <p className="text-gray-400">Champions de France</p>
                                     </div>
                                 </div>
@@ -108,7 +117,7 @@ export function ClubPage() {
                                     <MapPin className="h-6 w-6 text-primary mt-1" />
                                     <div>
                                         <h4 className="font-bold text-white">Adresse</h4>
-                                        <p className="text-gray-400">Laser Game Evolution, Le Havre</p>
+                                        <p className="text-gray-400">61 Rue de Fleurus, Le Havre</p>
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +220,7 @@ export function ClubPage() {
                     <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
                         Offrir une expérience de laser game compétitive de classe nationale qui développe des athlètes,
                         forge le caractère et crée des souvenirs inoubliables. Nous nous efforçons d'être la destination
-                        de choix pour les joueurs passionnés de laser game souhaitant se mesurer aux meilleurs.
+                        de choix pour les joueurs passionnés de Laser Game souhaitant se mesurer aux meilleurs.
                     </p>
                     <div className="grid md:grid-cols-3 gap-8 mt-12">
                         <div className="text-center">

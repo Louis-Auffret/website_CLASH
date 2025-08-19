@@ -796,7 +796,7 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                             </div>
                             <h4 className="font-bold text-white mb-2">Esprit sportif</h4>
                             <p className="text-gray-400">
-                                Maintenir les standards les plus élevées en matière de fair-play et de respect.
+                                Maintenir les standards les plus élevées en matière de fair-play et de respect
                             </p>
                         </div>
                     </div>

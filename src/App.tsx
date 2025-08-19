@@ -5,6 +5,7 @@ import { SportPage } from "./components/SportPage";
 import { ClubPage } from "./components/ClubPage";
 import { TeamsPage } from "./components/TeamsPage";
 import { SponsorsPage } from "./components/SponsorsPage";
+import { SocialsPage } from "./components/SocialsPage";
 // import { PlayerProfilePage } from "./components/PlayerProfilePage";
 import "./App.css";
 
@@ -48,6 +49,8 @@ export default function App() {
                 return <TeamsPage />;
             case "sponsors":
                 return <SponsorsPage />;
+            case "socials":
+                return <SocialsPage />;
             default:
                 return <HomePage onPageChange={handlePageChange} />;
         }

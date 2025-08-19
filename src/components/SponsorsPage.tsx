@@ -2,7 +2,7 @@ import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Handshake, Target, Users, Trophy, Zap, DollarSign, Star, Mail, Phone } from "lucide-react";
+import { Handshake, Target, Users, Trophy, Zap, Star, Mail, Phone } from "lucide-react";
 
 export function SponsorsPage() {
     const sponsors = [
@@ -83,8 +83,8 @@ export function SponsorsPage() {
                         SPONSORS & PARTENAIRES
                     </h1>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                        Construire l’avenir du Laser Game compétitif grâce à des partenariats stratégiques et au soutien
-                        de la communauté.
+                        Construire l’avenir du Laser Game compétitif grâce à des partenariats de confiances et au
+                        soutien de la communauté.
                     </p>
                 </div>
             </section>

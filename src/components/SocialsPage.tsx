@@ -152,19 +152,18 @@ export function SocialsPage() {
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin"
                             allowfullscreen
-                            className="justify-self-center rounded-xl my-8"></iframe>
+                            className="justify-self-center rounded-xl my-8 border-primary border-2 p-4"></iframe>
                     </div>
                 </div>
                 <div className="container mx-auto max-w-6xl">
                     <div className="pb-16">
                         <h3 className="text-xl font-bold mb-4 text-primary">BFM Normandie</h3>
                         <p className="text-xl text-gray-300">
-                            L'équipe de France 3 Normandie est venue nous rendre visite pour découvrir notre discipline
-                            et interviewer nos joueurs. Le reportage a été réalisé en début de saison, et notre
-                            association à bel et bien confirmer sa présence au championnat de France, puisqu'elle
-                            termine championne de France. Vous pouvez retrouver le reportage en vidéo ci-dessous.
+                            L'équipe de BFM Normandie est venue interviewer Sleaz, capitaine de la Team'Ajin (tout juste
+                            championne de France) pour parler de notre discipline. Vous pouvez retrouver le reportage en
+                            vidéo ci-dessous.
                         </p>
-                        <video className="w-full h-auto rounded-xl my-8" controls>
+                        <video className="w-full h-auto rounded-xl my-8 border-primary border-2 p-4" controls>
                             <source src="./src/assets/reportage_BFM.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>

@@ -24,6 +24,26 @@ a:hover {
     text-decoration: underline;
 }
 
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f1f1f; /* couleur de fond de la barre */
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0bd700; /* couleur de la barre de scroll */
+    border-radius: 6px;
+    border: 2px solid #1f1f1f;
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #96ff00;
+}
+
 /* body {
     margin: 0;
     display: flex;

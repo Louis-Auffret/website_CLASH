@@ -6,13 +6,12 @@ import { Target, Users, Trophy } from "lucide-react";
 import clashLogo from "../assets/clash-logo.png";
 import coverPhoto from "../assets/Teams.jpg";
 import trailerAjin from "../assets/Trailer_Ajin_CDF.mp4";
+import { useNavigate } from "react-router-dom";
 
-interface HomePageProps {
-    onPageChange: (page: string) => void;
-}
-
-export function HomePage({ onPageChange }: HomePageProps) {
+export function HomePage() {
     const videoRef = useRef<HTMLVideoElement>(null);
+    const navigate = useNavigate();
+
     useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
@@ -27,7 +26,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
                     }
                 });
             },
-            { threshold: 0.5 } // 50% de la vidéo doit être visible
+            { threshold: 0.5 }
         );
 
         observer.observe(video);
@@ -67,14 +66,14 @@ export function HomePage({ onPageChange }: HomePageProps) {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Button
                             size="lg"
-                            onClick={() => onPageChange("sport")}
+                            onClick={() => navigate("/sport")}
                             className="bg-primary hover:bg-primary/90 text-lg px-8 py-3">
                             Découvrez la discipline
                         </Button>
                         <Button
                             size="lg"
                             variant="outline"
-                            onClick={() => onPageChange("club")}
+                            onClick={() => navigate("/club")}
                             className=" text-lg px-8 py-3">
                             Rejoignez notre club
                         </Button>
@@ -94,8 +93,8 @@ export function HomePage({ onPageChange }: HomePageProps) {
                             <Target className="h-12 w-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform" />
                             <h3 className="text-xl font-bold mb-4 text-primary">Formation d'excellence</h3>
                             <p className="text-gray-400">
-                                Coaching sur-mesure pour développer vos compétences et faire de vous l'un des meilleur
-                                joueur de Laser Game.
+                                Coaching sur-mesure pour développer vos compétences et faire de vous l'un des meilleurs
+                                joueurs de Laser Game.
                             </p>
                         </Card>
 
@@ -133,11 +132,11 @@ export function HomePage({ onPageChange }: HomePageProps) {
                         Envie de faire partie <span className="text-primary">des meilleurs</span> ?
                     </h2>
                     <p className="text-xl text-gray-300 mb-8">
-                        Faites passez vos capacités au niveau surpérieur avec le CLASH.
+                        Faites passer vos capacités au niveau supérieur avec le CLASH.
                     </p>
                     <Button
                         size="lg"
-                        onClick={() => onPageChange("teams")}
+                        onClick={() => navigate("/teams")}
                         className="bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4">
                         Rencontrez nos équipes et joueurs
                     </Button>

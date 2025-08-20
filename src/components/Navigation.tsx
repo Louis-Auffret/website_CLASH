@@ -2,26 +2,23 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import clashLogo from "../assets/clash-logo.png";
 import { Menu } from "lucide-react";
+import { NavLink, useNavigate } from "react-router-dom";
 
-interface NavigationProps {
-    currentPage: string;
-    onPageChange: (page: string) => void;
-}
-
-export function Navigation({ currentPage, onPageChange }: NavigationProps) {
+export function Navigation() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const navItems = [
-        { id: "home", label: "Accueil" },
-        { id: "sport", label: "La Discipline" },
-        { id: "club", label: "Notre Club" },
-        { id: "teams", label: "Équipes & Joueurs" },
-        { id: "sponsors", label: "Sponsors" },
-        { id: "socials", label: "Nos réseaux" },
+        { path: "/", label: "Accueil" },
+        { path: "/sport", label: "La Discipline" },
+        { path: "/club", label: "Notre Club" },
+        { path: "/teams", label: "Équipes & Joueurs" },
+        { path: "/sponsors", label: "Sponsors" },
+        { path: "/socials", label: "Nos réseaux" },
     ];
 
-    const handlePageChange = (id: string) => {
-        onPageChange(id);
+    const handleNavigate = (path: string) => {
+        navigate(path);
         setMenuOpen(false); // fermer le menu après clic
     };
 
@@ -36,17 +33,18 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
                 {/* Desktop menu */}
                 <div className="hidden md:flex items-center space-x-6">
                     {navItems.map((item) => (
-                        <Button
-                            key={item.id}
-                            variant={currentPage === item.id ? "default" : "ghost"}
-                            onClick={() => handlePageChange(item.id)}
-                            className={`${
-                                currentPage === item.id
-                                    ? "bg-primary text-black hover:bg-primary/90"
-                                    : "text-white hover:text-primary hover:bg-white/10"
-                            } transition-all duration-300`}>
+                        <NavLink
+                            key={item.path}
+                            to={item.path}
+                            className={({ isActive }) =>
+                                `transition-all duration-300 ${
+                                    isActive
+                                        ? "bg-primary text-black hover:bg-primary/90 px-4 py-2 rounded-lg"
+                                        : "text-white hover:text-primary hover:bg-white/10 px-4 py-2 rounded-lg"
+                                }`
+                            }>
                             {item.label}
-                        </Button>
+                        </NavLink>
                     ))}
                 </div>
 
@@ -60,11 +58,9 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
                         <div className="absolute right-0 mt-2 w-48 bg-black border border-primary/30 rounded shadow-lg flex flex-col">
                             {navItems.map((item) => (
                                 <button
-                                    key={item.id}
-                                    className={`px-4 py-2 text-left text-white hover:bg-primary/20 ${
-                                        currentPage === item.id ? "bg-primary text-black" : ""
-                                    }`}
-                                    onClick={() => handlePageChange(item.id)}>
+                                    key={item.path}
+                                    className="px-4 py-2 text-left text-white hover:bg-primary/20"
+                                    onClick={() => handleNavigate(item.path)}>
                                     {item.label}
                                 </button>
                             ))}

@@ -364,7 +364,7 @@ export function ClubPage() {
                             REJOINS NOTRE CLUB
                         </h2>
                         <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                            Prêt à rejoindre le club de Laser Game le plus compétitif de France ? Remplis le formulaire
+                            Prêt à rejoindre le club de Laser Game le plus compétitif de France ? Remplis le formulaire
                             ci-dessous et viens tester notre discipline.
                         </p>
                     </div>
@@ -497,7 +497,7 @@ export function ClubPage() {
                                             value={formData.experience}
                                             onValueChange={(value) => handleInputChange("experience", value)}>
                                             <SelectTrigger className="bg-input border-primary/20 focus:border-primary/50 text-white">
-                                                <SelectValue placeholder="Quesl est ton niveau de jeu ?" />
+                                                <SelectValue placeholder="Quesl est ton niveau de jeu ?" />
                                             </SelectTrigger>
                                             <SelectContent className="bg-card border-primary/20">
                                                 <SelectItem value="Débutant">
@@ -524,7 +524,7 @@ export function ClubPage() {
                                             value={formData.availability}
                                             onValueChange={(value) => handleInputChange("availability", value)}>
                                             <SelectTrigger className="bg-input border-primary/20 focus:border-primary/50 text-white">
-                                                <SelectValue placeholder="Quand peux-tu t'entraîner ?" />
+                                                <SelectValue placeholder="Quand peux-tu t'entraîner ?" />
                                             </SelectTrigger>
                                             <SelectContent className="bg-card border-primary/20">
                                                 <SelectItem value="Dimanche">Dimanche</SelectItem>
@@ -543,7 +543,7 @@ export function ClubPage() {
 
                                 <div className="space-y-2">
                                     <Label htmlFor="motivation" className="text-gray-300">
-                                        Pourquoi souhaites-tu intégrer le CLASH ?
+                                        Pourquoi souhaites-tu intégrer le CLASH ?
                                     </Label>
                                     <Textarea
                                         id="motivation"
@@ -574,7 +574,7 @@ export function ClubPage() {
 
                     {/* Additional Info */}
                     <div className="mt-12 text-center">
-                        <h3 className="text-2xl font-bold text-white mb-4">Que se passe-t-il maintenant ?</h3>
+                        <h3 className="text-2xl font-bold text-white mb-4">Que se passe-t-il maintenant ?</h3>
                         <div className="grid md:grid-cols-3 gap-6">
                             <div className="text-center">
                                 <div className="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">

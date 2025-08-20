@@ -7,6 +7,7 @@ import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Trophy, Users, Calendar, MapPin, Target, Star, UserPlus, Mail, GamepadIcon } from "lucide-react";
+import emailjs from "@emailjs/browser";
 import clubLogo from "../assets/Cover.jpg";
 
 export function ClubPage() {
@@ -22,15 +23,78 @@ export function ClubPage() {
         motivation: "",
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Handle form submission here
-        console.log("Form submitted:", formData);
-        // You would typically send this data to your backend
-    };
-
     const handleInputChange = (field: string, value: string) => {
         setFormData((prev) => ({ ...prev, [field]: value }));
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const templateParams = {
+            nickname: formData.nickname,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            age: formData.age,
+            experience: formData.experience,
+            availability: formData.availability,
+            motivation: formData.motivation,
+        };
+
+        emailjs
+            .send(
+                "service_n5wcb6l", // Remplace par ton service ID EmailJS
+                "template_63890pt", // Remplace par ton template ID EmailJS
+                templateParams,
+                "adnlV6O9Ixksj_ouo" // Remplace par ta clé publique EmailJS
+            )
+            .then((response) => {
+                console.log("Email envoyé !", response.status, response.text);
+                alert("Votre formulaire a été envoyé avec succès !");
+                setFormData({
+                    nickname: "",
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    phone: "",
+                    age: "",
+                    experience: "",
+                    availability: "",
+                    motivation: "",
+                });
+            })
+            .catch((err) => {
+                console.error("Erreur lors de l'envoi :", err);
+                alert("Une erreur est survenue lors de l'envoi du formulaire. Veuillez réessayer.");
+            });
+
+        emailjs
+            .send(
+                "service_n5wcb6l", // Remplace par ton service ID EmailJS
+                "template_844ewb4", // Remplace par ton template ID EmailJS
+                templateParams,
+                "adnlV6O9Ixksj_ouo" // Remplace par ta clé publique EmailJS
+            )
+            .then((response) => {
+                console.log("Email envoyé !", response.status, response.text);
+                alert("Votre formulaire a été envoyé avec succès !");
+                setFormData({
+                    nickname: "",
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    phone: "",
+                    age: "",
+                    experience: "",
+                    availability: "",
+                    motivation: "",
+                });
+            })
+            .catch((err) => {
+                console.error("Erreur lors de l'envoi :", err);
+                alert("Une erreur est survenue lors de l'envoi du formulaire. Veuillez réessayer.");
+            });
     };
 
     const achievements = [
@@ -193,47 +257,6 @@ export function ClubPage() {
                     </div>
                 </div>
             </section>
-
-            {/* Facilities Section */}
-            {/* <section className="py-16 px-4">
-                <div className="container mx-auto max-w-6xl">
-                    <h2 className="text-4xl font-bold text-center mb-12 text-primary">Nos salles</h2>
-
-                    <div className="grid md:grid-cols-2 gap-8 mb-12">
-                        {facilities.map((facility, index) => (
-                            <Card
-                                key={index}
-                                className="bg-card border-primary/20 p-6 hover:border-primary/40 transition-all duration-300 group">
-                                <div className="flex items-start space-x-4">
-                                    <div className="bg-primary/20 p-3 rounded-lg group-hover:bg-primary/30 transition-colors">
-                                        <Target className="h-8 w-8 text-primary" />
-                                    </div>
-                                    <div className="flex-1">
-                                        <h3 className="text-xl font-bold mb-2 text-primary">{facility.name}</h3>
-                                        <p className="text-gray-300 mb-3">{facility.description}</p>
-                                        <div className="text-sm text-primary">Capacité: {facility.capacity}</div>
-                                    </div>
-                                </div>
-                            </Card>
-                        ))}
-                    </div>
-
-                    <div className="relative">
-                        <ImageWithFallback
-                            // src="https://images.unsplash.com/photo-1620705914357-a9d11009e068?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZW9uJTIwZ2FtaW5nJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NTUzNDU5NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                            src="../src/assets/Pour le site 2.jpg"
-                            alt="Neon Gaming Technology"
-                            className="w-full h-60 object-cover rounded-lg border border-primary/20"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent rounded-lg flex items-end p-6">
-                            <div>
-                                <h3 className="text-2xl font-bold text-white mb-2">Technologie de pointe</h3>
-                                <p className="text-gray-300">Entraînements avec suivi et analyse des performances !</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> */}
 
             {/* Budget Section */}
             <section className="py-16 px-4">
@@ -504,17 +527,17 @@ export function ClubPage() {
                                                 <SelectValue placeholder="Quesl est ton niveau de jeu ?" />
                                             </SelectTrigger>
                                             <SelectContent className="bg-card border-primary/20">
-                                                <SelectItem value="beginner">
+                                                <SelectItem value="Débutant">
                                                     Débutant (j'ai déjà joué un peu)
                                                 </SelectItem>
-                                                <SelectItem value="intermediate">
+                                                <SelectItem value="Intermédiaire">
                                                     Intermédiaire (j'ai déjà joué de nombreuses parties)
                                                 </SelectItem>
-                                                <SelectItem value="expert">
+                                                <SelectItem value="Expert">
                                                     Expert (je joue régulièrement, je participe aux no-limits de mon
                                                     centre)
                                                 </SelectItem>
-                                                <SelectItem value="professional">
+                                                <SelectItem value="Joueur Pro">
                                                     Joueur pro (joueur d'une équipe)
                                                 </SelectItem>
                                             </SelectContent>
@@ -531,11 +554,13 @@ export function ClubPage() {
                                                 <SelectValue placeholder="Quand peux-tu t'entraîner ?" />
                                             </SelectTrigger>
                                             <SelectContent className="bg-card border-primary/20">
-                                                <SelectItem value="Sunday">Dimanche</SelectItem>
-                                                <SelectItem value="monday">Lundi</SelectItem>
-                                                <SelectItem value="flexible">Dimanche et Lundi</SelectItem>
-                                                <SelectItem value="irregular">De manière irrégulière</SelectItem>
-                                                <SelectItem value="limited">
+                                                <SelectItem value="Dimanche">Dimanche</SelectItem>
+                                                <SelectItem value="Lundi">Lundi</SelectItem>
+                                                <SelectItem value="Dimanche et Lundi">Dimanche et Lundi</SelectItem>
+                                                <SelectItem value="De manière irrégulière">
+                                                    De manière irrégulière
+                                                </SelectItem>
+                                                <SelectItem value="Pas de disponibilité le dimanche ou le lundi">
                                                     Pas de disponibilité le dimanche ou le lundi
                                                 </SelectItem>
                                             </SelectContent>

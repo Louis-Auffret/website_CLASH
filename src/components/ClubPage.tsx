@@ -33,54 +33,47 @@ export function ClubPage() {
     };
 
     const achievements = [
-        { year: "2025", title: "Champions de France", description: "Championnat de France - Angoulême", star: 5 },
-        { year: "2024", title: "Quatrième place CDF", description: "Championnat de France - Roanne", star: 3 },
-        { year: "2023", title: "Quatrième place CDF", description: "Championnat de France - Le Mans", star: 3 },
-        { year: "2022", title: "Vice-Champions de France", description: "Championnat de France - Poitiers", star: 4 },
-        { year: "2022", title: "Champions de ligue Nord", description: "Championnat régionnal - Ligue Nord", star: 2 },
+        {
+            year: "2025",
+            title: "Champions de France",
+            team: "Team'Ajin",
+            description: "Championnat de France - Angoulême",
+            star: 5,
+        },
+        {
+            year: "2024",
+            title: "Quatrième place CDF",
+            team: "Ping'Win",
+            description: "Championnat de France - Roanne",
+            star: 3,
+        },
+        {
+            year: "2023",
+            title: "Quatrième place CDF",
+            team: "Ping'Win",
+            description: "Championnat de France - Le Mans",
+            star: 3,
+        },
+        {
+            year: "2022",
+            title: "Vice-Champions de France",
+            team: "Team'Ajin",
+            description: "Championnat de France - Poitiers",
+            star: 4,
+        },
+        {
+            year: "2022",
+            title: "Champions de ligue Nord",
+            team: "Team'Ajin",
+            description: "Championnat régionnal - Ligue Nord",
+            star: 2,
+        },
         {
             year: "2021",
             title: "Champions de ligue Ouest",
+            team: "CLASH",
             description: "Championnat régionnal - Ligue Ouest",
             star: 2,
-        },
-    ];
-
-    const facilities = [
-        {
-            name: "Briefing",
-            description:
-                "C'est le lieu ou les joueurs s'équipent. Très bon terrain d'entraînement, parfait pour s'entrainer à quelques joueurs.",
-            capacity: "6 joueurs en entrainement",
-        },
-        {
-            name: "Salle 1",
-            description: "Labyrinthe carré sans étage, avec deux mezzanines opposées, le rêve de tout raptor.",
-            capacity: "2 équipes ou 12 joueurs en entrainement",
-        },
-        {
-            name: "Salle 2",
-            description:
-                "Salle à double hauteur, très stratégique. Force les joueurs des équipes à jouer ensembles pour réussir leurs reprises.",
-            capacity: "2 équipes ou 18 joueurs en entrainement",
-        },
-        {
-            name: "Salle 3",
-            description:
-                "Salle à double hauteur, parfaite pour s'entrainer en petits groupes. Elle n'est pas utilisée en compétition.",
-            capacity: "2 équipes ou 8 joueurs en entrainement",
-        },
-        {
-            name: "Salle 2+3",
-            description:
-                "Ouverture de sas entre les salles 2 et 3 pour créer un immense labyrinthe. Pour varier les salles en entrainement.",
-            capacity: "4 équipes",
-        },
-        {
-            name: "Salle de repos",
-            description:
-                "Lieu de repos des joueurs, avec les plans des salles aux murs, parfait pour établir ses stratégies, se reposer et s'équiper.",
-            capacity: "30 joueurs",
         },
     ];
 
@@ -189,7 +182,10 @@ export function ClubPage() {
                                                 ))}
                                             </div>
                                         </div>
-                                        <h3 className="text-xl font-bold mb-2 text-white">{achievement.title}</h3>
+                                        <h3 className="text-xl font-bold mb-2 text-white">
+                                            {achievement.title}{" "}
+                                            <span className="font-extralight"> - {achievement.team}</span>
+                                        </h3>
                                         <p className="text-gray-400">{achievement.description}</p>
                                     </div>
                                 </div>

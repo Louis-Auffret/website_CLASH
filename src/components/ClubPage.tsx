@@ -241,16 +241,18 @@ export function ClubPage() {
                 <div className="container mx-auto max-w-6xl">
                     <div className="pb-16">
                         <h1 className="text-4xl font-bold mb-6 text-primary">Cotisations à l'année</h1>
-                        <p className="text-xl text-gray-300">
+                        <p className="text-xl text-gray-300 pb-6">
                             La saison d’entraînement s’étend de septembre à juin. À titre indicatif, les tarifs
-                            appliqués par la marque sont de 390 € pour la pratique loisir et de 590 € pour la pratique
-                            compétition. <br></br>
-                            <br></br>Grâce au soutien de nos sponsors, le club prend en charge une grande partie de ces
-                            frais, afin de rendre la discipline accessible au plus grand nombre. Une participation est
+                            appliqués par la marque sont de 390 € pour la pratique loisir et de 590 € pour la pratique
+                            compétition.
+                        </p>
+                        <p className="text-xl text-gray-300 pb-6">
+                            Grâce au soutien de nos sponsors, le club prend en charge une grande partie de ces frais,
+                            afin de rendre la discipline accessible au plus grand nombre. Une participation est
                             toutefois demandée pour couvrir certaines dépenses. Ces frais complémentaires varient d’une
                             saison à l’autre en fonction des financements obtenus et du nombre de joueurs inscrits.
-                            <br></br>
-                            <br></br>
+                        </p>
+                        <p className="text-xl text-gray-300">
                             Pour comprendre les montants demandés par la marque et leurs offres, référez-vous à leur
                             site internet. Si vous souhaitez rejoindre le CLASH, contactez-nous pour plus d'informations
                             sur les tarifs et les conditions d'adhésion.
@@ -579,7 +581,7 @@ export function ClubPage() {
                                 </div>
                                 <h4 className="font-bold text-white mb-2">Examen de ta candidature</h4>
                                 <p className="text-gray-400 text-sm">
-                                    Nous examinerons ta candidature dans les 72 heures.
+                                    Nous examinerons ta candidature dans les 72 heures.
                                 </p>
                             </div>
                             <div className="text-center">

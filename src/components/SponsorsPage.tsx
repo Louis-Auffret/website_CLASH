@@ -101,9 +101,10 @@ export function SponsorsPage() {
                             <h2 className="text-4xl font-bold mb-6 text-primary">Pourquoi chercher des Sponsors</h2>
                             <p className="text-lg text-gray-300 mb-6">
                                 Le CLASH est bien plus qu'un simple club de Laser Game : nous sommes des pionniers du
-                                laser de compétition, propulsant ce sport vers de nouveaux sommets. Nos partenariats de
-                                sponsoring nous permettent d'entretenir notre niveau de classe national, de soutenir nos
-                                athlètes d'élite et de développer cette discipline aux niveaux local et national.
+                                laser de compétition, propulsant cette discipmine vers de nouveaux sommets. Nos
+                                partenariats de sponsoring nous permettent d'entretenir notre niveau de classe national,
+                                de soutenir nos athlètes d'élite et de développer cette discipline aux niveaux local et
+                                national.
                             </p>
                             <p className="text-lg text-gray-300 mb-6">
                                 Grâce à des partenariats stratégiques, nous créons des relations mutuellement bénéfiques
@@ -145,7 +146,7 @@ export function SponsorsPage() {
                                     <div>
                                         <h4 className="font-bold text-white">Innovation</h4>
                                         <p className="text-gray-400 text-sm">
-                                            Un sport de pointe qui séduit de plus en plus le grand public
+                                            Une discipline de pointe qui séduit de plus en plus de monde
                                         </p>
                                     </div>
                                 </div>

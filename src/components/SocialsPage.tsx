@@ -5,6 +5,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import {
     Youtube,
     Twitter,
+    MicVocal,
     Instagram,
     Facebook,
     Twitch,
@@ -91,87 +92,75 @@ export function SocialsPage() {
 
     const featuredVideos = [
         {
-            title: "CLASH Championship Finals 2023 - Epic Showdown",
-            thumbnail:
-                "https://images.unsplash.com/photo-1511512578047-dfb367046420?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXNlciUyMGdhbWUlMjBhcmVuYXxlbnwxfHx8fDE3NTUzNDY1MDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-            channel: "Esports Central",
-            views: "127K",
-            duration: "18:42",
-            date: "2023-12-15",
-            description: "Complete coverage of our championship match against regional rivals",
+            title: "Laser Game : une équipe du Havre prépare les championnats de France",
+            thumbnail: "https://www.youtube.com/watch?v=lRXZq8snRc0",
+            link: "https://www.youtube.com/watch?v=lRXZq8snRc0",
+            channel: "France 3",
+            views: "3.3K",
+            duration: "1:49",
+            date: "11/19/2024",
+            description:
+                "Le laser game, vous connaissez ? Pour beaucoup, c'est un loisir… Mais pour les adhérents du Club de Laser game Associatif et Sportif Havrais, c'est une vraie discipline. L'une des 3 équipes du CLASH détient même le titre de vice-championne de France 2022.",
         },
         {
-            title: "Inside CLASH: Training Like Champions",
+            title: "Nous avons défiés le champion de France de Laser Game",
             thumbnail:
                 "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cmFpbmluZyUyMGZhY2lsaXR5fGVufDF8fHx8MTc1NTM0NjUwNHww&ixlib=rb-4.1.0&q=80&w=1080",
-            channel: "Sports Documentary",
-            views: "89K",
-            duration: "25:17",
-            date: "2023-11-08",
-            description: "Documentary exploring our training methods and team culture",
-        },
-        {
-            title: "Player Spotlight: Phoenix Rising Star",
-            thumbnail:
-                "https://images.unsplash.com/photo-1594736797933-d0401ba0ad45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYW1pbmclMjBwbGF5ZXJ8ZW58MXx8fHwxNzU1MzQ2NTA0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-            channel: "Player Profiles",
-            views: "45K",
-            duration: "12:34",
-            date: "2023-10-22",
-            description: "In-depth interview with our star player Phoenix about their journey",
-        },
-        {
-            title: "CLASH Arena Tour: State-of-the-Art Facilities",
-            thumbnail:
-                "https://images.unsplash.com/photo-1542751371-adc38448a05e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmdXR1cmlzdGljJTIwYXJlbmF8ZW58MXx8fHwxNzU1MzQ2NTA1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-            channel: "Tech Tours",
-            views: "73K",
-            duration: "15:28",
-            date: "2023-09-14",
-            description: "Complete walkthrough of our advanced training facilities and technology",
+            link: "https://www.youtube.com/watch?v=lRXZq8snRc0",
+            channel: "BFM",
+            views: "1.9K",
+            duration: "3:15",
+            date: "08/04/2025",
+            description:
+                "Nous avons affronté Sleaz, meilleur joueur de France et capitaine de la Team'Ajin, récente championne de France de Laser Game à domicile. Il nous présente sa discipline et nous as affronté lors d'un match.",
         },
     ];
 
     const newsArticles = [
         {
-            title: "CLASH Dominates Regional Championships with Innovative Strategy",
-            source: "Esports Today",
-            date: "2023-12-20",
+            title: "Laser game compétitif : l’équipe du Havre sacrée championne de France",
+            source: "Paris Normandie",
+            date: "08/05/2025",
             excerpt:
-                "The laser tag club's revolutionary approach to team coordination led them to a decisive victory in the regional championships, setting new standards for competitive play.",
+                "L’association havraise Clash vient de décrocher le titre de champion de France de laser game compétitif à Angoulême. Une première pour cette association créée en 2016.",
             image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGFtcGlvbnNoaXAlMjB0cm9waHl8ZW58MXx8fHwxNzU1MzQ2NTA1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-            readTime: "5 min read",
-            category: "Championship",
+            link: "https://www.paris-normandie.fr/id650248/article/2025-08-04/laser-game-competitif-lequipe-du-havre-sacree-championne-de-france",
+            readTime: "2 min",
+            category: "Championnat de France",
         },
         {
-            title: "The Rise of Competitive Laser Tag: How CLASH is Leading the Revolution",
-            source: "Gaming Weekly",
-            date: "2023-11-15",
+            title: "Une équipe du Havre remporte la coupe de France de Laser game",
+            source: "Charente libre",
+            date: "07/13/2025",
             excerpt:
-                "An in-depth look at how CLASH has transformed from a local club to a national powerhouse, pioneering the evolution of laser tag as a legitimate esport.",
-            image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlc3BvcnRzJTIwdGVhbXxlbnwxfHx8fDE3NTUzNDY1MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-            readTime: "8 min read",
-            category: "Industry",
+                "Neuf équipes de toute la France se sont affrontées ce week-end à Laser Game Evolution, zone des Avenauds à Gond-Pontouvre, lors de la finale de la coupe de France de laser game.",
+            image: "https://media.charentelibre.fr/25234954/1000x625/c15006ae-9065-4118-823e-cb0fa65884c9.jpg?v=1752425828",
+            link: "https://www.charentelibre.fr/charente/gond-pontouvre/une-equipe-du-havre-remporte-la-coupe-de-france-de-laser-game-organiseeaux-avenauds-a-gond-pontouvre-25234954.php",
+            readTime: "1 min",
+            category: "Championnat de France",
+        },
+    ];
+
+    const podcasts = [
+        {
+            title: "Objectif podium pour le CLASH : En route vers le championnat de France pour le club de laser game sportif Havrais",
+            source: "Ouest Track Radio",
+            date: "06/23/2025",
+            description:
+                "Un an après leur belle 4ᵉ place au championnat de France, le CLASH – Club de Laser Associatif et Sportif Havrais , revient dans nos studios avec une ambition claire : monter sur le podium lors du championnat de France en juillet !",
+            image: "https://ouest-track.com/upload/podcasts/photos/main/685a797f9c77a3.91331442.png?=1755653049",
+            link: "https://open.spotify.com/episode/7qWOGrYcgE2LZBq0gRyjme",
+            duration: "22:14",
         },
         {
-            title: "Technology Meets Sport: CLASH's State-of-the-Art Training Facility",
-            source: "Tech Sports Magazine",
-            date: "2023-10-28",
-            excerpt:
-                "Exclusive coverage of CLASH's new training center, featuring cutting-edge laser tag technology and analytics systems that are revolutionizing player development.",
-            image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNobm9sb2d5JTIwZmFjaWxpdHl8ZW58MXx8fHwxNzU1MzQ2NTA2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-            readTime: "6 min read",
-            category: "Technology",
-        },
-        {
-            title: "Community Impact: CLASH's Youth Development Program",
-            source: "Local Sports Network",
-            date: "2023-09-30",
-            excerpt:
-                "How CLASH is giving back to the community through their youth development program, introducing young players to competitive laser tag and building future champions.",
-            image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b3V0aCUyMHNwb3J0c3xlbnwxfHx8fDE3NTUzNDY1MDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
-            readTime: "4 min read",
-            category: "Community",
+            title: "Le CLASH club de laser game du Havre 4ème aux championnats de France",
+            source: "Ouest Track Radio",
+            date: "07/29/2024",
+            description:
+                "Sleaz et Fastyou sont venu présenter l'association du CLASH et les performance de leur équipe : les Ping'Win qui terminent 4ᵉ aux championnat de France pour la seconde année consécutive.",
+            image: "https://ouest-track.com/upload/podcasts/photos/main/66a78ed36c5522.75685762.png?=1755652001",
+            link: "https://open.spotify.com/episode/0fkSDTqk8LC8hxTr08rmEh",
+            duration: "18:41",
         },
     ];
 
@@ -269,10 +258,7 @@ export function SocialsPage() {
                                 </div>
 
                                 <div className="p-6">
-                                    <h3 className="text-lg font-bold text-white mb-2 line-clamp-2">{video.title}</h3>
-                                    <p className="text-gray-400 text-sm mb-3">{video.description}</p>
-
-                                    <div className="flex items-center justify-between text-sm text-gray-500">
+                                    <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
                                         <span className="text-primary">{video.channel}</span>
                                         <div className="flex items-center space-x-4">
                                             <div className="flex items-center">
@@ -285,17 +271,19 @@ export function SocialsPage() {
                                             </div>
                                         </div>
                                     </div>
+                                    <h3 className="text-lg font-bold text-white mb-2 line-clamp-2">{video.title}</h3>
+                                    <p className="text-gray-400 text-sm line-clamp-3 mb-3">{video.description}</p>
                                 </div>
                             </Card>
                         ))}
                     </div>
 
-                    <div className="text-center mt-12">
+                    {/* <div className="text-center mt-12">
                         <Button className="bg-primary hover:bg-primary/90 text-black font-bold px-8 py-3">
                             <Youtube className="h-5 w-5 mr-2" />
                             Voir toutes les vidéos
                         </Button>
-                    </div>
+                    </div> */}
                 </div>
             </section>
 
@@ -311,7 +299,7 @@ export function SocialsPage() {
                         {newsArticles.map((article, index) => (
                             <Card
                                 key={index}
-                                className="bg-card border-primary/20 overflow-hidden hover:border-primary/40 transition-all duration-300 group cursor-pointer">
+                                className="bg-card border-primary/20 overflow-hidden hover:border-primary/40 transition-all duration-300 group">
                                 <div className="relative h-48">
                                     <ImageWithFallback
                                         src={article.image}
@@ -319,9 +307,9 @@ export function SocialsPage() {
                                         className="w-full h-full object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                                    <div className="absolute top-4 left-4">
+                                    {/* <div className="absolute top-4 left-4">
                                         <Badge className="bg-primary/90 text-black">{article.category}</Badge>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <div className="p-6">
@@ -330,32 +318,94 @@ export function SocialsPage() {
                                         <span>{new Date(article.date).toLocaleDateString()}</span>
                                     </div>
 
-                                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">
                                         {article.title}
                                     </h3>
-                                    <p className="text-gray-400 mb-4 line-clamp-3">{article.excerpt}</p>
+                                    <p className="text-gray-400 mb-4 line-clamp-3 line-clamp-3">{article.excerpt}</p>
 
                                     <div className="flex items-center justify-between">
-                                        <span className="text-sm text-gray-500">{article.readTime}</span>
-                                        <Button
-                                            variant="ghost"
-                                            size="sm"
-                                            className="text-primary hover:text-primary hover:bg-primary/10">
-                                            Read More
-                                            <ExternalLink className="h-4 w-4 ml-1" />
-                                        </Button>
+                                        <span className="text-sm text-gray-500">
+                                            Temps de lecture : {article.readTime}
+                                        </span>
+                                        <a href={article.link} target="_blank">
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                className="text-primary hover:text-primary hover:bg-primary/10">
+                                                Lire l'article
+                                                <ExternalLink className="h-4 w-4 ml-1" />
+                                            </Button>
+                                        </a>
                                     </div>
                                 </div>
                             </Card>
                         ))}
                     </div>
 
-                    <div className="text-center mt-12">
+                    {/* <div className="text-center mt-12">
                         <Button className="bg-primary hover:bg-primary/90 text-black font-bold px-8 py-3">
                             <Newspaper className="h-5 w-5 mr-2" />
                             Voir tous les articles
                         </Button>
+                    </div> */}
+                </div>
+            </section>
+
+            {/* Podcast Section */}
+            <section className="py-16 px-4 bg-secondary/30">
+                <div className="container mx-auto max-w-6xl">
+                    <div className="flex items-center justify-center mb-12">
+                        <MicVocal className="h-8 w-8 text-primary mr-3" />
+                        <h2 className="text-4xl font-bold text-primary">À la radio</h2>
                     </div>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {podcasts.map((podcast, index) => (
+                            <Card
+                                key={index}
+                                className="bg-card border-primary/20 overflow-hidden hover:border-primary/40 transition-all duration-300 group">
+                                <div className="relative">
+                                    <ImageWithFallback
+                                        src={podcast.image}
+                                        alt={podcast.title}
+                                        className="w-full h-48 object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <a href={podcast.link} target="_blank">
+                                            <div className="bg-primary/90 hover:bg-primary w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 group-hover:scale-110">
+                                                <Play className="h-8 w-8 text-black ml-1" />
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div className="absolute bottom-2 right-2">
+                                        <Badge className="bg-black/80 text-white">{podcast.duration}</Badge>
+                                    </div>
+                                </div>
+
+                                <div className="p-6">
+                                    <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
+                                        <span className="text-primary font-medium">{podcast.source}</span>
+                                        <span>{new Date(podcast.date).toLocaleDateString()}</span>
+                                    </div>
+
+                                    <h3 className="text-xl font-bold text-white mb-3 transition-colors line-clamp-2">
+                                        {podcast.title}
+                                    </h3>
+                                    <p className="text-gray-400 mb-4 line-clamp-3 line-clamp-3">
+                                        {podcast.description}
+                                    </p>
+                                </div>
+                            </Card>
+                        ))}
+                    </div>
+
+                    {/* <div className="text-center mt-12">
+                        <Button className="bg-primary hover:bg-primary/90 text-black font-bold px-8 py-3">
+                            <Newspaper className="h-5 w-5 mr-2" />
+                            Voir tous les podcats
+                        </Button>
+                    </div> */}
                 </div>
             </section>
 

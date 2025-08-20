@@ -62,7 +62,7 @@ export function SocialsPage() {
         },
         {
             name: "Tik Tok",
-            handle: "@CLASHLaserTag",
+            handle: "asso_clash",
             followers: "12.4K",
             icon: Music2,
             color: "bg-pink-600 hover:bg-pink-700",
@@ -94,7 +94,7 @@ export function SocialsPage() {
     const featuredVideos = [
         {
             title: "Laser Game : une équipe du Havre prépare les championnats de France",
-            thumbnail: "https://www.youtube.com/watch?v=lRXZq8snRc0",
+            thumbnail: "https://img.youtube.com/vi/lRXZq8snRc0/maxresdefault.jpg",
             link: "https://www.youtube.com/watch?v=lRXZq8snRc0",
             channel: "France 3",
             views: "3.3K",
@@ -105,9 +105,8 @@ export function SocialsPage() {
         },
         {
             title: "Nous avons défiés le champion de France de Laser Game",
-            thumbnail:
-                "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cmFpbmluZyUyMGZhY2lsaXR5fGVufDF8fHx8MTc1NTM0NjUwNHww&ixlib=rb-4.1.0&q=80&w=1080",
-            link: "https://www.youtube.com/watch?v=lRXZq8snRc0",
+            thumbnail: "",
+            link: "",
             channel: "BFM",
             views: "1.9K",
             duration: "3:15",
@@ -249,9 +248,11 @@ export function SocialsPage() {
                                     />
                                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300" />
                                     <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="bg-primary/90 hover:bg-primary w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 group-hover:scale-110">
-                                            <Play className="h-8 w-8 text-black ml-1" />
-                                        </div>
+                                        <a href={video.link} target="_blank">
+                                            <div className="bg-primary/90 hover:bg-primary w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 group-hover:scale-110">
+                                                <Play className="h-8 w-8 text-black ml-1" />
+                                            </div>
+                                        </a>
                                     </div>
                                     <div className="absolute bottom-2 right-2">
                                         <Badge className="bg-black/80 text-white">{video.duration}</Badge>

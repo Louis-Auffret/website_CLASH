@@ -612,7 +612,7 @@ export function ClubPage() {
                         Notre <span className="text-primary">Mission</span>
                     </h2>
                     <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                        Offrir une expérience de laser game compétitive de classe nationale qui développe des athlètes,
+                        Offrir une expérience de Laser Game compétitive de classe nationale qui développe des athlètes,
                         forge le caractère et crée des souvenirs inoubliables. Nous nous efforçons d'être la destination
                         de choix pour les joueurs passionnés de Laser Game souhaitant se mesurer aux meilleurs.
                     </p>

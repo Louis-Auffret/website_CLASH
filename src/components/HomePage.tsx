@@ -59,8 +59,8 @@ export function HomePage({ onPageChange }: HomePageProps) {
                         Club de Laser Associatif et Sportif Havrais
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto drop-shadow-xl/50">
-                        Club de compétition de laser game d'élite. Là où la précision rencontre la technologie et où
-                        naissent les champions.
+                        Nous sommes l'un des plus grand club de France, là où la motivation rencontre la performance et
+                        le succès.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -89,16 +89,16 @@ export function HomePage({ onPageChange }: HomePageProps) {
                     </h2>
 
                     <div className="inline-flex content-center grid md:grid-cols-3 gap-8">
-                        <Card className="bg-card border-primary/20 p-8 text-center hover:border-primary/40 transition-all duration-300 group">
+                        <Card className="flex-1 bg-card border-primary/20 p-8 text-center hover:border-primary/40 transition-all duration-300 group">
                             <Target className="h-12 w-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform" />
                             <h3 className="text-xl font-bold mb-4 text-primary">Formation d'excellence</h3>
                             <p className="text-gray-400">
-                                Ciblage avancés et coaching professionnel pour affiner vos compétences et améliorer
-                                votre précision.
+                                Coaching sur-mesure pour développer vos compétences et faire de vous l'un des meilleur
+                                joueur de Laser Game.
                             </p>
                         </Card>
 
-                        <Card className="bg-card border-primary/20 p-8 text-center hover:border-primary/40 transition-all duration-300 group">
+                        <Card className="flex-1 bg-card border-primary/20 p-8 text-center hover:border-primary/40 transition-all duration-300 group">
                             <Users className="h-12 w-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform" />
                             <h3 className="text-xl font-bold mb-4 text-primary">Esprit d'équipe</h3>
                             <p className="text-gray-400">
@@ -107,12 +107,12 @@ export function HomePage({ onPageChange }: HomePageProps) {
                             </p>
                         </Card>
 
-                        <Card className="bg-card border-primary/20 p-8 text-center hover:border-primary/40 transition-all duration-300 group">
+                        <Card className="flex-1 bg-card border-primary/20 p-8 text-center hover:border-primary/40 transition-all duration-300 group">
                             <Trophy className="h-12 w-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform" />
                             <h3 className="text-xl font-bold mb-4 text-primary">Niveau Championnat</h3>
                             <p className="text-gray-400">
-                                Participez au tournois régionaux et nationaux avec nos équipes éxpérimentées et un
-                                palmarès éprouvé.
+                                Rejoignez nos équipes expérimentées et participez aux tournois régionaux jusqu’à la
+                                grande finale nationale.
                             </p>
                         </Card>
                     </div>

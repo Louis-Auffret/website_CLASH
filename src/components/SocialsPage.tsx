@@ -123,7 +123,7 @@ export function SocialsPage() {
             date: "08/05/2025",
             excerpt:
                 "L’association havraise Clash vient de décrocher le titre de champion de France de laser game compétitif à Angoulême. Une première pour cette association créée en 2016.",
-            image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGFtcGlvbnNoaXAlMjB0cm9waHl8ZW58MXx8fHwxNzU1MzQ2NTA1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+            image: "../src/assets/Players_portrait.jpg",
             link: "https://www.paris-normandie.fr/id650248/article/2025-08-04/laser-game-competitif-lequipe-du-havre-sacree-championne-de-france",
             readTime: "2 min",
             category: "Championnat de France",

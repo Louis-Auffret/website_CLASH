@@ -101,16 +101,15 @@ export function SponsorsPage() {
                             <h2 className="text-4xl font-bold mb-6 text-primary">Pourquoi chercher des Sponsors</h2>
                             <p className="text-lg text-gray-300 mb-6">
                                 Le CLASH est bien plus qu'un simple club de Laser Game : nous sommes des pionniers du
-                                laser de compétition, propulsant cette discipmine vers de nouveaux sommets. Nos
+                                Laser Game compétitif, propulsant cette discipline vers de nouveaux sommets. Nos
                                 partenariats de sponsoring nous permettent d'entretenir notre niveau de classe national,
-                                de soutenir nos athlètes d'élite et de développer cette discipline aux niveaux local et
-                                national.
+                                de soutenir nos athlètes de haut niveau et de développer la discipline aux niveaux local
+                                et national.
                             </p>
                             <p className="text-lg text-gray-300 mb-6">
-                                Grâce à des partenariats stratégiques, nous créons des relations mutuellement bénéfiques
-                                qui aident les marques à atteindre notre communauté tout en fournissant les ressources
-                                nécessaires pour développer la prochaine génération de champions compétitifs du Laser
-                                Game.
+                                Notre objectif : rendre accessible la compétition à chacun en finançant leur parcours
+                                grâce à nos partenariats. Permettant d'augmenter la communauté de joueurs et d'initiés,
+                                dans le but de créer la prochaine génération de champions !
                             </p>
 
                             <div className="grid sm:grid-cols-2 gap-4 mt-8">
@@ -315,8 +314,8 @@ export function SponsorsPage() {
                         Envie de devenir notre <span className="text-primary">partenaire</span> cette saison ?
                     </h2>
                     <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                        Rejoignez les marques d'élite qui soutiennent le Laser Game de compétition et rejoignez notre
-                        communauté de joueurs passionnés.
+                        Rejoignez l'aventure Laser Game compétitif en soutennant le CLASH et découvrez notre communauté
+                        de joueurs passionnés.
                     </p>
 
                     <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -348,7 +347,7 @@ export function SponsorsPage() {
 
                     <div className="flex items-center justify-center space-x-4">
                         <Handshake className="h-6 w-6 text-primary" />
-                        <span className="text-gray-300">Construisons ensemble quelque chose d'extraordinaire</span>
+                        <span className="text-gray-300">Construisons ensemble la discipline de demain</span>
                     </div>
                 </div>
             </section>

@@ -15,7 +15,8 @@ export function SportPage() {
                     </h1>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                         Le Laser Game, c'est plus qu'un simple jeu, c'est une discipline mêlant technologie et sport
-                        traditionnel, qui allie stratégie, précision et travail d'équipe.
+                        traditionnel, qui allie stratégie, précision, explosivité, réflexes, endurance et travail
+                        d'équipe.
                     </p>
                 </div>
             </section>
@@ -25,16 +26,17 @@ export function SportPage() {
                 <div className="container mx-auto max-w-6xl">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h2 className="text-4xl font-bold mb-6 text-primary">C'est quoi le Laser compétitif ?</h2>
+                            <h2 className="text-4xl font-bold mb-6 text-primary">C'est quoi le Laser compétitif ?</h2>
                             <p className="text-lg text-gray-300 mb-6">
                                 Le Laser Game est une discipline compétitive, collective, où deux équipes de cinq
                                 joueurs s'affrontent dans un labyrinthe lors de parties de 15 minutes réglementées. Les
                                 joueurs utilisent le matériel de Laser Game Evolution® pour marquer des points en
-                                touchant les capteurs de leurs adversaires, tout en évitant d'être touchés eux-mêmes.
+                                touchant les capteurs de leurs adversaires, tout en évitant d'être touchés
+                                eux&#8209;mêmes.
                             </p>
                             <p className="text-lg text-gray-300 mb-6">
                                 Au delà du simple loisir, l'aspect compétitif du Laser Game permet de développer des
-                                compétences très variées : endurance, précision, stratégie, réflexes et travail
+                                compétences très variées : endurance, précision, stratégie, réflexes et travail
                                 d'équipe. C'est une discipline exigeante qui demande à la fois de la concentration et de
                                 la coordination.
                             </p>
@@ -125,8 +127,8 @@ export function SportPage() {
                         <Card className="bg-card border-primary/20 p-6 hover:border-primary/40 transition-all duration-300">
                             <h3 className="text-xl font-bold mb-4 text-primary">Hauteurs</h3>
                             <p className="text-gray-400 mb-4">
-                                En compétition, un joueur éteint sur une hauteur, doit retourner au rez-de-chaussée
-                                avant de pouvoir jouer à nouveau.
+                                En compétition, un joueur éteint sur une hauteur, doit retourner au
+                                rez&#8209;de&#8209;chaussée avant de pouvoir jouer à nouveau.
                             </p>
                             <div className="text-sm text-primary"></div>
                         </Card>

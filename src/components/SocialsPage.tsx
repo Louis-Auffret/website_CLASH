@@ -8,6 +8,7 @@ import {
     MicVocal,
     Instagram,
     Facebook,
+    Music2,
     Twitch,
     MessageSquare,
     ExternalLink,
@@ -42,15 +43,6 @@ export function SocialsPage() {
             description: "Scores des joueurs et des équipes, annonces d'événements et moments forts",
         },
         // {
-        //     name: "Twitter",
-        //     handle: "@CLASHLaserTag",
-        //     followers: "12.4K",
-        //     icon: Twitter,
-        //     color: "bg-blue-500 hover:bg-blue-600",
-        //     url: "https://twitter.com/clashlasertag",
-        //     description: "Live tournament updates, news, and community discussions",
-        // },
-        // {
         //     name: "Twitch",
         //     handle: "CLASHLaserTag",
         //     followers: "5.1K",
@@ -67,6 +59,15 @@ export function SocialsPage() {
             color: "bg-blue-600 hover:bg-blue-700",
             url: "https://www.facebook.com/CLASHLGE/",
             description: "Community updates, event announcements, and photo galleries",
+        },
+        {
+            name: "Tik Tok",
+            handle: "@CLASHLaserTag",
+            followers: "12.4K",
+            icon: Music2,
+            color: "bg-pink-600 hover:bg-pink-700",
+            url: "https://www.tiktok.com/@asso_clash?_t=ZN-8yofazsJETn&_r=1",
+            description: "Live tournament updates, news, and community discussions",
         },
         {
             name: "Discord",
@@ -215,7 +216,7 @@ export function SocialsPage() {
                                     </div>
 
                                     <Button
-                                        className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 hover:border-primary/50 transition-all duration-300"
+                                        className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 hover:border-primary/50 transition-all duration-300 mt-auto"
                                         onClick={() => window.open(social.url, "_blank")}>
                                         <ExternalLink className="h-4 w-4 mr-2" />
                                         Nous suivre

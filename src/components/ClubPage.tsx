@@ -246,20 +246,33 @@ export function ClubPage() {
                     <div className="pb-16">
                         <h1 className="text-4xl font-bold mb-6 text-primary">Cotisations à l'année</h1>
                         <p className="text-xl text-gray-300">
-                            Une saison d'entraînement s'étend de Septembre à Juin. Les entraînement ont lieux les lundi
-                            et dimanche soir. En début de semaine, plus axé sur le loisir, et le dimanche plus axé sur
-                            la compétition.
+                            La saison d’entraînement s’étend de septembre à juin. À titre indicatif, les tarifs
+                            appliqués par la marque sont de 390 € pour la pratique loisir et de 590 € pour la pratique
+                            compétition. <br></br>
+                            <br></br>Grâce au soutien de nos sponsors, le club prend en charge une grande partie de ces
+                            frais, afin de rendre la discipline accessible au plus grand nombre. Une participation est
+                            toutefois demandée pour couvrir certaines dépenses. Ces frais complémentaires varient d’une
+                            saison à l’autre en fonction des financements obtenus et du nombre de joueurs inscrits.
+                            <br></br>
+                            <br></br>
+                            Pour comprendre les montants demandés par la marque et leurs offres, référez-vous à leur
+                            site internet. Si vous souhaitez rejoindre le CLASH, contactez-nous pour plus d'informations
+                            sur les tarifs et les conditions d'adhésion.
                         </p>
                     </div>
                     <div className="grid lg:grid-cols-2 gap-12">
                         <div>
                             <h2 className="text-4xl font-bold mb-6 text-primary">
-                                Cotisation Loisir <span className="text-white">[400€]</span>
+                                Cotisation <span className="text-white">Loisir</span>
                             </h2>
                             <div className="space-y-4">
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                    <p className="text-gray-300">Sans engagement</p>
+                                    <p className="text-gray-300">Lundi soir 18h - 21h</p>
+                                </div>
+                                <div className="flex items-start space-x-3">
+                                    <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
+                                    <p className="text-gray-300"> 39€ par mois - Sans engagement</p>
                                 </div>
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
@@ -275,21 +288,21 @@ export function ClubPage() {
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
                                     <p className="text-gray-300">Encadré par des joueurs compétitifs expérimentés</p>
                                 </div>
-                                <div className="flex items-start space-x-3">
-                                    <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                    <p className="text-gray-300">[400€] dédié aux frais de location du matériel</p>
-                                </div>
                             </div>
                         </div>
 
                         <div>
                             <h2 className="text-4xl font-bold mb-6 text-primary">
-                                Cotisation Compétition <span className="text-white">[600€]</span>
+                                Cotisation <span className="text-white">Compétition</span>
                             </h2>
                             <div className="space-y-4">
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                    <p className="text-gray-300">Engagement à l'année</p>
+                                    <p className="text-gray-300">Dimanche soir 18h - 21h</p>
+                                </div>
+                                <div className="flex items-start space-x-3">
+                                    <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
+                                    <p className="text-gray-300">59€ par mois - Engagement à l'année</p>
                                 </div>
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
@@ -304,15 +317,8 @@ export function ClubPage() {
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
                                     <p className="text-gray-300">
-                                        En plus des frais de location du matériel s'ajoute [200€] dédié aux frais de la
-                                        marque pour organiser les compétitions
-                                    </p>
-                                </div>
-                                <div className="flex items-start space-x-3">
-                                    <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                    <p className="text-gray-300">
-                                        Le club, strucuté sous forme d'association, réclame également une participation
-                                        financière [~50€] pour les déplacements de la saison
+                                        Le club réclame également une participation financière : pour les déplacements ,
+                                        les maillots, la communication, les évènements, etc.
                                     </p>
                                 </div>
                             </div>
@@ -362,7 +368,7 @@ export function ClubPage() {
                         </h2>
                         <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                             Prêt à rejoindre le club de Laser Game le plus compétitif de France ? Remplis le formulaire
-                            ci-dessous et deviens le meilleur.
+                            ci-dessous et viens tester notre discipline.
                         </p>
                     </div>
 

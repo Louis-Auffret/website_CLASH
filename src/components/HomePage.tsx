@@ -73,9 +73,9 @@ export function HomePage({ onPageChange }: HomePageProps) {
                         <Button
                             size="lg"
                             variant="outline"
-                            onClick={() => onPageChange("teams")}
+                            onClick={() => onPageChange("club")}
                             className=" text-lg px-8 py-3">
-                            Rencontrez nos équipes
+                            Rejoignez notre club
                         </Button>
                     </div>
                 </div>
@@ -136,9 +136,9 @@ export function HomePage({ onPageChange }: HomePageProps) {
                     </p>
                     <Button
                         size="lg"
-                        onClick={() => onPageChange("club")}
+                        onClick={() => onPageChange("teams")}
                         className="bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4">
-                        Apprenez en plus sur le club
+                        Rencontrez nos équipes et joueurs
                     </Button>
                 </div>
             </section>

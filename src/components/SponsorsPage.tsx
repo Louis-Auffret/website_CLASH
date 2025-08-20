@@ -2,7 +2,7 @@ import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Handshake, Target, Users, Trophy, Zap, Star, Mail, Phone } from "lucide-react";
+import { Handshake, Target, Users, Trophy, Zap, Star, Mail, Phone, LayoutTemplate } from "lucide-react";
 
 export function SponsorsPage() {
     const sponsors = [
@@ -25,49 +25,53 @@ export function SponsorsPage() {
         {
             name: "Sponsor majeur",
             price: "8 000€",
+            logo: "Poitrine",
             benefits: [
-                "Logo on all team uniforms and equipment",
-                "Naming rights to main arena",
-                "VIP access to all tournaments",
-                "Featured placement on website and social media",
-                "Co-branding opportunities",
-                "Player meet & greet events",
+                "Invitation à la soirée de remerciement",
+                "Collaboration sur un contenu promotionnel",
+                "Intervention des champions de France en entreprise",
+                "Post de remerciement personnalisé sur nos réseaux",
+                "Mentions sur les posts et stories",
+                "Accès à notre banque d'images et vidéos",
+                "Logos sur les visuels de communication et nos prints",
             ],
             featured: true,
         },
         {
             name: "Sponsor officiel",
             price: "2 000€",
+            logo: "Manche",
             benefits: [
-                "Logo on team equipment and gear",
-                "Featured sponsor recognition",
-                "Tournament booth space",
-                "Social media mentions",
-                "Newsletter inclusion",
-                "Player endorsement opportunities",
+                "Invitation à la soirée de remerciement",
+                "Intervention des champions de France en entreprise",
+                "Post de remerciement personnalisé sur nos réseaux",
+                "Mentions sur les posts et stories",
+                "Accès à notre banque d'images et vidéos",
+                "Logos sur les visuels de communication et nos prints",
             ],
             featured: false,
         },
         {
             name: "Partenaire",
             price: "1 000€",
+            logo: "Dos",
             benefits: [
-                "Logo placement on team materials",
-                "Website sponsor page listing",
-                "Event program inclusion",
-                "Social media recognition",
-                "Tournament tickets",
+                "Invitation à la soirée de remerciement",
+                "Post de remerciement collectif",
+                "Logo sur les prints du club",
+                "Mentions sur les posts et stories",
+                "Accès à notre banque d'images et vidéos",
             ],
             featured: false,
         },
         {
             name: "Soutien",
             price: "500€",
+            logo: "-",
             benefits: [
-                "Website listing",
-                "Social media thank you posts",
-                "Event program mention",
-                "Community recognition",
+                "Invitation à la soirée de remerciement",
+                "Post de remerciement collectif",
+                "Logo sur les prints du club",
             ],
             featured: false,
         },
@@ -279,6 +283,12 @@ export function SponsorsPage() {
                                     <p className="text-gray-400 text-sm">Par année</p>
                                 </div>
 
+                                <div className="text-center flex items-center space-x-3 ">
+                                    <LayoutTemplate className="text-primary" />
+                                    <p className="text-primary">
+                                        Logo : <span className="text-white">{tier.logo}</span>
+                                    </p>
+                                </div>
                                 <div className="space-y-3 mb-6">
                                     {tier.benefits.map((benefit, benefitIndex) => (
                                         <div key={benefitIndex} className="flex items-start space-x-2">

@@ -25,7 +25,7 @@ export function SportPage() {
                 <div className="container mx-auto max-w-6xl">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h2 className="text-4xl font-bold mb-6 text-primary">Qu'est-ce que le Laser Game ?</h2>
+                            <h2 className="text-4xl font-bold mb-6 text-primary">C'est quoi le Laser compétitif ?</h2>
                             <p className="text-lg text-gray-300 mb-6">
                                 Le Laser Game est une discipline compétitive, collective, où deux équipes de cinq
                                 joueurs s'affrontent dans un labyrinthe lors de parties de 15 minutes réglementées. Les
@@ -116,8 +116,8 @@ export function SportPage() {
                         <Card className="bg-card border-primary/20 p-6 hover:border-primary/40 transition-all duration-300">
                             <h3 className="text-xl font-bold mb-4 text-primary">Cachage de cible</h3>
                             <p className="text-gray-400 mb-4">
-                                Il est interdit de cacher sa cible. Il faut donc adopter une posture adéquate. Sinon le
-                                joueur peut subit des pénalités.
+                                Il est interdit de cacher ses cibles. Il faut donc adopter une posture adéquate. Sinon
+                                le joueur peut subir des pénalités.
                             </p>
                             <div className="text-sm text-primary">Faute: -200 points</div>
                         </Card>
@@ -126,7 +126,7 @@ export function SportPage() {
                             <h3 className="text-xl font-bold mb-4 text-primary">Hauteurs</h3>
                             <p className="text-gray-400 mb-4">
                                 En compétition, un joueur éteint sur une hauteur, doit retourner au rez-de-chaussée
-                                avant de pouvoir rejouer.
+                                avant de pouvoir jouer à nouveau.
                             </p>
                             <div className="text-sm text-primary"></div>
                         </Card>

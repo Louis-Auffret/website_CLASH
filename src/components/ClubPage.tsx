@@ -6,7 +6,8 @@ import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Trophy, Users, Calendar, MapPin, Target, Star, UserPlus, Mail, Phone, GamepadIcon } from "lucide-react";
+import { Trophy, Users, Calendar, MapPin, Target, Star, UserPlus, Mail, GamepadIcon } from "lucide-react";
+import clubLogo from "../assets/Cover.jpg";
 
 export function ClubPage() {
     const [formData, setFormData] = useState({
@@ -147,9 +148,7 @@ export function ClubPage() {
 
                         <div className="relative">
                             <ImageWithFallback
-                                // src="https://images.unsplash.com/photo-1675310854573-c5c8e4089426?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21wZXRpdGl2ZSUyMGdhbWluZyUyMHRlYW18ZW58MXx8fHwxNzU1MzQ1OTUxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                                // src="../src/assets/Pour le site 2.jpg"
-                                src="../src/assets/Cover.jpg"
+                                src={clubLogo}
                                 alt="Competitive Gaming Team"
                                 className="w-full h-80 object-cover rounded-lg border border-primary/20"
                             />

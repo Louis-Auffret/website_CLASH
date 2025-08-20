@@ -1,6 +1,5 @@
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Trophy, Target, Zap, Shield, Users, Star, Filter } from "lucide-react";
@@ -529,6 +528,11 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                                                         <span className="font-normal">
                                                                             {" "}
                                                                             -{player.performance.classMVP}
+                                                                            <sup>
+                                                                                {player.performance.classMVP === 1
+                                                                                    ? "er"
+                                                                                    : "e"}
+                                                                            </sup>
                                                                         </span>
                                                                     </span>
                                                                 </div>
@@ -539,6 +543,11 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                                                         <span className="font-normal">
                                                                             {" "}
                                                                             -{player.performance.classATQ}
+                                                                            <sup>
+                                                                                {player.performance.classATQ === 1
+                                                                                    ? "er"
+                                                                                    : "e"}
+                                                                            </sup>
                                                                         </span>
                                                                     </span>
                                                                 </div>
@@ -549,6 +558,11 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                                                         <span className="font-normal">
                                                                             {" "}
                                                                             -{player.performance.classDEF}
+                                                                            <sup>
+                                                                                {player.performance.classDEF === 1
+                                                                                    ? "er"
+                                                                                    : "e"}
+                                                                            </sup>
                                                                         </span>
                                                                     </span>
                                                                 </div>
@@ -575,8 +589,8 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
             {/* Individual Players Section */}
             <section className="py-16 px-4 bg-secondary/50">
                 <div className="container mx-auto max-w-6xl">
-                    <div className="flex items-center justify-between mb-12">
-                        <h2 className="text-4xl font-bold text-primary">Player Profiles</h2>
+                    <div className="flex items-center justify-between mb-12 flex-col md:flex-row">
+                        <h2 className="text-4xl font-bold text-primary mb-6 md:mb-0">Joueurs</h2>
                         <div className="flex items-center space-x-4">
                             <Filter className="h-5 w-5 text-primary" />
                             <div className="flex space-x-2">
@@ -589,7 +603,7 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                             ? "bg-primary text-black"
                                             : "border-primary text-primary hover:bg-primary/10"
                                     }>
-                                    All Teams
+                                    Toutes
                                 </Button>
                                 {teams.map((team) => (
                                     <Button

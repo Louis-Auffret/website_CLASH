@@ -3,6 +3,7 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Handshake, Target, Users, Trophy, Zap, Star, Mail, Phone, LayoutTemplate } from "lucide-react";
+import sponsorPhoto from "../assets/sponsor.jpg";
 
 export function SponsorsPage() {
     const sponsors = [
@@ -16,7 +17,7 @@ export function SponsorsPage() {
             partnership: "2024 - Présent",
             contribution:
                 "Financement des cotisations individuelles des joueurs compétitifs pour faciliter le recrutement.",
-            value: "9 000€",
+            value: "8 200€",
             website: "https://le-havre.lasergame-evolution.fr/",
         },
     ];
@@ -154,8 +155,7 @@ export function SponsorsPage() {
 
                         <div className="relative overflow-hidden rounded-lg">
                             <ImageWithFallback
-                                // src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHBhcnRuZXJzaGlwfGVufDF8fHx8MTc1NTM1MTA0M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                                src="../src/assets/sponsor.jpg"
+                                src={sponsorPhoto}
                                 alt="Business Partnership"
                                 className="w-full h-80 object-cover border border-primary/20 scale-130"
                             />
@@ -175,14 +175,16 @@ export function SponsorsPage() {
                             <Card
                                 key={sponsor.id}
                                 className="bg-card border-primary/20 hover:border-primary/40 transition-all duration-300 group overflow-hidden">
-                                <div className="flex items-start">
+                                <div className="flex items-start flex-col md:flex-row">
                                     {/* Sponsor Logo */}
-                                    <div className="relative flex-shrink-0">
-                                        <div className="w-40 h-min  bg-white/5 flex items-center justify-center">
+                                    <div
+                                        className="relative flex flex-shrink-0 w-full md:w-auto"
+                                        style={{ height: "-webkit-fill-available" }}>
+                                        <div className="w-40 h-full bg-white/5 flex flex-1 items-center justify-center">
                                             <ImageWithFallback
                                                 src={sponsor.logo}
                                                 alt={`${sponsor.name} Logo`}
-                                                className="w-32 h-76 object-contain group-hover:scale-110 transition-all duration-500"
+                                                className="w-32 h-32 object-contain group-hover:scale-110 transition-all duration-500"
                                             />
                                         </div>
                                     </div>

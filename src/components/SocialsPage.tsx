@@ -3,13 +3,10 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import {
-    Youtube,
-    Twitter,
     MicVocal,
     Instagram,
     Facebook,
     Music2,
-    Twitch,
     MessageSquare,
     ExternalLink,
     Play,
@@ -201,11 +198,11 @@ export function SocialsPage() {
                                         <div className={`p-3 rounded-lg ${social.color} transition-all duration-300`}>
                                             <IconComponent className="h-8 w-8 text-white" />
                                         </div>
-                                        <Badge
+                                        {/* <Badge
                                             variant="secondary"
                                             className="bg-primary/20 text-primary border-primary/30">
                                             {social.followers}
-                                        </Badge>
+                                        </Badge> */}
                                     </div>
 
                                     <div className="mb-4">
@@ -423,28 +420,28 @@ export function SocialsPage() {
                             <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <Users className="h-8 w-8 text-primary" />
                             </div>
-                            <div className="text-3xl font-bold text-primary mb-2">53.5K</div>
+                            <div className="text-3xl font-bold text-primary mb-2">400+</div>
                             <p className="text-gray-400">Total d'abonnés</p>
                         </div>
                         <div className="text-center">
                             <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <Video className="h-8 w-8 text-primary" />
                             </div>
-                            <div className="text-3xl font-bold text-primary mb-2">2.1M</div>
+                            <div className="text-3xl font-bold text-primary mb-2">15K+</div>
                             <p className="text-gray-400">Vidéos vues</p>
                         </div>
                         <div className="text-center">
                             <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <ThumbsUp className="h-8 w-8 text-primary" />
                             </div>
-                            <div className="text-3xl font-bold text-primary mb-2">847K</div>
+                            <div className="text-3xl font-bold text-primary mb-2">5K+</div>
                             <p className="text-gray-400">Likes & Réactions</p>
                         </div>
                         <div className="text-center">
                             <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <Share2 className="h-8 w-8 text-primary" />
                             </div>
-                            <div className="text-3xl font-bold text-primary mb-2">156K</div>
+                            <div className="text-3xl font-bold text-primary mb-2">1K+</div>
                             <p className="text-gray-400">Partages et reposts</p>
                         </div>
                     </div>

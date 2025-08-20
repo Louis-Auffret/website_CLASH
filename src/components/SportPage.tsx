@@ -2,6 +2,8 @@ import { Card } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Shield, Zap, Timer, Award, Download } from "lucide-react";
 import { Button } from "./ui/button";
+import image from "../assets/playersCDF.jpg";
+import lexisCodex from "../assets/Lexis Codex 2024-2025.pdf";
 
 export function SportPage() {
     return (
@@ -62,8 +64,7 @@ export function SportPage() {
 
                         <div className="relative">
                             <ImageWithFallback
-                                // src="https://images.unsplash.com/photo-1632017734927-48988a0efae7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmdXR1cmlzdGljJTIwZ2FtaW5nJTIwYXJlbmF8ZW58MXx8fHwxNzU1MzQ1OTUxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                                src="../src/assets/playersCDF.jpg"
+                                src={image}
                                 alt="Futuristic Gaming Arena"
                                 className="w-full h-80 object-cover rounded-lg border border-primary/20"
                             />
@@ -135,7 +136,7 @@ export function SportPage() {
                     </div>
 
                     <Button variant="link" size="lg" className="mt-8 justify-self-center flex">
-                        <a href="../src/assets/Lexis Codex 2024-2025.pdf" download className="flex items-center gap-2">
+                        <a href={lexisCodex} download className="flex items-center gap-2">
                             Télécharger le livre de règle 2025 <Download className="h-8 w-8 text-white" />
                         </a>
                     </Button>

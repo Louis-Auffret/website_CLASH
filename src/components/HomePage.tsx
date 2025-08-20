@@ -4,6 +4,8 @@ import { Card } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Target, Users, Trophy } from "lucide-react";
 import clashLogo from "../assets/clash-logo.png";
+import coverPhoto from "../assets/Teams.jpg";
+import trailerAjin from "../assets/Trailer_Ajin_CDF.mp4";
 
 interface HomePageProps {
     onPageChange: (page: string) => void;
@@ -41,8 +43,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90 z-10" />
                 <ImageWithFallback
-                    // src="https://images.unsplash.com/photo-1643398899826-2fca1e015fad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXNlciUyMHRhZyUyMGdhbWUlMjBkYXJrfGVufDF8fHx8MTc1NTM0NTk1MHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                    src="../src/assets/Teams.jpg"
+                    src={coverPhoto}
                     alt="Laser Tag Arena"
                     className="absolute inset-0 w-full h-full object-cover"
                 />
@@ -88,7 +89,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
                         Pourquoi choisir le <span className="text-primary">CLASH</span>?
                     </h2>
 
-                    <div className="inline-flex content-center grid md:grid-cols-3 gap-8">
+                    <div className="flex flex-col md:flex-row content-center gap-8">
                         <Card className="flex-1 bg-card border-primary/20 p-8 text-center hover:border-primary/40 transition-all duration-300 group">
                             <Target className="h-12 w-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform" />
                             <h3 className="text-xl font-bold mb-4 text-primary">Formation d'excellence</h3>
@@ -118,7 +119,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
                     </div>
                     <div className="container mx-auto max-w-6xl">
                         <video ref={videoRef} className="w-full h-auto rounded-xl my-8" controls muted playsInline>
-                            <source src="./src/assets/Trailer_Ajin_CDF.mp4" type="video/mp4" />
+                            <source src={trailerAjin} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
                     </div>

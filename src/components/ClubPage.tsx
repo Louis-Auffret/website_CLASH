@@ -241,10 +241,14 @@ export function ClubPage() {
                 <div className="container mx-auto max-w-6xl">
                     <div className="pb-16">
                         <h1 className="text-4xl font-bold mb-6 text-primary">Cotisations à l'année</h1>
-                        <p className="text-xl text-gray-300 pb-6">
+                        {/* <p className="text-xl text-gray-300 pb-6">
                             La saison d’entraînement s’étend de septembre à juin. À titre indicatif, les tarifs
                             appliqués par la marque sont de 390 € pour la pratique loisir et de 590 € pour la pratique
                             compétition.
+                        </p> */}
+                        <p className="text-xl text-gray-300 pb-6">
+                            La saison d’entraînement s’étend de septembre à juin. À titre indicatif, les tarifs
+                            appliqués sont décidés par la marque Laser Game Entreprise®.
                         </p>
                         <p className="text-xl text-gray-300 pb-6">
                             Grâce au soutien de nos sponsors, le club prend en charge une grande partie de ces frais,

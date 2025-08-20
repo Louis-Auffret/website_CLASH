@@ -68,33 +68,6 @@ export function ClubPage() {
                 console.error("Erreur lors de l'envoi :", err);
                 alert("Une erreur est survenue lors de l'envoi du formulaire. Veuillez réessayer.");
             });
-
-        emailjs
-            .send(
-                "service_n5wcb6l", // Remplace par ton service ID EmailJS
-                "template_844ewb4", // Remplace par ton template ID EmailJS
-                templateParams,
-                "adnlV6O9Ixksj_ouo" // Remplace par ta clé publique EmailJS
-            )
-            .then((response) => {
-                console.log("Email envoyé !", response.status, response.text);
-                alert("Votre formulaire a été envoyé avec succès !");
-                setFormData({
-                    nickname: "",
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    phone: "",
-                    age: "",
-                    experience: "",
-                    availability: "",
-                    motivation: "",
-                });
-            })
-            .catch((err) => {
-                console.error("Erreur lors de l'envoi :", err);
-                alert("Une erreur est survenue lors de l'envoi du formulaire. Veuillez réessayer.");
-            });
     };
 
     const achievements = [

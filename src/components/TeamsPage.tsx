@@ -663,7 +663,9 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                                 </div>
                                             </div>
                                             <div className="text-right">
-                                                <p className="text-xs text-gray-400 mb-1">Click to view profile</p>
+                                                <p className="text-xs text-gray-400 mb-1">
+                                                    Cliquez pour voit le profile
+                                                </p>
                                                 <div className="text-primary group-hover:scale-110 transition-transform duration-300">
                                                     <svg
                                                         className="h-5 w-5"

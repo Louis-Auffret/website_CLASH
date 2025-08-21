@@ -269,7 +269,7 @@ export function ClubPage() {
                                 </div>
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                    <p className="text-gray-300"> 39€ par mois - Sans engagement</p>
+                                    <p className="text-gray-300"> Sans engagement</p>
                                 </div>
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
@@ -299,7 +299,7 @@ export function ClubPage() {
                                 </div>
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                    <p className="text-gray-300">59€ par mois - Engagement à l'année</p>
+                                    <p className="text-gray-300">Engagement à l'année</p>
                                 </div>
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>

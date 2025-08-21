@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import { HomePage } from "./components/HomePage";
 import { SportPage } from "./components/SportPage";
@@ -24,6 +24,17 @@ function ScrollToTop() {
     return null;
 }
 
+// Wrapper pour utiliser useNavigate dans App
+function TeamsPageWrapper() {
+    const navigate = useNavigate();
+
+    const handlePlayerSelect = (playerId: string) => {
+        navigate(`/player/${playerId}`);
+    };
+
+    return <TeamsPage onPlayerSelect={handlePlayerSelect} />;
+}
+
 export default function App() {
     return (
         <Router>
@@ -35,14 +46,10 @@ export default function App() {
                         <Route path="/" element={<HomePage />} />
                         <Route path="/sport" element={<SportPage />} />
                         <Route path="/club" element={<ClubPage />} />
-                        <Route path="/teams" element={<TeamsPage />} />
+                        <Route path="/teams" element={<TeamsPageWrapper />} />
                         <Route path="/sponsors" element={<SponsorsPage />} />
                         <Route path="/socials" element={<SocialsPage />} />
-
-                        {/* route dynamique pour afficher un joueur */}
                         <Route path="/player/:id" element={<PlayerProfilePage />} />
-
-                        {/* catch-all 404 */}
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                 </main>

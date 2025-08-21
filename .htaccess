@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+# Si le fichier ou le dossier existe, le serveur le sert normalement
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Sinon, on renvoie index.html (React gère la route)
+RewriteRule . /index.html [L]

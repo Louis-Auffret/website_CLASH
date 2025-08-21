@@ -261,8 +261,8 @@ export function SponsorsPage() {
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-bold mb-6 text-primary">Opportunités de parrainage</h2>
                         <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                            Rejoignez notre communauté d'élite de partenaires et contribuez à façonner l'avenir du laser
-                            tag compétitif tout en gagnant une précieuse visibilité auprès de notre public engagé.
+                            Rejoignez notre communauté de partenaires et contribuez à façonner l'avenir du Laser Game
+                            compétitif tout en gagnant en visibilité auprès de notre public.
                         </p>
                     </div>
 

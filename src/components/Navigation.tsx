@@ -37,7 +37,7 @@ export function Navigation() {
                             key={item.path}
                             to={item.path}
                             className={({ isActive }) =>
-                                `transition-all duration-300 ${
+                                `transition-all duration-300 hover:!no-underline ${
                                     isActive
                                         ? "bg-primary text-black hover:bg-primary/90 px-4 py-2 rounded-lg"
                                         : "text-white hover:text-primary hover:bg-white/10 px-4 py-2 rounded-lg"

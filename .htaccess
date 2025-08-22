@@ -1,8 +1,46 @@
+# Activer le moteur de réécriture
 RewriteEngine On
 RewriteBase /
+
+# Ne rien faire si l'URL est exactement index.html
 RewriteRule ^index\.html$ - [L]
+
 # Si le fichier ou le dossier existe, le serveur le sert normalement
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-# Sinon, on renvoie index.html (React gère la route)
-RewriteRule . /index.html [L]
+
+# Sinon, redirige vers index.html pour que React gère la route
+RewriteRule . index.html [L]
+
+# -----------------------------------
+# Compression des fichiers pour vitesse
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
+</IfModule>
+
+# -----------------------------------
+# Cache des fichiers statiques pour performance
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # Images
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  # CSS / JS
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# -----------------------------------
+# Sécurité de base
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# -----------------------------------
+# SEO / Robots
+# Autoriser tous les robots
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "all"
+</IfModule>

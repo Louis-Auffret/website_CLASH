@@ -437,7 +437,7 @@ export function PlayerProfilePage() {
                             <Card
                                 key={index}
                                 className="bg-card border-primary/20 p-4 hover:border-primary/40 transition-all duration-300">
-                                <div className="flex items-center justify-between">
+                                <div className="flex items-center justify-between flex-col gap-4 sm:flex-row">
                                     <div className="flex items-center space-x-6">
                                         <div className="text-center">
                                             <div className="text-sm text-gray-400 mb-1">Date</div>

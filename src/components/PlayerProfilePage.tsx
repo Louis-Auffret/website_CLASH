@@ -28,6 +28,8 @@ export function PlayerProfilePage() {
         const allPlayerData: Record<string, any> = {
             Sleaz: {
                 name: "Sleaz",
+                firstName: "Louis",
+                lastName: "Auffret",
                 role: "Captain",
                 team: "Team'AJin",
                 teamId: 1,
@@ -128,7 +130,7 @@ export function PlayerProfilePage() {
                         variant="outline"
                         className="mb-6 border-primary text-primary hover:bg-primary/10">
                         <ArrowLeft className="h-4 w-4 mr-2" />
-                        Back to Teams
+                        Retour aux équipes
                     </Button>
                 </div>
             </section>
@@ -158,7 +160,13 @@ export function PlayerProfilePage() {
                             <div className="lg:col-span-2">
                                 <div className="flex items-start justify-between mb-6">
                                     <div>
-                                        <h1 className="text-4xl font-bold text-primary mb-2">{player.name}</h1>
+                                        <h1 className="text-4xl font-bold text-primary mb-2">
+                                            {player.name}
+                                            <span className="text-white font-normal">
+                                                {" "}
+                                                - {player.firstName} {player.lastName}
+                                            </span>
+                                        </h1>
                                         <div className="flex items-center space-x-4 mb-4">
                                             <Badge variant="secondary" className="text-lg px-3 py-1">
                                                 {player.role}
@@ -166,7 +174,7 @@ export function PlayerProfilePage() {
                                             <span className="text-gray-400">•</span>
                                             <span className="text-white font-medium text-lg">{player.team}</span>
                                         </div>
-                                        <div className="grid grid-cols-3 gap-4 text-sm mb-6">
+                                        <div className="grid md:grid-cols-3 gap-4 text-sm mb-6">
                                             <div className="flex items-center space-x-2">
                                                 <Calendar className="h-4 w-4 text-primary" />
                                                 <span className="text-gray-400">Inscrit:</span>
@@ -175,12 +183,14 @@ export function PlayerProfilePage() {
                                             <div className="flex items-center space-x-2">
                                                 <Users className="h-4 w-4 text-primary" />
                                                 <span className="text-gray-400">Âge:</span>
-                                                <span className="text-white">{player.age} years old</span>
+                                                <span className="text-white">{player.age} ans</span>
                                             </div>
                                             <div className="flex items-center space-x-2">
                                                 <TrendingUp className="h-4 w-4 text-primary" />
                                                 <span className="text-gray-400">Éxpérience:</span>
-                                                <span className="text-white">{player.careerStats.yearsActive} ans</span>
+                                                <span className="text-white">
+                                                    {player.careerStats.yearsActive} saisons
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -189,7 +199,7 @@ export function PlayerProfilePage() {
                                 <p className="text-gray-300 mb-6 leading-relaxed">{player.bio}</p>
 
                                 {/* Social Links */}
-                                <div className="flex items-center space-x-4">
+                                {/* <div className="flex items-center space-x-4">
                                     <span className="text-gray-400">Ses réseaux:</span>
                                     <Button
                                         variant="outline"
@@ -212,7 +222,7 @@ export function PlayerProfilePage() {
                                         <Mail className="h-4 w-4 mr-2" />
                                         Email
                                     </Button>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </Card>
@@ -386,34 +396,6 @@ export function PlayerProfilePage() {
                         <Card className="bg-card border-primary/20 p-4 text-center">
                             <div className="text-3xl font-bold text-primary mb-2">{player.performance.bestStreaks}</div>
                             <div className="text-sm text-gray-400">Reçues Moy/Match</div>
-                        </Card>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-8">
-                        <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">
-                                {player.performance.matchesPlayed}
-                            </div>
-                            <div className="text-sm text-gray-400">Égalités</div>
-                        </Card>
-                        <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">{player.performance.kdRatio}</div>
-                            <div className="text-sm text-gray-400">Défaites</div>
-                        </Card>
-                        <div></div>
-                        <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">{player.performance.winRate}</div>
-                            <div className="text-sm text-gray-400">Score total</div>
-                        </Card>
-                        <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">
-                                {player.performance.avgPointsPerMatch}
-                            </div>
-                            <div className="text-sm text-gray-400">Données totales</div>
-                        </Card>
-                        <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">{player.performance.bestStreaks}</div>
-                            <div className="text-sm text-gray-400">Reçues totales</div>
                         </Card>
                     </div>
                 </div>

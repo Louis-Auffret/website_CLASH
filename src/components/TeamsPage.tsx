@@ -632,7 +632,7 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                 key={index}
                                 className="bg-card border-primary/20 hover:border-primary/40 transition-all duration-300 group overflow-hidden cursor-pointer"
                                 onClick={() => onPlayerSelect && player.id && onPlayerSelect(player.id)}>
-                                <div className="flex items-start">
+                                <div className="flex items-start flex-col md:flex-row">
                                     {/* Player Photo as leftmost part of card */}
                                     <div className="relative flex-shrink-0">
                                         <div className="w-32 h-32 overflow-hidden">
@@ -663,23 +663,23 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                                 </div>
                                             </div>
                                             <div className="text-right">
-                                                <p className="text-xs text-gray-400 mb-1">
-                                                    Cliquez pour voit le profile
+                                                <p className="flex items-center text-xs text-gray-400 mb-1">
+                                                    Voir le profil
+                                                    <div className="visible text-primary group-hover:scale-110 transition-transform duration-300">
+                                                        <svg
+                                                            className="h-5 w-5 ml-1"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            viewBox="0 0 24 24">
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M9 5l7 7-7 7"
+                                                            />
+                                                        </svg>
+                                                    </div>
                                                 </p>
-                                                <div className="text-primary group-hover:scale-110 transition-transform duration-300">
-                                                    <svg
-                                                        className="h-5 w-5"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        viewBox="0 0 24 24">
-                                                        <path
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth={2}
-                                                            d="M9 5l7 7-7 7"
-                                                        />
-                                                    </svg>
-                                                </div>
                                             </div>
                                         </div>
 

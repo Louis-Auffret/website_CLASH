@@ -37,7 +37,8 @@ export function SocialsPage() {
             icon: Instagram,
             color: "bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600",
             url: "https://www.instagram.com/asso_clash/",
-            description: "Scores des joueurs et des équipes, annonces d'événements et moments forts",
+            description:
+                "Images et vidéos sur le club et ses membres, il s'agit de notre plus grosse chaîne de contenus.",
         },
         // {
         //     name: "Twitch",
@@ -55,7 +56,7 @@ export function SocialsPage() {
             icon: Facebook,
             color: "bg-blue-600 hover:bg-blue-700",
             url: "https://www.facebook.com/CLASHLGE/",
-            description: "Community updates, event announcements, and photo galleries",
+            description: "Score des équipes, annonces d'évènements et images du club !",
         },
         {
             name: "Tik Tok",
@@ -64,7 +65,7 @@ export function SocialsPage() {
             icon: Music2,
             color: "bg-pink-600 hover:bg-pink-700",
             url: "https://www.tiktok.com/@asso_clash?_t=ZN-8yofazsJETn&_r=1",
-            description: "Live tournament updates, news, and community discussions",
+            description: "Vidéos de présentations du club et trucs et astuces pour s'améliorer dans notre discipline.",
         },
         {
             name: "Discord",
@@ -72,7 +73,7 @@ export function SocialsPage() {
             followers: "2.3K",
             icon: MessageSquare,
             color: "bg-indigo-600 hover:bg-indigo-700",
-            url: "https://discord.gg/clashlasertag",
+            url: "https://discord.gg/MHRNJyueSM",
             description:
                 "Parfait pour échanger des stratégies et s'organiser avec son équipe ou tout simplement se retrouver en dehors des sessions de jeu.",
         },
@@ -82,7 +83,7 @@ export function SocialsPage() {
             followers: "2.3K",
             icon: MessageSquare,
             color: "bg-indigo-600 hover:bg-indigo-700",
-            url: "https://discord.gg/clashlasertag",
+            url: "https://discord.gg/JXU5ZkxrKQ",
             description:
                 "Discord des ligues LGE, pour les joueurs et les équipes et tous joueurs souhaitant s'inscrire dans une ligue/équipe",
         },
@@ -93,6 +94,7 @@ export function SocialsPage() {
             title: "Laser Game : une équipe du Havre prépare les championnats de France",
             thumbnail: "https://img.youtube.com/vi/lRXZq8snRc0/maxresdefault.jpg",
             link: "https://www.youtube.com/watch?v=lRXZq8snRc0",
+            altText: "Miniature de la vidéo de France 3 : Une équipe du Havre prépare les championnats de France",
             channel: "France 3",
             views: "3.3K",
             duration: "1:49",
@@ -103,7 +105,8 @@ export function SocialsPage() {
         {
             title: "Nous avons défiés le champion de France de Laser Game",
             thumbnail: "",
-            link: "",
+            link: "Miniature de la vidéo de BFM : Nous avons défiés le champion de France de Laser Game",
+            altText: "",
             channel: "BFM",
             views: "1.9K",
             duration: "3:15",
@@ -118,6 +121,7 @@ export function SocialsPage() {
             title: "Laser game compétitif : l’équipe du Havre sacrée championne de France",
             source: "Paris Normandie",
             date: "08/05/2025",
+            altText: "Couverture de l'article du Paris Normandie : CLASH l'équipe du Havre sacrée championne de France",
             excerpt:
                 "L’association havraise Clash vient de décrocher le titre de champion de France de laser game compétitif à Angoulême. Une première pour cette association créée en 2016.",
             image: "../src/assets/Players_portrait.jpg",
@@ -127,8 +131,10 @@ export function SocialsPage() {
         },
         {
             title: "Une équipe du Havre remporte la coupe de France de Laser game",
-            source: "Charente libre",
+            source: "Charente Libre",
             date: "07/13/2025",
+            altText:
+                "Couverture de l'article de Charente Libre : Une équipe du Havre remporte la coupe de France de Laser Game",
             excerpt:
                 "Neuf équipes de toute la France se sont affrontées ce week-end à Laser Game Evolution, zone des Avenauds à Gond-Pontouvre, lors de la finale de la coupe de France de laser game.",
             image: "https://media.charentelibre.fr/25234954/1000x625/c15006ae-9065-4118-823e-cb0fa65884c9.jpg?v=1752425828",
@@ -143,6 +149,7 @@ export function SocialsPage() {
             title: "Objectif podium pour le CLASH : En route vers le championnat de France pour le club de laser game sportif Havrais",
             source: "Ouest Track Radio",
             date: "06/23/2025",
+            altText: "Couverture du podcast Ouest Track Radio : Objectif podium pour le CLASH",
             description:
                 "Un an après leur belle 4ᵉ place au championnat de France, le CLASH – Club de Laser Associatif et Sportif Havrais , revient dans nos studios avec une ambition claire : monter sur le podium lors du championnat de France en juillet !",
             image: "https://ouest-track.com/upload/podcasts/photos/main/685a797f9c77a3.91331442.png?=1755653049",
@@ -153,6 +160,7 @@ export function SocialsPage() {
             title: "Le CLASH club de laser game du Havre 4ème aux championnats de France",
             source: "Ouest Track Radio",
             date: "07/29/2024",
+            altText: "Couverture du podcast Ouest Track Radio : CLASH quatrième au championnat de France",
             description:
                 "Sleaz et Fastyou sont venu présenter l'association du CLASH et les performance de leur équipe : les Ping'Win qui terminent 4ᵉ aux championnat de France pour la seconde année consécutive.",
             image: "https://ouest-track.com/upload/podcasts/photos/main/66a78ed36c5522.75685762.png?=1755652001",
@@ -240,7 +248,7 @@ export function SocialsPage() {
                                 <div className="relative">
                                     <ImageWithFallback
                                         src={video.thumbnail}
-                                        alt={video.title}
+                                        alt={video.altText}
                                         className="w-full h-48 object-cover"
                                     />
                                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300" />
@@ -302,7 +310,7 @@ export function SocialsPage() {
                                 <div className="relative h-48">
                                     <ImageWithFallback
                                         src={article.image}
-                                        alt={article.title}
+                                        alt={article.altText}
                                         className="w-full h-full object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -366,7 +374,7 @@ export function SocialsPage() {
                                 <div className="relative">
                                     <ImageWithFallback
                                         src={podcast.image}
-                                        alt={podcast.title}
+                                        alt={podcast.altText}
                                         className="w-full h-48 object-cover"
                                     />
                                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300" />

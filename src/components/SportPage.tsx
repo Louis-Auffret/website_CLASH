@@ -2,7 +2,7 @@ import { Card } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Shield, Zap, Timer, Award, Download } from "lucide-react";
 import { Button } from "./ui/button";
-import image from "../assets/playersCDF.jpg";
+import image from "../assets/podium_championnat_de_france_2025.webp";
 import lexisCodex from "../assets/Lexis Codex 2024-2025.pdf";
 
 export function SportPage() {
@@ -65,7 +65,7 @@ export function SportPage() {
                         <div className="relative">
                             <ImageWithFallback
                                 src={image}
-                                alt="Futuristic Gaming Arena"
+                                alt="Podium championnat de France 2025 de Laser Game, Team'Ajin au centre"
                                 className="w-full h-80 object-cover rounded-lg border border-primary/20"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg" />

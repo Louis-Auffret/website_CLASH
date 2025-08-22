@@ -43,7 +43,7 @@ export function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90 z-10" />
                 <ImageWithFallback
                     src={coverPhoto}
-                    alt="Laser Tag Arena"
+                    alt="Membres du CLASH"
                     className="absolute inset-0 w-full h-full object-cover"
                 />
 
@@ -51,7 +51,7 @@ export function HomePage() {
                     <div className="mb-6">
                         <img
                             src={clashLogo}
-                            alt="CLASH Logo"
+                            alt="Logo du CLASH"
                             className="h-60 w-60 object-contain mx-auto mb-4 animate-pulse"
                         />
                     </div>

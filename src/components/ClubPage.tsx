@@ -186,7 +186,7 @@ export function ClubPage() {
                         <div className="relative">
                             <ImageWithFallback
                                 src={clubLogo}
-                                alt="Competitive Gaming Team"
+                                alt="Illustration avec logo du club"
                                 className="w-full h-80 object-cover rounded-lg border border-primary/20"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg" />
@@ -404,8 +404,8 @@ export function ClubPage() {
                                             <SelectContent className="bg-card border-primary/20">
                                                 <SelectItem value="-10">-10 ans</SelectItem>
                                                 <SelectItem value="10-18">10-18 ans</SelectItem>
-                                                <SelectItem value="19-24">19-24 years</SelectItem>
-                                                <SelectItem value="25-30">25-30 years</SelectItem>
+                                                <SelectItem value="19-24">19-24 ans</SelectItem>
+                                                <SelectItem value="25-30">25-30 ans</SelectItem>
                                                 <SelectItem value="31+">+31 ans</SelectItem>
                                             </SelectContent>
                                         </Select>

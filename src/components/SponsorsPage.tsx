@@ -3,7 +3,7 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Handshake, Target, Users, Trophy, Zap, Star, Mail, Phone, LayoutTemplate } from "lucide-react";
-import sponsorPhoto from "../assets/sponsor.jpg";
+import sponsorPhoto from "../assets/TeamAjin_avec_sponsor_Laser_Game_Evolution_Le_Havre.webp";
 
 export function SponsorsPage() {
     const sponsors = [
@@ -17,7 +17,6 @@ export function SponsorsPage() {
             partnership: "2024 - Présent",
             contribution:
                 "Financement des cotisations individuelles des joueurs compétitifs pour faciliter le recrutement.",
-            value: "8 200€",
             website: "https://le-havre.lasergame-evolution.fr/",
         },
     ];
@@ -156,7 +155,7 @@ export function SponsorsPage() {
                         <div className="relative overflow-hidden rounded-lg">
                             <ImageWithFallback
                                 src={sponsorPhoto}
-                                alt="Business Partnership"
+                                alt="Team'Ajin, champions de France de Laser Game avec sponsor Laser Game Evolution Le Havre"
                                 className="w-full h-80 object-cover border border-primary/20 scale-130"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg" />
@@ -183,7 +182,7 @@ export function SponsorsPage() {
                                         <div className="w-40 h-full bg-white/5 flex flex-1 items-center justify-center">
                                             <ImageWithFallback
                                                 src={sponsor.logo}
-                                                alt={`${sponsor.name} Logo`}
+                                                alt={`Logo ${sponsor.name}`}
                                                 className="w-32 h-32 object-contain group-hover:scale-110 transition-all duration-500"
                                             />
                                         </div>
@@ -223,9 +222,9 @@ export function SponsorsPage() {
                                                     Contribution du partenariat
                                                 </h4>
                                                 <p className="text-gray-400 text-sm mb-3">{sponsor.contribution}</p>
-                                                <div className="flex items-center space-x-2">
+                                                {/* <div className="flex items-center space-x-2">
                                                     <span className="text-primary font-bold">{sponsor.value}</span>
-                                                </div>
+                                                </div> */}
                                             </div>
 
                                             <div className="flex items-center justify-between">
@@ -238,7 +237,7 @@ export function SponsorsPage() {
                                                     </p>
                                                 </div>
                                                 {sponsor.tier === "Partenaire majeur" && (
-                                                    <div className="flex items-center space-x-1 bg-primary/20 px-3 py-1 rounded-full">
+                                                    <div className="flex items-center space-x-1 bg-primary/20 px-3 py-1 rounded-full invisible md:visible">
                                                         <Star className="h-4 w-4 text-primary fill-current" />
                                                         <span className="text-primary font-bold text-sm">
                                                             Partenaire majeur

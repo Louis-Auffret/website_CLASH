@@ -121,7 +121,7 @@ export function HomePage() {
                         <video ref={videoRef} className="w-full h-auto rounded-xl my-8" controls muted playsInline>
                             <source src={trailerAjin} type="video/mp4" />
                             <track src={subtitles} kind="subtitles" srcLang="fr" label="Français" default />
-                            Votre navigateur ne supporte pas ce type de vidéo.
+                            Votre navigateur ne supporte pas ce type de vidéo (WebM, MP4).
                         </video>
                     </div>
                 </div>

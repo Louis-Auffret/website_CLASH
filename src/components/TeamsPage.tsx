@@ -600,6 +600,7 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                 <Button
                                     variant={selectedTeamFilter === "all" ? "default" : "outline"}
                                     size="sm"
+                                    aria-label="Filtrer joueurs : Tous"
                                     onClick={() => setSelectedTeamFilter("all")}
                                     className={
                                         selectedTeamFilter === "all"
@@ -613,6 +614,7 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                         key={team.id}
                                         variant={selectedTeamFilter === team.id.toString() ? "default" : "outline"}
                                         size="sm"
+                                        aria-label={`Filtrer joueurs de l'équipe : ${team.name}`}
                                         onClick={() => setSelectedTeamFilter(team.id.toString())}
                                         className={
                                             selectedTeamFilter === team.id.toString()

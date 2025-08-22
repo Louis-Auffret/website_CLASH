@@ -71,7 +71,11 @@ export function Navigation() {
 
                 {/* Mobile menu */}
                 <div className="md:hidden relative" ref={menuRef}>
-                    <Button variant="ghost" className="border-primary border-1" onClick={() => setMenuOpen(!menuOpen)}>
+                    <Button
+                        variant="ghost"
+                        className="border-primary border-1"
+                        aria-label="Menu mobile"
+                        onClick={() => setMenuOpen(!menuOpen)}>
                         <Menu />
                     </Button>
 

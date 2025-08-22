@@ -7,6 +7,7 @@ import clashLogo from "../assets/clash-logo.png";
 import coverPhoto from "../assets/Teams.jpg";
 import trailerAjin from "../assets/Trailer_Ajin_CDF.mp4";
 import { useNavigate } from "react-router-dom";
+import subtitles from "../assets/transcript.vtt";
 
 export function HomePage() {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -119,7 +120,8 @@ export function HomePage() {
                     <div className="container mx-auto max-w-6xl">
                         <video ref={videoRef} className="w-full h-auto rounded-xl my-8" controls muted playsInline>
                             <source src={trailerAjin} type="video/mp4" />
-                            Your browser does not support the video tag.
+                            <track src={subtitles} kind="subtitles" srcLang="fr" label="Français" default />
+                            Votre navigateur ne supporte pas ce type de vidéo.
                         </video>
                     </div>
                 </div>

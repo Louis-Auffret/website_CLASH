@@ -85,7 +85,7 @@ export function SocialsPage() {
             color: "bg-indigo-600 hover:bg-indigo-700",
             url: "https://discord.gg/JXU5ZkxrKQ",
             description:
-                "Discord des ligues LGE, pour les joueurs et les équipes et tous joueurs souhaitant s'inscrire dans une ligue/équipe",
+                "Discord des ligues LGE, pour les joueurs et les équipes et tous joueurs souhaitant s'inscrire dans une ligue ou une équipe près de chez soi.",
         },
     ];
 

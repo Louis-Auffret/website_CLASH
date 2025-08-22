@@ -237,7 +237,7 @@ export function SponsorsPage() {
                                                     </p>
                                                 </div>
                                                 {sponsor.tier === "Partenaire majeur" && (
-                                                    <div className="flex items-center space-x-1 bg-primary/20 px-3 py-1 rounded-full invisible md:visible">
+                                                    <div className="hidden sm:flex items-center space-x-1 bg-primary/20 px-3 py-1 rounded-full">
                                                         <Star className="h-4 w-4 text-primary fill-current" />
                                                         <span className="text-primary font-bold text-sm">
                                                             Partenaire majeur

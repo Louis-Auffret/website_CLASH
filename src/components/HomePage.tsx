@@ -46,6 +46,9 @@ export function HomePage() {
                     src={coverPhoto}
                     alt="Membres du CLASH"
                     className="absolute inset-0 w-full h-full object-cover"
+                    fetchPriority="high"
+                    loading="eager"
+                    decoding="async"
                 />
 
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
@@ -54,6 +57,9 @@ export function HomePage() {
                             src={clashLogo}
                             alt="Logo du CLASH"
                             className="h-60 w-60 object-contain mx-auto mb-4 animate-pulse"
+                            fetchPriority="high"
+                            loading="eager"
+                            decoding="async"
                         />
                     </div>
                     <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent drop-shadow-xl/50">

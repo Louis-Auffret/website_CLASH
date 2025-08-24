@@ -3,8 +3,8 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Target, Users, Trophy } from "lucide-react";
-import clashLogo from "../assets/clash-logo.png";
-import coverPhoto from "../assets/Teams.jpg";
+import clashLogo from "../assets/logo-clash.svg";
+import coverPhoto from "../assets/Teams.webp";
 import trailerAjin from "../assets/Trailer_Ajin_CDF.mp4";
 import { useNavigate } from "react-router-dom";
 import subtitles from "../assets/transcript.vtt";
@@ -46,6 +46,8 @@ export function HomePage() {
                     src={coverPhoto}
                     alt="Membres du CLASH"
                     className="absolute inset-0 w-full h-full object-cover"
+                    width={2800}
+                    height={1173}
                     fetchPriority="high"
                     loading="eager"
                     decoding="async"

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
-import clashLogo from "../assets/clash-logo.png";
+import clashLogo from "../assets/logo-clash.svg";
 import { Menu } from "lucide-react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 

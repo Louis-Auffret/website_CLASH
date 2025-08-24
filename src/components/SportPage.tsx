@@ -8,6 +8,7 @@ import lexisCodex from "../assets/Lexis Codex 2024-2025.pdf";
 export function SportPage() {
     return (
         <div className="pt-20">
+            <title>CLASH – La Discipline</title>
             {/* Header Section */}
             <section className="relative py-20 px-4">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />

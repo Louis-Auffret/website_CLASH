@@ -171,6 +171,7 @@ export function SocialsPage() {
 
     return (
         <div className="pt-20">
+            <title>CLASH – Nos Réseaux</title>
             {/* Header Section */}
             <section className="relative py-20 px-4">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5" />

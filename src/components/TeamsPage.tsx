@@ -398,6 +398,7 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
 
     return (
         <div className="pt-20">
+            <title>CLASH – Équipes & Joueurs</title>
             {/* Header Section */}
             <section className="relative py-20 px-4">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />

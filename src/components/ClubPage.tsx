@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Trophy, Users, Calendar, MapPin, Target, Star, UserPlus, Mail, GamepadIcon } from "lucide-react";
 import emailjs from "@emailjs/browser";
-import clubLogo from "../assets/Cover.jpg";
+import clubLogo from "../assets/Cover.webp";
 
 export function ClubPage() {
     const [formData, setFormData] = useState({
@@ -117,6 +117,7 @@ export function ClubPage() {
 
     return (
         <div className="pt-20">
+            <title>CLASH – Le Club</title>
             {/* Header Section */}
             <section className="relative py-20 px-4">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />

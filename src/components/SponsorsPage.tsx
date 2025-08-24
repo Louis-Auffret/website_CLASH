@@ -2,10 +2,12 @@ import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { useNavigate } from "react-router-dom";
 import { Handshake, Target, Users, Trophy, Zap, Star, Mail, Phone, LayoutTemplate } from "lucide-react";
 import sponsorPhoto from "../assets/TeamAjin_avec_sponsor_Laser_Game_Evolution_Le_Havre.webp";
 
 export function SponsorsPage() {
+    const navigate = useNavigate();
     const sponsors = [
         {
             id: 1,
@@ -347,10 +349,17 @@ export function SponsorsPage() {
                         </Card>
                     </div>
 
-                    <div className="flex items-center justify-center space-x-4">
+                    <div className="flex items-center justify-center space-x-4 mb-8">
                         <Handshake className="h-6 w-6 text-primary" />
                         <span className="text-gray-300">Construisons ensemble la discipline de demain</span>
                     </div>
+
+                    <Button
+                        size="lg"
+                        onClick={() => navigate("/socials")}
+                        className="min-w-100 bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4 mx-auto">
+                        Retrouvez-nous sur nos réseaux sociaux
+                    </Button>
                 </div>
             </section>
         </div>

@@ -1,6 +1,7 @@
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
+import { useNavigate } from "react-router-dom";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import {
     MicVocal,
@@ -20,6 +21,7 @@ import {
 } from "lucide-react";
 
 export function SocialsPage() {
+    const navigate = useNavigate();
     const socialLinks = [
         // {
         //     name: "YouTube",
@@ -419,12 +421,12 @@ export function SocialsPage() {
 
             {/* Community Stats */}
             <section className="py-16 px-4 bg-gradient-to-r from-primary/10 to-primary/5">
-                <div className="container mx-auto max-w-4xl">
-                    <h2 className="text-4xl font-bold text-center mb-12 text-white">
+                <div className="container mx-auto max-w-4xl flex flex-col">
+                    <h2 className="text-4xl font-bold text-center text-white">
                         Notre <span className="text-primary">Communauté</span>
                     </h2>
 
-                    <div className="grid md:grid-cols-4 gap-8">
+                    <div className="grid md:grid-cols-4 gap-8 my-12">
                         <div className="text-center">
                             <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <Users className="h-8 w-8 text-primary" />
@@ -454,6 +456,13 @@ export function SocialsPage() {
                             <p className="text-gray-400">Partages et reposts</p>
                         </div>
                     </div>
+
+                    <Button
+                        size="lg"
+                        onClick={() => navigate("/contact")}
+                        className="min-w-100 bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4 mx-auto">
+                        Vous souhaitez nous contacter
+                    </Button>
                 </div>
             </section>
         </div>

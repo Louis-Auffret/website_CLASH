@@ -2,10 +2,13 @@ import { Card } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Shield, Zap, Timer, Award, Download } from "lucide-react";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
+
 import image from "../assets/podium_championnat_de_france_2025.webp";
 import lexisCodex from "../assets/Lexis Codex 2024-2025.pdf";
 
 export function SportPage() {
+    const navigate = useNavigate();
     return (
         <div className="pt-20">
             <title>CLASH – La Discipline</title>
@@ -77,7 +80,7 @@ export function SportPage() {
 
             {/* Rules Section */}
             <section className="py-16 px-4 bg-secondary/50">
-                <div className="container mx-auto max-w-6xl">
+                <div className="container mx-auto max-w-6xl flex flex-col">
                     <h2 className="text-4xl font-bold text-center mb-12 text-primary">Règles du jeu compétitif</h2>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -136,10 +139,16 @@ export function SportPage() {
                         </Card>
                     </div>
 
-                    <Button variant="link" size="lg" className="mt-8 justify-self-center flex">
+                    <Button variant="link" size="lg" className="my-8 justify-self-center flex">
                         <a href={lexisCodex} download className="flex items-center gap-2">
                             Télécharger le livre de règle 2025 <Download className="h-8 w-8 text-white" />
                         </a>
+                    </Button>
+                    <Button
+                        size="lg"
+                        onClick={() => navigate("/teams")}
+                        className="bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4 mx-auto">
+                        Rencontrez nos joueurs
                     </Button>
                 </div>
             </section>

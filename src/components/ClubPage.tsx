@@ -1,75 +1,12 @@
-import { useState } from "react";
 import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
-import { Label } from "./ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Trophy, Users, Calendar, MapPin, Target, Star, UserPlus, Mail, GamepadIcon } from "lucide-react";
-import emailjs from "@emailjs/browser";
+import { Trophy, Users, Calendar, MapPin, Target, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "./ui/button";
 import clubLogo from "../assets/Cover.webp";
 
 export function ClubPage() {
-    const [formData, setFormData] = useState({
-        nickname: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        age: "",
-        experience: "",
-        availability: "",
-        motivation: "",
-    });
-
-    const handleInputChange = (field: string, value: string) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        const templateParams = {
-            nickname: formData.nickname,
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            phone: formData.phone,
-            age: formData.age,
-            experience: formData.experience,
-            availability: formData.availability,
-            motivation: formData.motivation,
-        };
-
-        emailjs
-            .send(
-                "service_n5wcb6l", // Remplace par ton service ID EmailJS
-                "template_63890pt", // Remplace par ton template ID EmailJS
-                templateParams,
-                "adnlV6O9Ixksj_ouo" // Remplace par ta clé publique EmailJS
-            )
-            .then((response) => {
-                console.log("Email envoyé !", response.status, response.text);
-                alert("Votre formulaire a été envoyé avec succès !");
-                setFormData({
-                    nickname: "",
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    phone: "",
-                    age: "",
-                    experience: "",
-                    availability: "",
-                    motivation: "",
-                });
-            })
-            .catch((err) => {
-                console.error("Erreur lors de l'envoi :", err);
-                alert("Une erreur est survenue lors de l'envoi du formulaire. Veuillez réessayer.");
-            });
-    };
-
+    const navigate = useNavigate();
     const achievements = [
         {
             year: "2025",
@@ -126,8 +63,8 @@ export function ClubPage() {
                         NOTRE CLUB
                     </h1>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                        Fondé en 2016, le CLASH -
-                        <i className="text-gray-400"> Club de Laser Associatif et Sportif Havrais</i> - est un des clubs
+                        Fondé en 2016, le CLASH –
+                        <i className="text-gray-400"> Club de Laser Associatif et Sportif Havrais</i> – est un des clubs
                         les plus expérimentés et prestigieux de France. Actuel champion de France !
                     </p>
                 </div>
@@ -354,258 +291,6 @@ export function ClubPage() {
             </section>
 
             {/* Join Our Club Section */}
-            <section className="py-20 px-4 relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10" />
-                <div className="container mx-auto max-w-4xl relative z-10">
-                    <div className="text-center mb-12">
-                        <div className="bg-primary/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <UserPlus className="h-10 w-10 text-primary" />
-                        </div>
-                        <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">
-                            REJOINS NOTRE CLUB
-                        </h2>
-                        <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                            Prêt à rejoindre le club de Laser Game le plus compétitif de France ? Remplis le formulaire
-                            ci-dessous et viens tester notre discipline.
-                        </p>
-                    </div>
-
-                    <Card className="bg-card/80 border-primary/30 backdrop-blur-sm p-8 hover:border-primary/50 transition-all duration-300">
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            {/* Personal Information */}
-                            <div className="space-y-4">
-                                <div className="flex items-center space-x-2 mb-4">
-                                    <GamepadIcon className="h-5 w-5 text-primary" />
-                                    <h3 className="text-xl font-bold text-primary">Informations du joueur</h3>
-                                </div>
-
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="nickname" className="text-gray-300">
-                                            Pseudo
-                                        </Label>
-                                        <Input
-                                            id="nickname"
-                                            placeholder="Ton pseudo en jeu"
-                                            value={formData.nickname}
-                                            onChange={(e) => handleInputChange("nickname", e.target.value)}
-                                            className="bg-input border-primary/20 focus:border-primary/50 text-white placeholder:text-gray-500"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="age" className="text-gray-300">
-                                            Âge *
-                                        </Label>
-                                        <Select
-                                            value={formData.age}
-                                            onValueChange={(value) => handleInputChange("age", value)}>
-                                            <SelectTrigger className="bg-input border-primary/20 focus:border-primary/50 text-white">
-                                                <SelectValue placeholder="Sélectionne ta tranche d'âge" />
-                                            </SelectTrigger>
-                                            <SelectContent className="bg-card border-primary/20">
-                                                <SelectItem value="-10">-10 ans</SelectItem>
-                                                <SelectItem value="10-18">10-18 ans</SelectItem>
-                                                <SelectItem value="19-24">19-24 ans</SelectItem>
-                                                <SelectItem value="25-30">25-30 ans</SelectItem>
-                                                <SelectItem value="31+">+31 ans</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                </div>
-
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="firstName" className="text-gray-300">
-                                            Prénom *
-                                        </Label>
-                                        <Input
-                                            id="firstName"
-                                            placeholder="Ton prénom"
-                                            value={formData.firstName}
-                                            onChange={(e) => handleInputChange("firstName", e.target.value)}
-                                            className="bg-input border-primary/20 focus:border-primary/50 text-white placeholder:text-gray-500"
-                                            required
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="lastName" className="text-gray-300">
-                                            Nom *
-                                        </Label>
-                                        <Input
-                                            id="lastName"
-                                            placeholder="Ton nom"
-                                            value={formData.lastName}
-                                            onChange={(e) => handleInputChange("lastName", e.target.value)}
-                                            className="bg-input border-primary/20 focus:border-primary/50 text-white placeholder:text-gray-500"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Contact Information */}
-                            <div className="space-y-4">
-                                <div className="flex items-center space-x-2 mb-4">
-                                    <Mail className="h-5 w-5 text-primary" />
-                                    <h3 className="text-xl font-bold text-primary">Coordonnées</h3>
-                                </div>
-
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="email" className="text-gray-300">
-                                            Adresse mail *
-                                        </Label>
-                                        <Input
-                                            id="email"
-                                            type="email"
-                                            placeholder="mon.email@exemple.com"
-                                            value={formData.email}
-                                            onChange={(e) => handleInputChange("email", e.target.value)}
-                                            className="bg-input border-primary/20 focus:border-primary/50 text-white placeholder:text-gray-500"
-                                            required
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="phone" className="text-gray-300">
-                                            Numéro de téléphone *
-                                        </Label>
-                                        <Input
-                                            id="phone"
-                                            type="tel"
-                                            placeholder="(+33) 6 12 34 56 78"
-                                            value={formData.phone}
-                                            onChange={(e) => handleInputChange("phone", e.target.value)}
-                                            className="bg-input border-primary/20 focus:border-primary/50 text-white placeholder:text-gray-500"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Gaming Information */}
-                            <div className="space-y-4">
-                                <div className="flex items-center space-x-2 mb-4">
-                                    <Target className="h-5 w-5 text-primary" />
-                                    <h3 className="text-xl font-bold text-primary">Éxpérience de jeu</h3>
-                                </div>
-
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="experience" className="text-gray-300">
-                                            Niveau de jeu
-                                        </Label>
-                                        <Select
-                                            value={formData.experience}
-                                            onValueChange={(value) => handleInputChange("experience", value)}>
-                                            <SelectTrigger className="bg-input border-primary/20 focus:border-primary/50 text-white">
-                                                <SelectValue placeholder="Quesl est ton niveau de jeu ?" />
-                                            </SelectTrigger>
-                                            <SelectContent className="bg-card border-primary/20">
-                                                <SelectItem value="Débutant">
-                                                    Débutant (j'ai déjà joué un peu)
-                                                </SelectItem>
-                                                <SelectItem value="Intermédiaire">
-                                                    Intermédiaire (j'ai déjà joué de nombreuses parties)
-                                                </SelectItem>
-                                                <SelectItem value="Expert">
-                                                    Expert (je joue régulièrement, je participe aux no-limits de mon
-                                                    centre)
-                                                </SelectItem>
-                                                <SelectItem value="Joueur Pro">
-                                                    Joueur pro (joueur d'une équipe)
-                                                </SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="availability" className="text-gray-300">
-                                            Disponibilités
-                                        </Label>
-                                        <Select
-                                            value={formData.availability}
-                                            onValueChange={(value) => handleInputChange("availability", value)}>
-                                            <SelectTrigger className="bg-input border-primary/20 focus:border-primary/50 text-white">
-                                                <SelectValue placeholder="Quand peux-tu t'entraîner ?" />
-                                            </SelectTrigger>
-                                            <SelectContent className="bg-card border-primary/20">
-                                                <SelectItem value="Dimanche">Dimanche</SelectItem>
-                                                <SelectItem value="Lundi">Lundi</SelectItem>
-                                                <SelectItem value="Dimanche et Lundi">Dimanche et Lundi</SelectItem>
-                                                <SelectItem value="De manière irrégulière">
-                                                    De manière irrégulière
-                                                </SelectItem>
-                                                <SelectItem value="Pas de disponibilité le dimanche ou le lundi">
-                                                    Pas de disponibilité le dimanche ou le lundi
-                                                </SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="motivation" className="text-gray-300">
-                                        Pourquoi souhaites-tu intégrer le CLASH ?
-                                    </Label>
-                                    <Textarea
-                                        id="motivation"
-                                        placeholder="Parlez-nous de votre motivation, de vos objectifs et de ce que vous espérez accomplir avec notre club..."
-                                        value={formData.motivation}
-                                        onChange={(e) => handleInputChange("motivation", e.target.value)}
-                                        className="bg-input border-primary/20 focus:border-primary/50 text-white placeholder:text-gray-500 min-h-[120px]"
-                                        rows={5}
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Submit Button */}
-                            <div className="pt-6">
-                                <Button
-                                    type="submit"
-                                    className="w-full bg-primary hover:bg-primary/90 text-black font-bold py-4 px-8 text-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/25">
-                                    <UserPlus className="h-5 w-5 mr-2" />
-                                    REJOINS NOS ÉQUIPES
-                                </Button>
-                                <p className="text-sm text-gray-400 mt-4 text-center">
-                                    En soumettant ce formulaire, vous acceptez d'être contacté par les représentants du
-                                    CLASH au sujet de votre adhésion.
-                                </p>
-                            </div>
-                        </form>
-                    </Card>
-
-                    {/* Additional Info */}
-                    <div className="mt-12 text-center">
-                        <h3 className="text-2xl font-bold text-white mb-4">Que se passe-t-il maintenant ?</h3>
-                        <div className="grid md:grid-cols-3 gap-6">
-                            <div className="text-center">
-                                <div className="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                                    <span className="text-primary font-bold">1</span>
-                                </div>
-                                <h4 className="font-bold text-white mb-2">Examen de ta candidature</h4>
-                                <p className="text-gray-400 text-sm">
-                                    Nous examinerons ta candidature dans les 72 heures.
-                                </p>
-                            </div>
-                            <div className="text-center">
-                                <div className="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                                    <span className="text-primary font-bold">2</span>
-                                </div>
-                                <h4 className="font-bold text-white mb-2">Évaluation des compétences</h4>
-                                <p className="text-gray-400 text-sm">
-                                    Rejoins-nous pour une session d'évaluation ludique
-                                </p>
-                            </div>
-                            <div className="text-center">
-                                <div className="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                                    <span className="text-primary font-bold">3</span>
-                                </div>
-                                <h4 className="font-bold text-white mb-2">Bienvenue au CLASH</h4>
-                                <p className="text-gray-400 text-sm">Commence ton parcours vers la gloire</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {/* Mission Section */}
             <section className="py-16 px-4 bg-gradient-to-r from-primary/10 to-primary/5">
@@ -618,7 +303,7 @@ export function ClubPage() {
                         forge le caractère et crée des souvenirs inoubliables. Nous nous efforçons d'être la destination
                         de choix pour les joueurs passionnés de Laser Game souhaitant se mesurer aux meilleurs.
                     </p>
-                    <div className="grid md:grid-cols-3 gap-8 mt-12">
+                    <div className="grid md:grid-cols-3 gap-8 my-12">
                         <div className="text-center">
                             <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <Target className="h-8 w-8 text-primary" />
@@ -643,6 +328,12 @@ export function ClubPage() {
                             </p>
                         </div>
                     </div>
+                    <Button
+                        size="lg"
+                        onClick={() => navigate("/sponsors")}
+                        className="min-w-100 bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4 mx-auto">
+                        Rencontrez nos sponsors
+                    </Button>
                 </div>
             </section>
         </div>

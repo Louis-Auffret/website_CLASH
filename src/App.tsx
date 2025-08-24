@@ -6,6 +6,7 @@ import { ClubPage } from "./components/ClubPage";
 import { TeamsPage } from "./components/TeamsPage";
 import { SponsorsPage } from "./components/SponsorsPage";
 import { SocialsPage } from "./components/SocialsPage";
+import { ContactPage } from "./components/ContactPage";
 import { NotFoundPage } from "./components/NotFoundPage";
 import { PlayerProfilePage } from "./components/PlayerProfilePage";
 import "./App.css";
@@ -47,9 +48,10 @@ export default function App() {
                         <Route path="/sport" element={<SportPage />} />
                         <Route path="/club" element={<ClubPage />} />
                         <Route path="/teams" element={<TeamsPageWrapper />} />
+                        <Route path="/player/:id" element={<PlayerProfilePage />} />
                         <Route path="/sponsors" element={<SponsorsPage />} />
                         <Route path="/socials" element={<SocialsPage />} />
-                        <Route path="/player/:id" element={<PlayerProfilePage />} />
+                        <Route path="/contact" element={<ContactPage />} />
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                 </main>

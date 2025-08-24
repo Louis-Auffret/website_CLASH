@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Trophy, Target, Zap, Shield, Users, Star, Filter } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import sleaz from "../assets/players/Sleaz1.jpg";
 
@@ -12,6 +13,7 @@ interface TeamsPageProps {
 }
 
 export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
+    const navigate = useNavigate();
     const [selectedTeamFilter, setSelectedTeamFilter] = useState<string>("all");
 
     const teams = [
@@ -407,8 +409,8 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                         ÉQUIPES & JOUEURS
                     </h1>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                        Découvrez nos équipes d'élite et nos joueurs vedettes qui représentent le meilleur de la
-                        compétition de Laser Game.
+                        Découvrez nos équipes de champions et nos joueurs vedettes qui représentent le meilleur de la
+                        compétition de Laser Game en France.
                     </p>
                 </div>
             </section>
@@ -786,7 +788,7 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                         recherche de joueurs talentueux pour rejoindre nos équipes.
                     </p>
 
-                    <div className="grid md:grid-cols-4 gap-6 mt-12">
+                    <div className="grid md:grid-cols-4 gap-6 my-12">
                         <div className="text-center">
                             <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <Target className="h-8 w-8 text-primary" />
@@ -822,6 +824,12 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                             </p>
                         </div>
                     </div>
+                    <Button
+                        size="lg"
+                        onClick={() => navigate("/club")}
+                        className="min-w-100 bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4 mx-auto">
+                        Découvrez le club
+                    </Button>
                 </div>
             </section>
         </div>

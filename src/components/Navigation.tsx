@@ -17,6 +17,7 @@ export function Navigation() {
         { path: "/teams", label: "Équipes & Joueurs" },
         { path: "/sponsors", label: "Sponsors" },
         { path: "/socials", label: "Nos réseaux" },
+        { path: "/contact", label: "Contact" },
     ];
 
     const handleNavigate = (path: string) => {

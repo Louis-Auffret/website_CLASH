@@ -9,11 +9,14 @@ import { SocialsPage } from "./components/SocialsPage";
 import { ContactPage } from "./components/ContactPage";
 import { NotFoundPage } from "./components/NotFoundPage";
 import { PlayerProfilePage } from "./components/PlayerProfilePage";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 import "./App.css";
 
 // composant pour faire défiler vers le haut à chaque changement de route
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+
+const MEASUREMENT_ID = "G-SBF55VW119";
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -39,6 +42,7 @@ function TeamsPageWrapper() {
 export default function App() {
     return (
         <Router>
+            <AnalyticsTracker measurementId={MEASUREMENT_ID} />
             <div className="dark min-h-screen bg-background text-foreground">
                 <ScrollToTop />
                 <Navigation />

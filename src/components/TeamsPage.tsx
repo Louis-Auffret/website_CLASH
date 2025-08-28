@@ -2,405 +2,103 @@ import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Trophy, Target, Zap, Shield, Users, Star, Filter } from "lucide-react";
-import { useState } from "react";
+import { Trophy, Zap, Filter, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
-import sleaz from "../assets/players/Sleaz1.jpg";
+import background from "../assets/players/avatar_background.webp";
+import Sleaz from "../assets/players/Sleaz_Player.webp";
 
 interface TeamsPageProps {
     onPlayerSelect?: (playerId: string) => void;
 }
 
+type Player = {
+    player_id: number;
+    player_pseudo: string;
+    firstName: string;
+    lastName: string;
+    birthdate: string;
+    photo: string;
+    player_achievements: string;
+    career_score: number;
+    career_given: number;
+    career_received: number;
+    career_TK: number;
+    career_competition: number;
+    career_matches: number;
+    career_wins: number;
+    career_defeats: number;
+    career_draws: number;
+    team_id: number;
+    team_name: string;
+    team_achievements: string;
+    total_score: number;
+    total_given: number;
+    total_received: number;
+    total_TK: number;
+    total_matches: number;
+    total_wins: number;
+    total_defeats: number;
+    total_draws: number;
+};
+
+type Team = {
+    id: number;
+    name: string;
+    achievements: string;
+    players: Player[];
+};
+
 export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
     const navigate = useNavigate();
+    const [teams, setTeams] = useState<Team[]>([]);
     const [selectedTeamFilter, setSelectedTeamFilter] = useState<string>("all");
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const playerImages: { [key: string]: string } = {
+        // ajoute tous les joueurs ici
+        Sleaz: Sleaz,
+    };
 
-    const teams = [
-        {
-            id: 1,
-            name: "Team'Ajin",
-            division: "Ligue 1 IDF",
-            wins: "28",
-            loose: "12",
-            seasons: "2021-22 / 2024-25",
-            color: "primary",
-            achievements: ["Champions de France CDF 2025", "Vice-champions de France CDF 2022"],
-            players: [
-                {
-                    id: "Sleaz",
-                    name: "Louis Auffret",
-                    role: "Capitaine + Raptor",
-                    photo: sleaz,
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [
-                        "Chamion de France 2025",
-                        "MVP CDF 2024",
-                        "MVP CDF 2025",
-                        "Meilleur Attaquant CDF 2024",
-                        "Meilleur Attaquant CDF 2025",
-                        "MVP Ligue-sur-Seine 2024",
-                        "MVP Ligue 1 IDF 2025",
-                        "Meilleur Attaquant Ligue 1 IDF 2025",
-                        "MVP Ligue 1 IDF 2025",
-                        "Meilleur Attaquant Ligue-sur-Seine 2024",
-                        "MVP Ligue-sur-Seine 2024",
-                        "Meilleur espoir 2017",
-                    ],
-                },
-                {
-                    id: "Fastyou",
-                    name: "Tom Herteleer",
-                    role: "Raptor",
-                    photo: sleaz,
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [],
-                },
-                {
-                    id: "Ysbar",
-                    name: "Mathys Lemiere",
-                    role: "Middle",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [],
-                },
-                {
-                    id: "Niumesis",
-                    name: "Quentin Kubézik",
-                    role: "Sniper",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [],
-                },
-                {
-                    id: "Oso",
-                    name: "Joey Morel",
-                    role: "Middle",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [],
-                },
-                {
-                    id: "Neoxip",
-                    name: "Romain Chatillon",
-                    role: "Middle",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [],
-                },
-            ],
-        },
-        {
-            id: 2,
-            name: "Ping'Win",
-            division: "Ligue 1 IDF",
-            wins: "4",
-            loose: "36",
-            seasons: "2022-23 / 2023-34 / 2024-25",
-            color: "secondary",
-            achievements: ["4e place Championnat de France 2023", "4e place Championnat de France 2024"],
-            players: [
-                {
-                    id: "Katchu",
-                    name: "Killian Hennache",
-                    role: "Capitaine",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: ["State Champion", "Best Strategist", "Stealth Master"],
-                },
-                {
-                    id: "Madox",
-                    name: "Aurélien Boce",
-                    role: "Infiltrator",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [],
-                },
-                {
-                    id: "Pegasus",
-                    name: "Noah Bourdel",
-                    role: "Sniper",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: ["Perfect Shot Award", "National Sniper Champion"],
-                },
-                {
-                    id: "JPP",
-                    name: "Benjamin Cateville",
-                    role: "Medic",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: ["Life Saver Award", "Best Medic"],
-                },
-                {
-                    id: "Lazarre",
-                    name: "Tyler Brown",
-                    role: "Heavy",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: ["Tank Award", "Defensive MVP"],
-                },
-            ],
-        },
-        {
-            id: 3,
-            name: "Platyp'Us",
-            division: "Ligue 2 IDF",
-            wins: "23",
-            loose: "16",
-            seasons: "2024-25",
-            color: "accent",
-            achievements: ["3e Ligue 2 IDF"],
-            players: [
-                {
-                    id: "lisa-zhang",
-                    name: "Lisa Zhang",
-                    role: "Capitaine",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [],
-                },
-                {
-                    id: "james-wilson",
-                    name: "James Wilson",
-                    role: "Tactician",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [],
-                },
-                {
-                    id: "ava-thompson",
-                    name: "Ava Thompson",
-                    role: "Flanker",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [],
-                },
-                {
-                    id: "noah-davis",
-                    name: "Noah Davis",
-                    role: "Anchor",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [],
-                },
-                {
-                    id: "chloe-lee",
-                    name: "Chloe Lee",
-                    role: "Support",
-                    photo: "",
-                    performance: {
-                        matchesPlayed: 38,
-                        pointsTaken: 2847,
-                        pointsGiven: 1018,
-                        score: 665,
-                        moyTaken: 41.8,
-                        moyGiven: 24.2,
-                        moyScore: 17.6,
-                        classATQ: 1,
-                        classDEF: 13,
-                        classMVP: 1,
-                        teamKills: 2,
-                    },
-                    achievements: [],
-                },
-            ],
-        },
-    ];
+    // Fetch des équipes
+    useEffect(() => {
+        fetch("https://asso-clash.fr/backend/api.php")
+            .then((res) => res.json())
+            .then((data) => setTeams(data))
+            .catch((err) => console.error("Erreur chargement API:", err));
+    }, []);
 
-    // Flatten all players for the individual players section
-    const allPlayers = teams.flatMap((team) =>
-        team.players.map((player) => ({ ...player, team: team.name, teamId: team.id }))
-    );
+    // Gestion des flèches du clavier
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "ArrowRight") nextTeam();
+            else if (e.key === "ArrowLeft") prevTeam();
+        };
 
-    const filteredPlayers =
-        selectedTeamFilter === "all"
-            ? allPlayers
-            : allPlayers.filter((player) => player.teamId.toString() === selectedTeamFilter);
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [currentIndex]); // dépendance si nextTeam / prevTeam utilisent l’état
+
+    // Créer une liste de tous les joueurs + filtrage par équipe
+    const filteredPlayers = useMemo(() => {
+        return teams
+            .flatMap((team) =>
+                team.players.map((player) => ({
+                    ...player,
+                    team_id: team.id, // s’assurer que team_id est correct
+                    team_name: team.name,
+                }))
+            )
+            .filter((player) => selectedTeamFilter === "all" || player.team_id.toString() === selectedTeamFilter);
+    }, [teams, selectedTeamFilter]);
+
+    const nextTeam = () => setCurrentIndex((prev) => (prev + 1) % teams.length);
+    const prevTeam = () => setCurrentIndex((prev) => (prev - 1 + teams.length) % teams.length);
 
     return (
         <div className="pt-20">
             <title>CLASH – Équipes & Joueurs</title>
+
             {/* Header Section */}
             <section className="relative py-20 px-4">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />
@@ -417,177 +115,216 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
 
             {/* Teams Section */}
             <section className="py-16 px-4">
-                <div className="container mx-auto max-w-6xl">
+                <div className="container mx-auto max-w-6xl relative">
                     <h2 className="text-4xl font-bold text-center mb-12 text-primary">Nos équipes</h2>
 
-                    <div className="space-y-12">
-                        {teams.map((team) => (
-                            <Card
-                                key={team.id}
-                                className="bg-card border-primary/20 p-8 hover:border-primary/40 transition-all duration-300">
-                                <div className="grid lg:grid-cols-3 gap-8">
-                                    {/* Team Info */}
-                                    <div className="lg:col-span-1">
-                                        <div className="flex items-center space-x-3 mb-4">
-                                            <div className="bg-primary/20 p-3 rounded-lg">
-                                                <Zap className="h-8 w-8 text-primary" />
-                                            </div>
-                                            <div>
-                                                <h3 className="text-2xl font-bold text-primary">{team.name}</h3>
-                                                <Badge variant="secondary" className="mt-1">
-                                                    {team.division}
-                                                </Badge>
-                                            </div>
-                                        </div>
+                    {/* Flèches */}
+                    {teams.length > 1 && (
+                        <>
+                            <button
+                                onClick={prevTeam}
+                                className="absolute left-0 -translate-x-2 top-1/2 -translate-y-1/2 z-10 bg-primary/20 hover:bg-primary/40 p-3 rounded-full">
+                                <ChevronLeft className="w-6 h-6 text-white" />
+                            </button>
+                            <button
+                                onClick={nextTeam}
+                                className="absolute right-0 translate-x-2 top-1/2 -translate-y-1/2 z-10 bg-primary/20 hover:bg-primary/40 p-3 rounded-full">
+                                <ChevronRight className="w-6 h-6 text-white" />
+                            </button>
+                        </>
+                    )}
 
-                                        <div className="space-y-3 mb-6">
-                                            <div className="flex justify-between">
-                                                <span className="text-gray-400">Victoires:</span>
-                                                <span className="text-primary font-bold">{team.wins}</span>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <span className="text-gray-400">Défaites:</span>
-                                                <span className="text-red-700">{team.loose}</span>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <span className="text-gray-400">Saisons:</span>
-                                                <span className="text-white">{team.seasons}</span>
-                                            </div>
-                                        </div>
-
-                                        <div className="space-y-2">
-                                            <h4 className="font-bold text-white mb-3">Succès de l'équipe</h4>
-                                            {team.achievements.map((achievement, index) => (
-                                                <div key={index} className="flex items-center space-x-2">
-                                                    <Trophy className="h-4 w-4 text-primary" />
-                                                    <span className="text-sm text-gray-300">{achievement}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Players */}
-                                    <div className="lg:col-span-2">
-                                        <h4 className="text-xl font-bold mb-6 text-white">Roster</h4>
-                                        <div className="grid gap-3">
-                                            {team.players.map((player, index) => (
-                                                <Card
-                                                    key={index}
-                                                    className="bg-secondary/30 border-primary/10 p-4 hover:border-primary/30 transition-all duration-300 group">
-                                                    <div className="flex items-center space-x-4">
-                                                        <div className="relative">
-                                                            <ImageWithFallback
-                                                                src={player.photo}
-                                                                alt={player.name}
-                                                                className="w-12 h-12 rounded-full object-cover border-2 border-primary/30 group-hover:scale-110 transition-transform duration-300"
-                                                            />
-                                                            {player.role.includes("Capitaine") && (
-                                                                <Star className="absolute -top-1 -right-1 h-4 w-4 text-primary fill-current" />
-                                                            )}
-                                                        </div>
-                                                        <div className="flex-1">
-                                                            <div className="flex items-center justify-between mb-1">
-                                                                <h5 className="font-bold text-white">
-                                                                    {player.id}{" "}
-                                                                    <span className="font-normal">
-                                                                        {" "}
-                                                                        - {player.name}
-                                                                    </span>
-                                                                </h5>
-                                                                <Badge
-                                                                    variant="outline"
-                                                                    className="text-xs border-primary/30 text-primary">
-                                                                    {player.role}
-                                                                </Badge>
-                                                            </div>
-                                                            <div className="grid grid-cols-4 gap-4 text-xs">
-                                                                <div>
-                                                                    <span className="text-gray-400">Score: </span>
-                                                                    <span className="text-primary font-bold">
-                                                                        {player.performance.score}
-                                                                    </span>
-                                                                </div>
-                                                                <div>
-                                                                    <span className="text-gray-400">Données: </span>
-                                                                    <span className="text-primary font-bold">
-                                                                        {player.performance.pointsTaken}
-                                                                    </span>
-                                                                </div>
-                                                                <div>
-                                                                    <span className="text-gray-400">Reçues: </span>
-                                                                    <span className="text-primary font-bold">
-                                                                        {player.performance.pointsGiven}
-                                                                    </span>
-                                                                </div>
-                                                                <div>
-                                                                    <span className="text-gray-400">Tirs alliés: </span>
-                                                                    <span className="text-primary font-bold">
-                                                                        {player.performance.teamKills}
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div className="grid grid-cols-4 gap-4 text-xs">
-                                                                <div>
-                                                                    <span className="text-gray-400">Moy/Rang: </span>
-                                                                    <span className="text-primary font-bold">
-                                                                        {player.performance.moyScore}{" "}
-                                                                        <span className="font-normal">
-                                                                            {" "}
-                                                                            -{player.performance.classMVP}
-                                                                            <sup>
-                                                                                {player.performance.classMVP === 1
-                                                                                    ? "er"
-                                                                                    : "e"}
-                                                                            </sup>
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                                <div>
-                                                                    <span className="text-gray-400">Moy/Rang: </span>
-                                                                    <span className="text-primary font-bold">
-                                                                        {player.performance.moyTaken}
-                                                                        <span className="font-normal">
-                                                                            {" "}
-                                                                            -{player.performance.classATQ}
-                                                                            <sup>
-                                                                                {player.performance.classATQ === 1
-                                                                                    ? "er"
-                                                                                    : "e"}
-                                                                            </sup>
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                                <div>
-                                                                    <span className="text-gray-400">Moy/Rang: </span>
-                                                                    <span className="text-primary font-bold">
-                                                                        {player.performance.moyGiven}
-                                                                        <span className="font-normal">
-                                                                            {" "}
-                                                                            -{player.performance.classDEF}
-                                                                            <sup>
-                                                                                {player.performance.classDEF === 1
-                                                                                    ? "er"
-                                                                                    : "e"}
-                                                                            </sup>
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                                <div>
-                                                                    <span className="text-gray-400">Matchs: </span>
-                                                                    <span className="text-primary font-bold">
-                                                                        {player.performance.matchesPlayed}
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                    {/* Carousel */}
+                    <div className="overflow-hidden">
+                        <div
+                            className="flex transition-transform duration-500"
+                            style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                            {teams.map((team) => (
+                                <div key={team.id} className="w-full flex-shrink-0 px-4">
+                                    <Card className="bg-card border-primary/20 p-8 hover:border-primary/40 transition-all duration-300">
+                                        <div className="grid lg:grid-cols-3 gap-8">
+                                            {/* Team Info */}
+                                            <div className="lg:col-span-1">
+                                                <div className="flex items-center space-x-3 mb-4">
+                                                    <div className="bg-primary/20 p-3 rounded-lg">
+                                                        <Zap className="h-8 w-8 text-primary" />
                                                     </div>
-                                                </Card>
-                                            ))}
+                                                    <h3 className="text-2xl font-bold text-primary">{team.name}</h3>
+                                                </div>
+
+                                                <div className="space-y-3 mb-6">
+                                                    <div className="flex justify-between">
+                                                        <p className="text-gray-400">Victoires:</p>
+                                                        <p className="text-primary font-bold">
+                                                            {team.players.reduce(
+                                                                (acc, player) => acc + player.total_wins,
+                                                                0
+                                                            ) / 5}
+                                                            {/* {Math.round(
+                                                                team.players.reduce(
+                                                                    (acc, player) => acc + player.total_wins,
+                                                                    0
+                                                                ) / 5
+                                                            )} */}
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex justify-between">
+                                                        <p className="text-gray-400">Défaites:</p>
+                                                        <p className="text-red-500">
+                                                            {" "}
+                                                            {team.players.reduce(
+                                                                (acc, player) => acc + player.total_defeats,
+                                                                0
+                                                            ) / 5}
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex justify-between">
+                                                        <p className="text-gray-400">Égalités:</p>
+                                                        <p className="text-white">
+                                                            {" "}
+                                                            {team.players.reduce(
+                                                                (acc, player) => acc + player.total_draws,
+                                                                0
+                                                            ) / 5}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <h4 className="font-bold text-white mb-3">
+                                                        Succès de l&apos;équipe
+                                                    </h4>
+                                                    {(() => {
+                                                        let achievements: string[] = [];
+                                                        try {
+                                                            achievements = JSON.parse(team.achievements);
+                                                        } catch {
+                                                            achievements = [team.achievements];
+                                                        }
+                                                        return achievements.map((ach, i) => (
+                                                            <div key={i} className="flex items-center space-x-2">
+                                                                <Trophy className="h-4 w-4 text-primary" />
+                                                                <span className="text-sm text-gray-300">{ach}</span>
+                                                            </div>
+                                                        ));
+                                                    })()}
+                                                </div>
+                                            </div>
+
+                                            {/* Players */}
+                                            <div className="lg:col-span-2">
+                                                <h4 className="text-xl font-bold mb-6 text-white">Roster</h4>
+                                                <div className="grid gap-3">
+                                                    {team.players.map((player) => (
+                                                        <Card
+                                                            key={player.player_id}
+                                                            className="bg-secondary/30 border-primary/10 p-4 hover:border-primary/30 transition-all duration-300 group">
+                                                            <div className="flex items-center space-x-4">
+                                                                <div className="relative">
+                                                                    <ImageWithFallback
+                                                                        src={player.photo}
+                                                                        alt={player.player_pseudo}
+                                                                        className="w-12 h-12 rounded-full object-cover border-2 border-primary/30 group-hover:scale-110 transition-transform duration-300"
+                                                                    />
+                                                                </div>
+                                                                <div className="flex-1">
+                                                                    <div className="flex items-center justify-between mb-1">
+                                                                        <h5 className="font-bold text-white">
+                                                                            {player.player_pseudo}{" "}
+                                                                            <span className="font-normal">
+                                                                                - {player.firstName} {player.lastName}
+                                                                            </span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div className="grid grid-cols-4 gap-4 text-xs">
+                                                                        <div>
+                                                                            <span className="text-gray-400">
+                                                                                Score:{" "}
+                                                                            </span>
+                                                                            <span className="text-primary font-bold">
+                                                                                {player.total_score}
+                                                                            </span>
+                                                                        </div>
+                                                                        <div>
+                                                                            <span className="text-gray-400">
+                                                                                Données:{" "}
+                                                                            </span>
+                                                                            <span className="text-primary font-bold">
+                                                                                {player.total_given}
+                                                                            </span>
+                                                                        </div>
+                                                                        <div>
+                                                                            <span className="text-gray-400">
+                                                                                Reçues:{" "}
+                                                                            </span>
+                                                                            <span className="text-primary font-bold">
+                                                                                {player.total_received}
+                                                                            </span>
+                                                                        </div>
+                                                                        <div>
+                                                                            <span className="text-gray-400">
+                                                                                Tirs alliés:{" "}
+                                                                            </span>
+                                                                            <span className="text-primary font-bold">
+                                                                                {player.total_TK}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="grid grid-cols-4 gap-4 text-xs">
+                                                                        <div>
+                                                                            <span className="text-gray-400">Moy: </span>
+                                                                            <span className="text-primary font-bold">
+                                                                                {player.total_matches
+                                                                                    ? (
+                                                                                          Number(player.total_score) /
+                                                                                          Number(player.total_matches)
+                                                                                      ).toFixed(1)
+                                                                                    : 0}
+                                                                            </span>
+                                                                        </div>
+                                                                        <div>
+                                                                            <span className="text-gray-400">Moy: </span>
+                                                                            <span className="text-primary font-bold">
+                                                                                {player.total_matches
+                                                                                    ? (
+                                                                                          Number(player.total_given) /
+                                                                                          Number(player.total_matches)
+                                                                                      ).toFixed(1)
+                                                                                    : 0}
+                                                                            </span>
+                                                                        </div>
+                                                                        <div>
+                                                                            <span className="text-gray-400">Moy: </span>
+                                                                            <span className="text-primary font-bold">
+                                                                                {player.total_matches
+                                                                                    ? (
+                                                                                          Number(
+                                                                                              player.total_received
+                                                                                          ) /
+                                                                                          Number(player.total_matches)
+                                                                                      ).toFixed(1)
+                                                                                    : 0}
+                                                                            </span>
+                                                                        </div>
+                                                                        <div>
+                                                                            <span className="text-gray-400">
+                                                                                Matchs:{" "}
+                                                                            </span>
+                                                                            <span className="text-primary font-bold">
+                                                                                {player.total_matches}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </Card>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Card>
                                 </div>
-                            </Card>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -603,7 +340,6 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                 <Button
                                     variant={selectedTeamFilter === "all" ? "default" : "outline"}
                                     size="sm"
-                                    aria-label="Filtrer joueurs : Tous"
                                     onClick={() => setSelectedTeamFilter("all")}
                                     className={
                                         selectedTeamFilter === "all"
@@ -612,224 +348,208 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                     }>
                                     Toutes
                                 </Button>
-                                {teams.map((team) => (
-                                    <Button
-                                        key={team.id}
-                                        variant={selectedTeamFilter === team.id.toString() ? "default" : "outline"}
-                                        size="sm"
-                                        aria-label={`Filtrer joueurs de l'équipe : ${team.name}`}
-                                        onClick={() => setSelectedTeamFilter(team.id.toString())}
-                                        className={
-                                            selectedTeamFilter === team.id.toString()
-                                                ? "bg-primary text-black"
-                                                : "border-primary text-primary hover:bg-primary/10"
-                                        }>
-                                        {team.name}
-                                    </Button>
-                                ))}
+                                {teams.map((team) => {
+                                    const isSelected = selectedTeamFilter === team.id.toString();
+                                    return (
+                                        <Button
+                                            key={team.id}
+                                            variant={isSelected ? "default" : "outline"}
+                                            size="sm"
+                                            onClick={() => setSelectedTeamFilter(team.id.toString())}
+                                            className={
+                                                isSelected
+                                                    ? "bg-primary text-black"
+                                                    : "border-primary text-primary hover:bg-primary/10"
+                                            }>
+                                            {team.name}
+                                        </Button>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>
 
                     <div className="space-y-6">
-                        {filteredPlayers.map((player, index) => (
-                            <Card
-                                key={index}
-                                className="bg-card border-primary/20 hover:border-primary/40 transition-all duration-300 group overflow-hidden cursor-pointer"
-                                onClick={() => onPlayerSelect && player.id && onPlayerSelect(player.id)}>
-                                <div className="flex items-start flex-col md:flex-row">
-                                    {/* Player Photo as leftmost part of card */}
-                                    <div className="relative flex-shrink-0">
-                                        <div className="w-32 h-32 overflow-hidden">
-                                            <ImageWithFallback
-                                                src={player.photo}
-                                                alt={player.name}
-                                                className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
-                                            />
-                                        </div>
-                                        {player.role.includes("Capitaine") && (
-                                            <div className="absolute top-2 right-2 bg-primary/90 p-1 rounded-full">
-                                                <Star className="h-4 w-4 text-black fill-current" />
+                        {filteredPlayers
+                            .slice()
+                            .sort((a, b) => b.career_score - a.career_score)
+                            .map((player, index) => (
+                                <Card
+                                    key={index}
+                                    className="bg-card border-primary/20 hover:border-primary/40 transition-all duration-300 group overflow-hidden cursor-pointer"
+                                    onClick={() =>
+                                        onPlayerSelect &&
+                                        player.player_id &&
+                                        onPlayerSelect(player.player_id.toString())
+                                    }>
+                                    <div className="flex items-start flex-col md:flex-row">
+                                        <div
+                                            className="flex-2 relative flex-shrink-0"
+                                            style={{ height: "-webkit-fill-available" }}>
+                                            <div
+                                                className="w-32 h-32 overflow-hidden max-h-70 md:max-h-none"
+                                                style={{
+                                                    height: "-webkit-fill-available",
+                                                    width: "-webkit-fill-available",
+                                                }}>
+                                                <ImageWithFallback
+                                                    src={background}
+                                                    alt="Arrière plan joueur"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                                <ImageWithFallback
+                                                    src={playerImages[player.player_pseudo]}
+                                                    alt={player.player_pseudo}
+                                                    className="absolute inset-0 w-full h-full object-cover object-top z-10 transition-transform duration-500 origin-bottom md:translate-y-2 md:group-hover:scale-102"
+                                                />
                                             </div>
-                                        )}
-                                    </div>
+                                        </div>
 
-                                    {/* Player Info */}
-                                    <div className="flex-1 p-6">
-                                        <div className="flex items-start justify-between mb-4">
+                                        <div className="flex-8 p-6">
                                             <div>
-                                                <h3 className="text-2xl font-bold text-primary mb-1">{player.name}</h3>
-                                                <div className="flex items-center space-x-3">
-                                                    <Badge variant="secondary" className="text-sm">
-                                                        {player.role}
-                                                    </Badge>
-                                                    <span className="text-gray-400">•</span>
-                                                    <span className="text-white font-medium">{player.team}</span>
+                                                <div className="flex items-start justify-between mb-4">
+                                                    <div>
+                                                        <h3 className="text-2xl font-bold text-primary mb-1">
+                                                            {player.player_pseudo}
+                                                        </h3>
+                                                        <div className="flex items-center space-x-3">
+                                                            <span className="text-white font-medium">
+                                                                {player.firstName + " " + player.lastName}
+                                                            </span>
+                                                            <span className="text-gray-400">•</span>
+                                                            <span className="text-white">{player.team_name}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="text-right">
+                                                        <p className="flex items-center text-sm text-gray-400 mb-1">
+                                                            Voir le profil
+                                                            <div className="visible text-primary group-hover:scale-110 transition-transform duration-300">
+                                                                <svg
+                                                                    className="h-5 w-5 ml-1"
+                                                                    fill="none"
+                                                                    stroke="currentColor"
+                                                                    viewBox="0 0 24 24">
+                                                                    <path
+                                                                        strokeLinecap="round"
+                                                                        strokeLinejoin="round"
+                                                                        strokeWidth={2}
+                                                                        d="M9 5l7 7-7 7"
+                                                                    />
+                                                                </svg>
+                                                            </div>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                                                    <div className="text-center">
+                                                        <p className="text-2xl font-bold text-primary">
+                                                            {player.career_score.toLocaleString()}
+                                                        </p>
+                                                        <p className="text-sm text-gray-400">Score</p>
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="text-2xl font-bold text-primary">
+                                                            {player.career_given.toLocaleString()}
+                                                        </p>
+                                                        <p className="text-sm text-gray-400">Données</p>
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="text-2xl font-bold text-primary">
+                                                            {player.career_received.toLocaleString()}
+                                                        </p>
+                                                        <p className="text-sm text-gray-400">Reçues</p>
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="text-2xl font-bold text-primary">
+                                                            {player.career_TK}
+                                                        </p>
+                                                        <p className="text-sm text-gray-400">Tirs alliés</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                                                    <div className="text-center">
+                                                        <p className="text-2xl font-bold text-primary">
+                                                            {player.career_matches
+                                                                ? (
+                                                                      Number(player.career_score) /
+                                                                      Number(player.career_matches)
+                                                                  ).toFixed(2)
+                                                                : 0}
+                                                        </p>
+                                                        <p className="text-sm text-gray-400">Moyenne Score</p>
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="text-2xl font-bold text-primary">
+                                                            {player.career_matches
+                                                                ? (
+                                                                      Number(player.career_given) /
+                                                                      Number(player.career_matches)
+                                                                  ).toFixed(2)
+                                                                : 0}
+                                                        </p>
+                                                        <p className="text-sm text-gray-400">Moyenne Données</p>
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="text-2xl font-bold text-primary">
+                                                            {player.career_matches
+                                                                ? (
+                                                                      Number(player.career_received) /
+                                                                      Number(player.career_matches)
+                                                                  ).toFixed(2)
+                                                                : 0}
+                                                        </p>
+                                                        <p className="text-sm text-gray-400">Moyenne Reçues</p>
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="text-2xl font-bold text-primary">
+                                                            {player.career_matches}
+                                                        </p>
+                                                        <p className="text-sm text-gray-400">Total matchs</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-bold text-white mb-2">Succès</h4>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {(() => {
+                                                            let achievements: string[] = [];
+                                                            try {
+                                                                // On essaie de parser comme un tableau JSON
+                                                                if (typeof player.player_achievements === "string") {
+                                                                    achievements = JSON.parse(
+                                                                        player.player_achievements
+                                                                    );
+                                                                    // Si ce n'est pas un tableau après parse, on le transforme en tableau
+                                                                    if (!Array.isArray(achievements))
+                                                                        achievements = [achievements];
+                                                                } else if (Array.isArray(player.player_achievements)) {
+                                                                    achievements = player.player_achievements;
+                                                                } else {
+                                                                    achievements = [String(player.player_achievements)];
+                                                                }
+                                                            } catch (e) {
+                                                                // Si JSON.parse échoue, on met juste la valeur dans un tableau
+                                                                achievements = [player.player_achievements];
+                                                            }
+
+                                                            return achievements.map((ach, i) => (
+                                                                <div
+                                                                    key={i}
+                                                                    className="flex items-center space-x-1 bg-primary/10 px-2 py-1 rounded-full">
+                                                                    <Trophy className="h-4 w-4 text-primary mr-2" />
+                                                                    <span className="text-sm text-gray-300">{ach}</span>
+                                                                </div>
+                                                            ));
+                                                        })()}
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="text-right">
-                                                <p className="flex items-center text-xs text-gray-400 mb-1">
-                                                    Voir le profil
-                                                    <div className="visible text-primary group-hover:scale-110 transition-transform duration-300">
-                                                        <svg
-                                                            className="h-5 w-5 ml-1"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            viewBox="0 0 24 24">
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                strokeWidth={2}
-                                                                d="M9 5l7 7-7 7"
-                                                            />
-                                                        </svg>
-                                                    </div>
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        {/* Performance Stats */}
-                                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4">
-                                            <div className="text-center">
-                                                <p className="text-2xl font-bold text-primary">
-                                                    {player.performance.matchesPlayed}
-                                                </p>
-                                                <p className="text-xs text-gray-400">Matches</p>
-                                            </div>
-                                            <div className="text-center">
-                                                <p className="text-2xl font-bold text-primary">
-                                                    {player.performance.score.toLocaleString()}
-                                                </p>
-                                                <p className="text-xs text-gray-400">Score (rang)</p>
-                                            </div>
-                                            <div className="text-center">
-                                                <p className="text-2xl font-bold text-primary">
-                                                    {player.performance.pointsTaken.toLocaleString()}
-                                                </p>
-                                                <p className="text-xs text-gray-400">Données (rang)</p>
-                                            </div>
-                                            <div className="text-center">
-                                                <p className="text-2xl font-bold text-primary">
-                                                    {player.performance.pointsGiven.toLocaleString()}
-                                                </p>
-                                                <p className="text-xs text-gray-400">Reçues (rang)</p>
-                                            </div>
-                                            <div className="text-center">
-                                                <p className="text-2xl font-bold text-primary">
-                                                    {player.performance.teamKills}
-                                                </p>
-                                                <p className="text-xs text-gray-400">Tirs alliés</p>
-                                            </div>
-                                        </div>
-
-                                        {/* Average Stats */}
-                                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4">
-                                            <div></div>
-                                            <div className="text-center">
-                                                <p className="text-2xl font-bold text-primary">
-                                                    {player.performance.moyScore.toLocaleString()}{" "}
-                                                    <span className="font-normal">
-                                                        ({player.performance.classMVP.toLocaleString()})
-                                                    </span>
-                                                </p>
-                                                <p className="text-xs text-gray-400">Moyenne</p>
-                                            </div>
-                                            <div className="text-center">
-                                                <p className="text-2xl font-bold text-primary">
-                                                    {player.performance.moyTaken.toLocaleString()}{" "}
-                                                    <span className="font-normal">
-                                                        ({player.performance.classATQ.toLocaleString()})
-                                                    </span>
-                                                </p>
-                                                <p className="text-xs text-gray-400">Données (moy)</p>
-                                            </div>
-                                            <div className="text-center">
-                                                <p className="text-2xl font-bold text-primary">
-                                                    {player.performance.moyGiven.toLocaleString()}{" "}
-                                                    <span className="font-normal">
-                                                        ({player.performance.classDEF.toLocaleString()})
-                                                    </span>
-                                                </p>
-                                                <p className="text-xs text-gray-400">Reçues (moy)</p>
-                                            </div>
-                                            <div></div>
-                                        </div>
-
-                                        {/* Achievements */}
-                                        <div>
-                                            <h4 className="font-bold text-white mb-2">Achievements</h4>
-                                            <div className="flex flex-wrap gap-2">
-                                                {player.achievements.map((achievement, achievementIndex) => (
-                                                    <div
-                                                        key={achievementIndex}
-                                                        className="flex items-center space-x-1 bg-primary/10 px-2 py-1 rounded-full">
-                                                        <Trophy className="h-3 w-3 text-primary" />
-                                                        <span className="text-xs text-gray-300">{achievement}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Card>
-                        ))}
+                                </Card>
+                            ))}
                     </div>
-                </div>
-            </section>
-
-            {/* Recruitment Section */}
-            <section className="py-16 px-4">
-                <div className="container mx-auto max-w-4xl text-center">
-                    <h2 className="text-4xl font-bold mb-6 text-white">
-                        Rejoignez nos <span className="text-primary">équipes d'élite</span>
-                    </h2>
-                    <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                        Vous pensez avoir ce qu'il faut pour rivaliser au plus haut niveau ? Nous sommes toujours à la
-                        recherche de joueurs talentueux pour rejoindre nos équipes.
-                    </p>
-
-                    <div className="grid md:grid-cols-4 gap-6 my-12">
-                        <div className="text-center">
-                            <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Target className="h-8 w-8 text-primary" />
-                            </div>
-                            <h4 className="font-bold text-white mb-2">Compétences</h4>
-                            <p className="text-gray-400">
-                                Faites preuve d'une précision et d'un sens du jeu exceptionnels
-                            </p>
-                        </div>
-                        <div className="text-center">
-                            <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Users className="h-8 w-8 text-primary" />
-                            </div>
-                            <h4 className="font-bold text-white mb-2">Travail d'équipe</h4>
-                            <p className="text-gray-400">
-                                Travailler efficacement avec ses coéquipiers dans des situations de forte pression
-                            </p>
-                        </div>
-                        <div className="text-center">
-                            <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Zap className="h-8 w-8 text-primary" />
-                            </div>
-                            <h4 className="font-bold text-white mb-2">Assiduité</h4>
-                            <p className="text-gray-400">S'engager à participer aux entraînements et à s'améliorer</p>
-                        </div>
-                        <div className="text-center">
-                            <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Shield className="h-8 w-8 text-primary" />
-                            </div>
-                            <h4 className="font-bold text-white mb-2">Esprit sportif</h4>
-                            <p className="text-gray-400">
-                                Maintenir les standards les plus élevées en matière de fair-play et de respect
-                            </p>
-                        </div>
-                    </div>
-                    <Button
-                        size="lg"
-                        onClick={() => navigate("/club")}
-                        className="min-w-100 bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4 mx-auto">
-                        Découvrez le club
-                    </Button>
                 </div>
             </section>
         </div>

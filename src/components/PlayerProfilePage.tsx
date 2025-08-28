@@ -1,106 +1,88 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import {
-    Trophy,
-    ArrowLeft,
-    Star,
-    Target,
-    Zap,
-    Users,
-    Calendar,
-    TrendingUp,
-    MapPin,
-    Mail,
-    Instagram,
-    Twitter,
-} from "lucide-react";
-import sleaz from "../assets/players/Sleaz1.jpg";
+import { Trophy, ArrowLeft, Star, Calendar, Users, TrendingUp } from "lucide-react";
+
+type Player = {
+    player_id: number;
+    player_pseudo: string;
+    firstName: string;
+    lastName: string;
+    birthdate: string;
+    registration: number;
+    photo: string;
+    player_achievements: string | string[];
+    career_score: number;
+    career_given: number;
+    career_received: number;
+    career_TK: number;
+    career_competition: number;
+    career_matches: number;
+    career_wins: number;
+    career_defeats: number;
+    career_draws: number;
+    team_id: number;
+    team_name: string;
+    total_score: number;
+    total_given: number;
+    total_received: number;
+    total_TK: number;
+    total_matches: number;
+    total_wins: number;
+};
 
 export function PlayerProfilePage() {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
 
-    // Fonction pour récupérer les données d’un joueur
-    const getPlayerData = (playerId: string) => {
-        const allPlayerData: Record<string, any> = {
-            Sleaz: {
-                name: "Sleaz",
-                firstName: "Louis",
-                lastName: "Auffret",
-                role: "Captain",
-                team: "Team'AJin",
-                teamId: 1,
-                photo: sleaz,
-                age: 24,
-                location: "San Francisco, CA",
-                joinDate: "2016",
-                bio: "Competitive laser tag athlete with over 4 years of professional experience...",
-                performance: {
-                    matchesPlayed: 32,
-                    pointsTaken: 2847,
-                    pointsGiven: 1018,
-                    kdRatio: "2.8",
-                    accuracy: "87.3%",
-                    teamKills: 12,
-                    wins: 28,
-                    losses: 4,
-                    winRate: "87.5%",
-                    avgPointsPerMatch: 89,
-                    bestStreaks: 15,
-                    totalTournaments: 12,
-                },
-                achievements: [
-                    {
-                        title: "MVP 2023",
-                        date: "December 2023",
-                        description: "Most Valuable Player of the National Championship",
-                    },
-                    { title: "National Champion", date: "December 2023", description: "Led Digital Storm to victory" },
-                    { title: "Best Captain Award", date: "November 2023", description: "Outstanding leadership" },
-                ],
-                careerStats: {
-                    totalMatches: 145,
-                    totalWins: 127,
-                    careerKD: "2.6",
-                    careerAccuracy: "85.8%",
-                    totalTournaments: 28,
-                    championshipTitles: 3,
-                    yearsActive: 4,
-                },
-                recentMatches: [
-                    {
-                        date: "Jan 15, 2024",
-                        opponent: "Cyber Phantoms",
-                        result: "V",
-                        score: "98-76",
-                        kd: "3.2",
-                        accuracy: "91%",
-                    },
-                    {
-                        date: "Jan 12, 2024",
-                        opponent: "Neon Hunters",
-                        result: "D",
-                        score: "112-89",
-                        kd: "2.9",
-                        accuracy: "88%",
-                    },
-                ],
-                social: {
-                    instagram: "@alexchen_laser",
-                    twitter: "@alexchen_gaming",
-                    email: "alex.chen@clash-lasertag.com",
-                },
-                specialties: ["Team Leadership", "Strategic Planning", "Fast Attack", "Arena Control"],
-                equipment: ["TechNova X1 Laser", "Nexus Pro Vest", "Atlas Tactical Gear"],
-            },
-        };
-        return allPlayerData[playerId] || null;
+    const [player, setPlayer] = useState<Player | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    const getAge = (birthdate: string): number => {
+        const birth = new Date(birthdate);
+        const today = new Date();
+        let age = today.getFullYear() - birth.getFullYear();
+        const m = today.getMonth() - birth.getMonth();
+
+        if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+        return age;
     };
 
-    const player = id ? getPlayerData(id) : null;
+    const getExperience = (registration: string | number): number => {
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth(); // 0 = janvier, 11 = décembre
+
+        let seasonYear = currentYear;
+        if (currentMonth < 8) {
+            // avant septembre
+            seasonYear = currentYear - 1;
+        }
+
+        return seasonYear - Number(registration) + 1; // +1 pour inclure la première saison
+    };
+
+    useEffect(() => {
+        fetch("https://asso-clash.fr/backend/api.php")
+            .then((res) => res.json())
+            .then((teams) => {
+                const allPlayers = teams.flatMap((team: any) =>
+                    team.players.map((p: any) => ({ ...p, team_name: team.name }))
+                );
+                const found = allPlayers.find((p: Player) => p.player_id.toString() === id);
+                setPlayer(found || null);
+            })
+            .catch((err) => console.error("Erreur API:", err))
+            .finally(() => setLoading(false));
+    }, [id]);
+
+    if (loading) {
+        return <div className="pt-20 min-h-screen flex items-center justify-center text-white">Chargement...</div>;
+    }
 
     if (!player) {
         return (
@@ -116,13 +98,11 @@ export function PlayerProfilePage() {
         );
     }
 
-    const onBack = () => {
-        navigate("/teams");
-    };
+    const onBack = () => navigate("/teams");
 
     return (
         <div className="pt-20">
-            {/* Header with Back Button */}
+            {/* Bouton retour */}
             <section className="py-8 px-4">
                 <div className="container mx-auto max-w-6xl">
                     <Button
@@ -135,227 +115,189 @@ export function PlayerProfilePage() {
                 </div>
             </section>
 
-            {/* Player Hero Section */}
+            {/* Player Hero */}
             <section className="py-16 px-4">
                 <div className="container mx-auto max-w-6xl">
                     <Card className="bg-card border-primary/20 p-8 mb-8">
                         <div className="grid lg:grid-cols-3 gap-8">
-                            {/* Player Photo */}
+                            {/* Photo */}
                             <div className="lg:col-span-1">
-                                <div className="relative">
-                                    <ImageWithFallback
-                                        src={player.photo}
-                                        alt={player.name}
-                                        className="w-full h-80 object-cover rounded-lg border-2 border-primary/30"
-                                    />
-                                    {player.role === "Captain" && (
-                                        <div className="absolute top-4 right-4 bg-primary/90 p-2 rounded-full">
-                                            <Star className="h-6 w-6 text-black fill-current" />
-                                        </div>
-                                    )}
-                                </div>
+                                <ImageWithFallback
+                                    src={player.photo}
+                                    alt={player.player_pseudo}
+                                    className="w-full h-80 object-cover rounded-lg border-2 border-primary/30"
+                                />
                             </div>
 
-                            {/* Player Info */}
+                            {/* Infos */}
                             <div className="lg:col-span-2">
-                                <div className="flex items-start justify-between mb-6">
-                                    <div>
-                                        <h1 className="text-4xl font-bold text-primary mb-2">
-                                            {player.name}
-                                            <span className="text-white font-normal">
-                                                {" "}
-                                                - {player.firstName} {player.lastName}
-                                            </span>
-                                        </h1>
-                                        <div className="flex items-center space-x-4 mb-4">
-                                            <Badge variant="secondary" className="text-lg px-3 py-1">
-                                                {player.role}
-                                            </Badge>
-                                            <span className="text-gray-400">•</span>
-                                            <span className="text-white font-medium text-lg">{player.team}</span>
-                                        </div>
-                                        <div className="grid md:grid-cols-3 gap-4 text-sm mb-6">
-                                            <div className="flex items-center space-x-2">
-                                                <Calendar className="h-4 w-4 text-primary" />
-                                                <span className="text-gray-400">Inscrit:</span>
-                                                <span className="text-white">{player.joinDate}</span>
-                                            </div>
-                                            <div className="flex items-center space-x-2">
-                                                <Users className="h-4 w-4 text-primary" />
-                                                <span className="text-gray-400">Âge:</span>
-                                                <span className="text-white">{player.age} ans</span>
-                                            </div>
-                                            <div className="flex items-center space-x-2">
-                                                <TrendingUp className="h-4 w-4 text-primary" />
-                                                <span className="text-gray-400">Éxpérience:</span>
-                                                <span className="text-white">
-                                                    {player.careerStats.yearsActive} saisons
-                                                </span>
-                                            </div>
-                                        </div>
+                                <h1 className="text-4xl font-bold text-primary mb-2">
+                                    {player.player_pseudo}
+                                    <span className="text-white font-normal">
+                                        {" "}
+                                        - {player.firstName} {player.lastName}
+                                    </span>
+                                </h1>
+                                <div className="flex items-center space-x-4 mb-4">
+                                    <Badge variant="secondary">{player.team_name}</Badge>
+                                </div>
+                                <div className="grid md:grid-cols-3 gap-4 text-sm mb-6">
+                                    <div className="flex items-center space-x-2">
+                                        <Calendar className="h-4 w-4 text-primary" />
+                                        <span className="text-gray-400">Inscrit:</span>
+                                        <span className="text-white">{player.registration}</span>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <Users className="h-4 w-4 text-primary" />
+                                        <span className="text-gray-400">Âge:</span>
+                                        <span className="text-white">{getAge(player.birthdate)} ans</span>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <TrendingUp className="h-4 w-4 text-primary" />
+                                        <span className="text-gray-400">Expérience:</span>
+                                        <span className="text-white">
+                                            {getExperience(player.registration)} saison
+                                            {getExperience(player.registration) > 1 ? "s" : ""}
+                                        </span>
                                     </div>
                                 </div>
-
-                                <p className="text-gray-300 mb-6 leading-relaxed">{player.bio}</p>
-
-                                {/* Social Links */}
-                                {/* <div className="flex items-center space-x-4">
-                                    <span className="text-gray-400">Ses réseaux:</span>
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        className="border-primary/30 text-primary hover:bg-primary/10">
-                                        <Instagram className="h-4 w-4 mr-2" />
-                                        Instagram
-                                    </Button>
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        className="border-primary/30 text-primary hover:bg-primary/10">
-                                        <Twitter className="h-4 w-4 mr-2" />
-                                        Twitter
-                                    </Button>
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        className="border-primary/30 text-primary hover:bg-primary/10">
-                                        <Mail className="h-4 w-4 mr-2" />
-                                        Email
-                                    </Button>
-                                </div> */}
+                                <div></div>
                             </div>
                         </div>
                     </Card>
                 </div>
             </section>
 
-            {/* Current Season Stats Overview */}
+            {/* Stats détaillées */}
             <section className="py-16 px-4 bg-secondary/50">
                 <div className="container mx-auto max-w-6xl">
-                    <h2 className="text-3xl font-bold text-primary mb-8">Performances de la saison en cours</h2>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-8">
+                    <h2 className="text-3xl font-bold text-primary mb-8">Statistiques</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-6 gap-6">
                         <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">
-                                {player.performance.matchesPlayed}
-                            </div>
+                            <div className="text-2xl font-bold text-primary">{player.total_matches}</div>
                             <div className="text-sm text-gray-400">Matchs joués</div>
                         </Card>
                         <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">
-                                {player.performance.matchesPlayed}
-                            </div>
+                            <div className="text-2xl font-bold text-primary">{player.total_wins}</div>
                             <div className="text-sm text-gray-400">Victoires</div>
                         </Card>
                         <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">{player.performance.winRate}</div>
+                            <div className="text-2xl font-bold text-primary">
+                                {player.total_matches > 0
+                                    ? ((player.total_wins / player.total_matches) * 100).toFixed(1) + "%"
+                                    : "0%"}
+                            </div>
                             <div className="text-sm text-gray-400">Taux de victoire</div>
                         </Card>
+
                         <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">{player.performance.kdRatio}</div>
+                            <div className="text-2xl font-bold text-primary">
+                                {player.total_matches
+                                    ? (Number(player.total_score) / Number(player.total_matches)).toFixed(2)
+                                    : 0}
+                            </div>
                             <div className="text-sm text-gray-400">Score Moy/Match</div>
                         </Card>
                         <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">
-                                {player.performance.avgPointsPerMatch}
+                            <div className="text-2xl font-bold text-primary">
+                                {player.total_matches
+                                    ? (Number(player.total_given) / Number(player.total_matches)).toFixed(2)
+                                    : 0}
                             </div>
                             <div className="text-sm text-gray-400">Données Moy/Match</div>
                         </Card>
                         <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">{player.performance.bestStreaks}</div>
+                            <div className="text-2xl font-bold text-primary">
+                                {player.total_matches
+                                    ? (Number(player.total_received) / Number(player.total_matches)).toFixed(2)
+                                    : 0}
+                            </div>
                             <div className="text-sm text-gray-400">Reçues Moy/Match</div>
                         </Card>
                     </div>
 
-                    <div className="grid lg:grid-cols-2 gap-8">
-                        {/* Detailed Stats */}
-                        <Card className="bg-card border-primary/20 p-6">
+                    {/* Detailed Stats */}
+                    <div className="flex flex-col md:flex-row gap-6 mt-6">
+                        <Card className="bg-card border-primary/20 p-6 flex-1">
                             <h3 className="text-xl font-bold text-white mb-4">Statistiques de la saison</h3>
                             <div className="space-y-4">
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Score total:</span>
-                                    <span className="text-primary font-bold">
-                                        {player.performance.pointsTaken.toLocaleString()}
-                                    </span>
+                                    <span className="text-primary font-bold">{player.total_score}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Total de touches données:</span>
-                                    <span className="text-primary font-bold">
-                                        {player.performance.pointsTaken.toLocaleString()}
-                                    </span>
+                                    <span className="text-primary font-bold">{player.total_given}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Total de touches reçues:</span>
-                                    <span className="text-white">
-                                        {player.performance.pointsGiven.toLocaleString()}
-                                    </span>
+                                    <span className="text-white">{player.total_received}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Total de Tirs alliés donnés:</span>
-                                    <span className="text-white">{player.performance.teamKills}</span>
+                                    <span className="text-white">{player.total_TK}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Victoires:</span>
-                                    <span className="text-primary font-bold">{player.performance.wins}</span>
+                                    <span className="text-primary font-bold">{player.total_wins}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Défaites:</span>
-                                    <span className="text-white">{player.performance.losses}</span>
+                                    <span className="text-white">{player.total_matches}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Égalités:</span>
-                                    <span className="text-white">{player.performance.totalTournaments}</span>
+                                    <span className="text-white">{player.total_matches}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Tournois joués:</span>
-                                    <span className="text-white">{player.performance.totalTournaments}</span>
+                                    <span className="text-white">{player.total_matches}</span>
                                 </div>
                             </div>
                         </Card>
 
                         {/* Career Overview */}
-                        <Card className="bg-card border-primary/20 p-6">
+                        <Card className="bg-card border-primary/20 p-6 flex-1">
                             <h3 className="text-xl font-bold text-white mb-4">Statistiques de carrière</h3>
                             <div className="space-y-4">
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Score total:</span>
-                                    <span className="text-primary font-bold">{player.careerStats.totalMatches}</span>
+                                    <span className="text-primary font-bold">{player.career_score}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Total de touches données:</span>
-                                    <span className="text-primary font-bold">
-                                        {player.performance.pointsTaken.toLocaleString()}
-                                    </span>
+                                    <span className="text-primary font-bold">{player.career_given}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Total de touches reçues:</span>
-                                    <span className="text-white">
-                                        {player.performance.pointsGiven.toLocaleString()}
-                                    </span>
+                                    <span className="text-white">{player.career_received}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Total de Tirs alliés donnés:</span>
-                                    <span className="text-white">{player.performance.teamKills}</span>
+                                    <span className="text-white">{player.career_TK}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Victoires:</span>
-                                    <span className="text-primary font-bold">{player.performance.wins}</span>
+                                    <span className="text-primary font-bold">{player.career_wins}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Défaites:</span>
-                                    <span className="text-white">{player.performance.losses}</span>
+                                    <span className="text-white">{player.career_defeats}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Égalités:</span>
-                                    <span className="text-white">{player.performance.totalTournaments}</span>
+                                    <span className="text-white">{player.career_draws}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Tournois joués:</span>
-                                    <span className="text-white">{player.performance.totalTournaments}</span>
+                                    <span className="text-white">{player.career_competition}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-400">Saisons jouées:</span>
-                                    <span className="text-white">{player.careerStats.yearsActive}</span>
+                                    <span className="text-white">
+                                        {getExperience(player.registration)}
+                                        {getExperience(player.registration) > 1}
+                                    </span>
                                 </div>
                             </div>
                         </Card>
@@ -370,31 +312,45 @@ export function PlayerProfilePage() {
 
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-8">
                         <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">
-                                {player.performance.matchesPlayed}
-                            </div>
+                            <div className="text-3xl font-bold text-primary mb-2">{player.career_matches}</div>
                             <div className="text-sm text-gray-400">Matchs joués</div>
                         </Card>
                         <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">{player.performance.kdRatio}</div>
+                            <div className="text-3xl font-bold text-primary mb-2">{player.career_wins}</div>
                             <div className="text-sm text-gray-400">Victoires</div>
                         </Card>
                         <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">{player.performance.accuracy}</div>
+                            <div className="text-3xl font-bold text-primary mb-2">
+                                {player.career_matches > 0
+                                    ? ((player.career_wins / player.career_matches) * 100).toFixed(1) + "%"
+                                    : "0%"}
+                            </div>
                             <div className="text-sm text-gray-400">Taux de victoire</div>
                         </Card>
                         <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">{player.performance.winRate}</div>
+                            <div className="text-3xl font-bold text-primary mb-2">
+                                {player.career_matches
+                                    ? (Number(player.career_score) / Number(player.career_matches)).toFixed(2)
+                                    : 0}
+                            </div>
                             <div className="text-sm text-gray-400">Score Moy/Match</div>
                         </Card>
                         <Card className="bg-card border-primary/20 p-4 text-center">
                             <div className="text-3xl font-bold text-primary mb-2">
-                                {player.performance.avgPointsPerMatch}
+                                {" "}
+                                {player.career_matches
+                                    ? (Number(player.career_given) / Number(player.career_matches)).toFixed(2)
+                                    : 0}
                             </div>
                             <div className="text-sm text-gray-400">Données Moy/Match</div>
                         </Card>
                         <Card className="bg-card border-primary/20 p-4 text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">{player.performance.bestStreaks}</div>
+                            <div className="text-3xl font-bold text-primary mb-2">
+                                {" "}
+                                {player.career_matches
+                                    ? (Number(player.career_received) / Number(player.career_matches)).toFixed(2)
+                                    : 0}
+                            </div>
                             <div className="text-sm text-gray-400">Reçues Moy/Match</div>
                         </Card>
                     </div>
@@ -407,80 +363,23 @@ export function PlayerProfilePage() {
                     <h2 className="text-3xl font-bold text-primary mb-8">Récompenses et Titres</h2>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {player.achievements.map((achievement, index) => (
-                            <Card
-                                key={index}
-                                className="bg-card border-primary/20 p-6 hover:border-primary/40 transition-all duration-300">
-                                <div className="flex items-start space-x-4">
-                                    <div className="bg-primary/20 p-3 rounded-full flex-shrink-0">
-                                        <Trophy className="h-6 w-6 text-primary" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-bold text-white mb-2">{achievement.title}</h3>
-                                        <p className="text-primary text-sm mb-2">{achievement.date}</p>
-                                        <p className="text-gray-400 text-sm">{achievement.description}</p>
-                                    </div>
-                                </div>
-                            </Card>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Recent Matches */}
-            <section className="py-16 px-4">
-                <div className="container mx-auto max-w-6xl">
-                    <h2 className="text-3xl font-bold text-primary mb-8">Historique des matchs récents</h2>
-
-                    <div className="space-y-4">
-                        {player.recentMatches.map((match, index) => (
-                            <Card
-                                key={index}
-                                className="bg-card border-primary/20 p-4 hover:border-primary/40 transition-all duration-300">
-                                <div className="flex items-center justify-between flex-col gap-4 sm:flex-row">
-                                    <div className="flex items-center space-x-6">
-                                        <div className="text-center">
-                                            <div className="text-sm text-gray-400 mb-1">Date</div>
-                                            <div className="text-white font-medium">{match.date}</div>
+                        {String(player.player_achievements)
+                            .replace(/[\[\]"]/g, "") // supprime [ ] et "
+                            .split(",")
+                            .map((achievement, index) => (
+                                <Card
+                                    key={index}
+                                    className="bg-card border-primary/20 p-6 hover:border-primary/40 transition-all duration-300">
+                                    <div className="flex items-start space-x-4">
+                                        <div className="bg-primary/20 p-3 rounded-full flex-shrink-0">
+                                            <Trophy className="h-6 w-6 text-primary" />
                                         </div>
-                                        <div className="text-center">
-                                            <div className="text-sm text-gray-400 mb-1">Adversaire</div>
-                                            <div className="text-white font-medium">{match.opponent}</div>
-                                        </div>
-                                        <div className="text-center">
-                                            <div className="text-sm text-gray-400 mb-1">Résultat</div>
-                                            <Badge
-                                                variant={match.result === "V" ? "default" : "destructive"}
-                                                className={match.result === "V" ? "bg-primary text-black" : ""}>
-                                                {match.result === "V" ? "Victoire" : "Défaite"}
-                                            </Badge>
-                                        </div>
-                                        <div className="text-center">
-                                            <div className="text-sm text-gray-400 mb-1">Score équipe</div>
-                                            <div className="text-white font-medium">{match.score}</div>
+                                        <div>
+                                            <h3 className="font-bold text-white">{achievement.trim()}</h3>
                                         </div>
                                     </div>
-                                    <div className="flex items-center space-x-6">
-                                        <div className="text-center">
-                                            <div className="text-sm text-gray-400 mb-1">Score joueur</div>
-                                            <div className="text-primary font-bold">{match.kd}</div>
-                                        </div>
-                                        <div className="text-center">
-                                            <div className="text-sm text-gray-400 mb-1">Touches Données</div>
-                                            <div className="text-primary font-bold">{match.accuracy}</div>
-                                        </div>
-                                        <div className="text-center">
-                                            <div className="text-sm text-gray-400 mb-1">Touches Reçues</div>
-                                            <div className="text-primary font-bold">{match.accuracy}</div>
-                                        </div>
-                                        <div className="text-center">
-                                            <div className="text-sm text-gray-400 mb-1">Tirs alliés</div>
-                                            <div className="text-primary font-bold">{match.accuracy}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Card>
-                        ))}
+                                </Card>
+                            ))}
                     </div>
                 </div>
             </section>

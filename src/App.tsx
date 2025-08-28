@@ -10,11 +10,9 @@ import { ContactPage } from "./components/ContactPage";
 import { NotFoundPage } from "./components/NotFoundPage";
 import { PlayerProfilePage } from "./components/PlayerProfilePage";
 import AnalyticsTracker from "./components/AnalyticsTracker";
-import "./App.css";
-
-// composant pour faire défiler vers le haut à chaque changement de route
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import "./App.css";
 
 const MEASUREMENT_ID = "G-SBF55VW119";
 
@@ -40,6 +38,15 @@ function TeamsPageWrapper() {
 }
 
 export default function App() {
+    const [players, setPlayers] = useState<any[]>([]);
+
+    // Appel à ton backend OVH
+    useEffect(() => {
+        fetch("https://asso-clash.fr/backend/api.php")
+            .then((res) => res.json())
+            .then((data) => setPlayers(data))
+            .catch((err) => console.error("Erreur fetch:", err));
+    }, []);
     return (
         <Router>
             <AnalyticsTracker measurementId={MEASUREMENT_ID} />

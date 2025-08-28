@@ -148,6 +148,17 @@ export function SocialsPage() {
 
     const podcasts = [
         {
+            title: "“Cette année elle est pour nous” : le Clash sacrés champions de France de Laser Game",
+            source: "Ouest Track Radio",
+            date: "08/27/2025",
+            altText: "Couverture du podcast Ouest Track Radio : Cette année elle est pour nous",
+            description:
+                "Dans cet épisode, partez à la rencontre de l’équipe Le Clash, sacrée championne de France de Laser Game. Au programme : reportage exclusif avec le club des champions et immersion totale dans les labyrinthes où tout se joue.",
+            image: "https://ouest-track.com/upload/podcasts/photos/main/68af3309e83df5.45237438.png?=1756326594",
+            link: "https://ouest-track.com/podcasts/cette-annee-elle-est-pour-nous-le-clash-sacres-champions-de-france-de-laser-game-12913",
+            duration: "13:39",
+        },
+        {
             title: "Objectif podium pour le CLASH : En route vers le championnat de France pour le club de laser game sportif Havrais",
             source: "Ouest Track Radio",
             date: "06/23/2025",
@@ -426,7 +437,7 @@ export function SocialsPage() {
                         Notre <span className="text-primary">Communauté</span>
                     </h2>
 
-                    <div className="grid md:grid-cols-4 gap-8 my-12">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 my-12">
                         <div className="text-center">
                             <div className="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <Users className="h-8 w-8 text-primary" />

@@ -24,6 +24,7 @@ import {
     UserPlus,
     Target,
     GamepadIcon,
+    ExternalLink,
 } from "lucide-react";
 
 export function ContactPage() {
@@ -120,6 +121,7 @@ export function ContactPage() {
 
     return (
         <div className="pt-20">
+            <title>CLASH – Contact</title>
             {/* Header Section */}
             <section className="relative py-20 px-4">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5" />
@@ -142,8 +144,7 @@ export function ContactPage() {
                 <div className="grid lg:grid-cols-3 gap-12">
                     {/* Contact Form */}
                     <div className="lg:col-span-2">
-                        <section className="py-20 px-4 relative">
-                            <div className="absolute inset-0" />
+                        <section className="pt-20 pb-10 lg:pb-20 px-4 relative">
                             <div className="container mx-auto max-w-4xl relative z-10">
                                 <Card className="bg-card/80 border-primary/30 backdrop-blur-sm p-8 hover:border-primary/50 transition-all duration-300">
                                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -407,7 +408,7 @@ export function ContactPage() {
                     </div>
 
                     {/* Contact Information Sidebar */}
-                    <div className="space-y-6 pt-20">
+                    <div className="space-y-6 lg:pt-20">
                         {/* Contact Details */}
                         <Card className="bg-card/80 border-primary/30 backdrop-blur-sm p-6 hover:border-primary/50 transition-all duration-300">
                             <h3 className="text-xl font-bold text-primary mb-6 flex items-center">
@@ -459,7 +460,12 @@ export function ContactPage() {
 
                                 <Button
                                     className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 hover:border-primary/50 transition-all duration-300"
-                                    onClick={() => window.open("https://maps.google.com/?q=123+Arena+Drive", "_blank")}>
+                                    onClick={() =>
+                                        window.open(
+                                            "https://maps.google.com/?q=Laser+Game+Evolution+Le+Havre",
+                                            "_blank"
+                                        )
+                                    }>
                                     <MapPin className="h-4 w-4 mr-2" />
                                     Obtenir l'adresse
                                 </Button>
@@ -467,7 +473,7 @@ export function ContactPage() {
                         </Card>
 
                         {/* Emergency Contact */}
-                        <Card className="bg-destructive/10 border-destructive/30 backdrop-blur-sm p-6 hover:border-destructive/50 transition-all duration-300">
+                        {/* <Card className="bg-destructive/10 border-destructive/30 backdrop-blur-sm p-6 hover:border-destructive/50 transition-all duration-300">
                             <h3 className="text-xl font-bold text-destructive mb-4 flex items-center">
                                 <AlertCircle className="h-5 w-5 mr-2" />
                                 Emergency Contact
@@ -479,7 +485,7 @@ export function ContactPage() {
                                 <p className="text-destructive font-mono">Emergency: +1 (555) 911-CLASH</p>
                                 <p className="text-gray-400 text-xs">Available 24/7 during events</p>
                             </div>
-                        </Card>
+                        </Card> */}
 
                         {/* Arena Image */}
                         <div className="relative cursor-pointer overflow-hidden group rounded-lg border border-primary/20">
@@ -490,8 +496,9 @@ export function ContactPage() {
                                     className="w-full h-48 object-cover transform transition-transform duration-300 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg flex items-end p-4">
-                                    <div>
-                                        <h4 className="font-bold text-primary mb-1">Notre club</h4>
+                                    <div className="flex items-center">
+                                        <h4 className="font-bold text-primary">Notre club</h4>
+                                        <ExternalLink className="h-4 w-4 ml-2" />
                                     </div>
                                 </div>
                             </a>
@@ -549,7 +556,7 @@ export function ContactPage() {
                         size="lg"
                         onClick={() => navigate("/sport")}
                         className="bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4 mx-auto">
-                        Envie d'en apprendre plus sur notre discipline
+                        En apprendre plus sur notre discipline
                     </Button>
                 </div>
             </section>

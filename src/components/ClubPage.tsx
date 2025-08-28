@@ -65,7 +65,7 @@ export function ClubPage() {
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                         Fondé en 2016, le CLASH –
                         <i className="text-gray-400"> Club de Laser Associatif et Sportif Havrais</i> – est un des clubs
-                        les plus expérimentés et prestigieux de France. Actuel champion de France !
+                        les plus expérimentés et prestigieux dans le domaine. Actuel champion de France !
                     </p>
                 </div>
             </section>
@@ -78,9 +78,9 @@ export function ClubPage() {
                             <h2 className="text-4xl font-bold mb-6 text-primary">À propos du CLASH</h2>
                             <p className="text-lg text-gray-300 mb-6">
                                 Le CLASH a été fondé avec l'objectif de faire du laser game une discipline de
-                                compétition, passant du simple loisir à la compétition. Notre expérience et nos joueurs
-                                expérimentés offrent l'environnement idéal pour que les joueurs développent leurs
-                                compétences et concourent au plus haut niveau.
+                                compétition. Notre expérience et nos joueurs vétérans constituent l'environnement idéal
+                                pour que des nouveaux joueurs développent leurs compétences et concourent au plus haut
+                                niveau.
                             </p>
                             <p className="text-lg text-gray-300 mb-6">
                                 Nous pensons que le Laser Game est plus qu'un simple jeu : c'est une discipline qui
@@ -171,8 +171,8 @@ export function ClubPage() {
 
             {/* Budget Section */}
             <section className="py-16 px-4">
-                <div className="container mx-auto max-w-6xl">
-                    <div className="pb-16">
+                <div className="container mx-auto max-w-6xl flex flex-col">
+                    <div>
                         <h1 className="text-4xl font-bold mb-6 text-primary">Cotisations à l'année</h1>
                         {/* <p className="text-xl text-gray-300 pb-6">
                             La saison d’entraînement s’étend de septembre à juin. À titre indicatif, les tarifs
@@ -195,7 +195,7 @@ export function ClubPage() {
                             sur les tarifs et les conditions d'adhésion.
                         </p>
                     </div>
-                    <div className="grid lg:grid-cols-2 gap-12">
+                    <div className="grid lg:grid-cols-2 gap-12 py-16">
                         <div>
                             <h2 className="text-4xl font-bold mb-6 text-primary">
                                 Cotisation <span className="text-white">Loisir</span>
@@ -203,7 +203,7 @@ export function ClubPage() {
                             <div className="space-y-4">
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                    <p className="text-gray-300">Lundi soir 18h - 21h</p>
+                                    <p className="text-gray-300">Lundi soir 18h – 21h</p>
                                 </div>
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
@@ -233,7 +233,7 @@ export function ClubPage() {
                             <div className="space-y-4">
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                    <p className="text-gray-300">Dimanche soir 18h - 21h</p>
+                                    <p className="text-gray-300">Dimanche soir 18h – 21h</p>
                                 </div>
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
@@ -252,13 +252,19 @@ export function ClubPage() {
                                 <div className="flex items-start space-x-3">
                                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
                                     <p className="text-gray-300">
-                                        Le club réclame également une participation financière : pour les déplacements ,
+                                        Le club réclame également une participation financière : pour les déplacements,
                                         les maillots, la communication, les évènements, etc.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <Button
+                        size="lg"
+                        onClick={() => navigate("/contact")}
+                        className="min-w-100 bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4 mx-auto">
+                        Rejoignez notre club
+                    </Button>
                 </div>
             </section>
 
@@ -278,7 +284,7 @@ export function ClubPage() {
                         </Card>
 
                         <Card className="bg-card border-primary/20 p-6 hover:border-primary/40 transition-all duration-300">
-                            <h3 className="text-xl font-bold mb-4 text-primary">Jeunes</h3>
+                            <h3 className="text-xl font-bold mb-4 text-primary">Loisir</h3>
                             <p className="text-gray-400 mb-4">
                                 Pour les joueurs moins expérimentés, le club propose un créneau le lundi soir encadré
                                 par les pros, entraîneurs du club. L'objectif est de découvrir la discipline et ses

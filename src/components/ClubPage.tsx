@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Card } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Trophy, Users, Calendar, MapPin, Target, Star } from "lucide-react";
@@ -12,49 +13,62 @@ export function ClubPage() {
             year: "2025",
             title: "Champions de France",
             team: "Team'Ajin",
-            description: "Championnat de France - Angoulême",
+            description: "Championnat de France – Angoulême",
             star: 5,
         },
         {
             year: "2024",
             title: "Quatrième place CDF",
             team: "Ping'Win",
-            description: "Championnat de France - Roanne",
+            description: "Championnat de France – Roanne",
             star: 3,
         },
         {
             year: "2023",
             title: "Quatrième place CDF",
             team: "Ping'Win",
-            description: "Championnat de France - Le Mans",
+            description: "Championnat de France – Le Mans",
             star: 3,
         },
         {
             year: "2022",
             title: "Vice-Champions de France",
             team: "Team'Ajin",
-            description: "Championnat de France - Poitiers",
+            description: "Championnat de France – Poitiers",
             star: 4,
         },
         {
             year: "2022",
             title: "Champions de ligue Nord",
             team: "Team'Ajin",
-            description: "Championnat régionnal - Ligue Nord",
+            description: "Championnat régionnal – Ligue Nord",
             star: 2,
         },
         {
             year: "2021",
             title: "Champions de ligue Ouest",
             team: "CLASH",
-            description: "Championnat régionnal - Ligue Ouest",
+            description: "Championnat régionnal – Ligue Ouest",
             star: 2,
         },
     ];
 
     return (
         <div className="pt-20">
-            <title>CLASH – Le Club</title>
+            <Helmet>
+                <title>Notre Club – Laser Game Evolution Le Havre | CLASH</title>
+                <meta
+                    name="description"
+                    content="Asso-Clash, le club de laser game au Havre : une équipe passionnée, des entraînements réguliers et des compétitions locales et nationales."
+                />
+                <meta property="og:title" content="Notre Club – Laser Game Evolution Le Havre | CLASH" />
+                <meta
+                    property="og:description"
+                    content="Rejoignez Asso-Clash, le club de laser game au Havre, pour vivre l’expérience compétitive et associative !"
+                />
+                <meta property="og:url" content="https://asso-clash.fr/club" />
+            </Helmet>
+
             {/* Header Section */}
             <section className="relative py-20 px-4">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />

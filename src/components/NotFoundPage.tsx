@@ -1,22 +1,37 @@
+import { Helmet } from "react-helmet";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Home, Users, Trophy, Target, Zap, AlertTriangle, ArrowLeft, Search, RefreshCw } from "lucide-react";
+import {
+    Home,
+    Users,
+    Trophy,
+    Target,
+    Zap,
+    AlertTriangle,
+    ArrowLeft,
+    Search,
+    RefreshCw,
+    Share2,
+    MessageSquare,
+    Handshake,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export function NotFoundPage() {
     const navigate = useNavigate();
 
     const quickLinks = [
-        { path: "/", label: "Page d'accueil", icon: Home, description: "Retournez sur la page d'accueil" },
+        { path: "/club", label: "Notre Club", icon: Trophy, description: "Découvrez notre club" },
+        { path: "/sport", label: "La Discipline", icon: Target, description: "Apprenez en plus sur le Laser Game" },
         {
             path: "/teams",
             label: "Équipes & Joueurs",
             icon: Users,
             description: "Découvrez nos équipes et nos joueurs",
         },
-        { path: "/sport", label: "La Discipline", icon: Target, description: "Apprenez en plus sur le Laser Game" },
-        { path: "/club", label: "Notre Club", icon: Trophy, description: "Découvrez notre club" },
+        { path: "/sponsors", label: "Sponsors", icon: Handshake, description: "Découvrez nos partenaires" },
+        { path: "/socials", label: "Nos Réseaux", icon: Share2, description: "Retrouvez nous sur nos réseaux" },
+        { path: "/contact", label: "Contact", icon: MessageSquare, description: "Contactez-nous directement" },
     ];
 
     const handleRefresh = () => {
@@ -25,6 +40,15 @@ export function NotFoundPage() {
 
     return (
         <div className="pt-20 min-h-screen flex items-center justify-center">
+            <Helmet>
+                <title>Page non trouvée – CLASH</title>
+                <meta
+                    name="description"
+                    content="La page que vous recherchez n'existe pas sur le site CLASH, association de laser game au Havre."
+                />
+                <meta name="robots" content="noindex, follow" />
+            </Helmet>
+
             <div className="container mx-auto px-4 max-w-4xl text-center">
                 {/* Main 404 Section */}
                 <div className="relative mb-16">
@@ -51,8 +75,8 @@ export function NotFoundPage() {
                             </div>
 
                             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                                On dirait que cette page a disparue ! Nous ne parvenons pas à localiser la cible que
-                                vous recherchez.
+                                Oups ! La page que vous cherchez n'existe pas. Revenez à la page d'accueil ou explorez
+                                nos sections.
                             </p>
 
                             <div className="flex items-center justify-center space-x-2 text-primary">
@@ -95,7 +119,7 @@ export function NotFoundPage() {
                         Naviguez vers la page cible :
                     </h2>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
                         {quickLinks.map((link) => {
                             const IconComponent = link.icon;
                             return (

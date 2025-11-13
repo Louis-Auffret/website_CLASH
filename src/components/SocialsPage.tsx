@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -58,7 +59,7 @@ export function SocialsPage() {
             icon: Facebook,
             color: "bg-blue-600 hover:bg-blue-700",
             url: "https://www.facebook.com/CLASHLGE/",
-            description: "Score des équipes, annonces d'évènements et images du club !",
+            description: "Score des équipes, annonces d'évènements et images du club !",
         },
         {
             name: "Tik Tok",
@@ -107,7 +108,7 @@ export function SocialsPage() {
         {
             title: "Nous avons défiés le champion de France de Laser Game",
             thumbnail: "",
-            link: "Miniature de la vidéo de BFM : Nous avons défiés le champion de France de Laser Game",
+            link: "https://www.facebook.com/lasergamelehavre/videos/-champion-de-france-et-sous-les-projecteurs-bfm-normandie-est-venu-interviewer-s/1262808381583012/",
             altText: "",
             channel: "BFM",
             views: "1.9K",
@@ -120,13 +121,26 @@ export function SocialsPage() {
 
     const newsArticles = [
         {
+            title: "Au Havre, 5 choses à savoir sur les champions de France du laser game en compétition",
+            source: "76 Actu",
+            date: "09/17/2025",
+            altText:
+                "Couverture de l'article de 76 Actu : Au Havre, 5 choses à savoir sur les champions de France du laser game en compétition",
+            excerpt:
+                "On a rencontré l'équipe de laser game compétitif du Havre. Depuis juillet 2025, ils sont champions de France de leur discipline. Et justement, c'est quoi exactement le laser game ?",
+            image: "https://static.actu.fr/uploads/2025/09/48530d76-02f6-4ff2-ac04-666511c1fc9c-960x640.jpg",
+            link: "https://actu.fr/normandie/le-havre_76351/au-havre-5-choses-a-savoir-sur-les-champions-de-france-du-laser-game-en-competition_63164416.html",
+            readTime: "3 min",
+            category: "Club CLASH",
+        },
+        {
             title: "Laser game compétitif : l’équipe du Havre sacrée championne de France",
             source: "Paris Normandie",
             date: "08/05/2025",
             altText: "Couverture de l'article du Paris Normandie : CLASH l'équipe du Havre sacrée championne de France",
             excerpt:
                 "L’association havraise Clash vient de décrocher le titre de champion de France de laser game compétitif à Angoulême. Une première pour cette association créée en 2016.",
-            image: "../src/assets/Players_portrait.jpg",
+            image: "../src/assets/AJIN_trophée.webp",
             link: "https://www.paris-normandie.fr/id650248/article/2025-08-04/laser-game-competitif-lequipe-du-havre-sacree-championne-de-france",
             readTime: "2 min",
             category: "Championnat de France",
@@ -143,6 +157,19 @@ export function SocialsPage() {
             link: "https://www.charentelibre.fr/charente/gond-pontouvre/une-equipe-du-havre-remporte-la-coupe-de-france-de-laser-game-organiseeaux-avenauds-a-gond-pontouvre-25234954.php",
             readTime: "1 min",
             category: "Championnat de France",
+        },
+        {
+            title: "Au Havre, un club de laser game vise les championnats de France",
+            source: "76 Actu",
+            date: "01/24/2017",
+            altText:
+                "Couverture de l'article de 76 Actu : Au Havre, un club de laser game vise les championnats de France",
+            excerpt:
+                "Au Havre (Seine-Maritime), le laser game est plus qu'un jeu, c'est un sport ! Le club Clash rassemble une quinzaine d'adeptes, rêvant d'atteindre les championnats de France.",
+            image: "https://static.actu.fr/uploads/2017/01/DSCN1780.JPG",
+            link: "https://actu.fr/normandie/le-havre_76351/au-havre-un-club-de-laser-game-vise-les-championnats-de-france_454476.html",
+            readTime: "1 min",
+            category: "Club CLASH",
         },
     ];
 
@@ -184,7 +211,20 @@ export function SocialsPage() {
 
     return (
         <div className="pt-20">
-            <title>CLASH – Nos Réseaux</title>
+            <Helmet>
+                <title>Nos Réseaux – Laser Game Evolution Le Havre | CLASH</title>
+                <meta
+                    name="description"
+                    content="Suivez Asso-Clash sur nos réseaux sociaux et restez informés des tournois et événements de laser game au Havre."
+                />
+                <meta property="og:title" content="Nos Réseaux – Laser Game Evolution Le Havre | CLASH" />
+                <meta
+                    property="og:description"
+                    content="Restez connectés avec Asso-Clash sur les réseaux sociaux pour suivre toutes les actualités et événements de laser game."
+                />
+                <meta property="og:url" content="https://asso-clash.fr/socials" />
+            </Helmet>
+
             {/* Header Section */}
             <section className="relative py-20 px-4">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5" />

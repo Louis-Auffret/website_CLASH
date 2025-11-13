@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -121,7 +122,20 @@ export function ContactPage() {
 
     return (
         <div className="pt-20">
-            <title>CLASH – Contact</title>
+            <Helmet>
+                <title>Contact – Laser Game Evolution Le Havre | CLASH</title>
+                <meta
+                    name="description"
+                    content="Contactez Asso-Clash, association de laser game evolution au Havre, pour rejoindre nos équipes ou obtenir des informations sur les événements."
+                />
+                <meta property="og:title" content="Contact – Laser Game Evolution Le Havre | CLASH" />
+                <meta
+                    property="og:description"
+                    content="Envoyez-nous un message pour rejoindre Asso-Clash ou participer à nos tournois de laser game au Havre."
+                />
+                <meta property="og:url" content="https://asso-clash.fr/contact" />
+            </Helmet>
+
             {/* Header Section */}
             <section className="relative py-20 px-4">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5" />
@@ -171,7 +185,7 @@ export function ContactPage() {
                                             <div className="grid md:grid-cols-2 gap-4">
                                                 <div className="space-y-2">
                                                     <Label htmlFor="nickname" className="text-gray-300">
-                                                        Pseudo
+                                                        Pseudo *
                                                     </Label>
                                                     <Input
                                                         id="nickname"
@@ -179,6 +193,7 @@ export function ContactPage() {
                                                         value={formData.nickname}
                                                         onChange={(e) => handleInputChange("nickname", e.target.value)}
                                                         className="bg-input border-primary/20 focus:border-primary/50 text-white placeholder:text-gray-500"
+                                                        required
                                                     />
                                                 </div>
                                                 <div className="space-y-2">

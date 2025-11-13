@@ -1,16 +1,18 @@
+import { Helmet } from "react-helmet";
 import { Card } from "./ui/card";
-import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Trophy, Zap, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
-import background from "../assets/players/avatar_background.webp";
-import Sleaz from "../assets/players/Sleaz_Player.webp";
+// Imports des images :
+import background from "../assets/avatar_background.webp";
+import default_player from "../assets/players/Default.png";
 
 interface TeamsPageProps {
-    onPlayerSelect?: (playerId: string) => void;
+    onPlayerSelect?: (playerId: string, seasonId: string | null) => void;
 }
 
 type Player = {
@@ -50,22 +52,59 @@ type Team = {
     players: Player[];
 };
 
+type Season = {
+    id: number;
+    name: string;
+    start_date: string;
+    end_date?: string;
+};
+
 export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
     const navigate = useNavigate();
     const [teams, setTeams] = useState<Team[]>([]);
+    const [seasons, setSeasons] = useState<Season[]>([]);
+    const [selectedSeason, setSelectedSeason] = useState<string | null>(null);
     const [selectedTeamFilter, setSelectedTeamFilter] = useState<string>("all");
     const [currentIndex, setCurrentIndex] = useState(0);
-    const playerImages: { [key: string]: string } = {
-        // ajoute tous les joueurs ici
-        Sleaz: Sleaz,
-    };
 
-    // Fetch des équipes
+    // const modules = import.meta.glob("../assets/*_player.webp", { eager: true }); // Importe toutes les images du dossier players
+    const modules = import.meta.glob<{ default: string }>("../assets/players/*.png", { eager: true }); // Importe toutes les images du dossier players
+
+    // On reconstruit un objet { Sleaz: <url> }
+    const playerImages: { [key: string]: string } = {};
+
+    for (const path in modules) {
+        const fileName = path.split("/").pop()?.replace(".png", "");
+        if (fileName) {
+            playerImages[fileName] = modules[path].default;
+        }
+    }
+
+    // Fetch des équipes en fonction de la saison sélectionnée
     useEffect(() => {
-        fetch("https://asso-clash.fr/backend/api.php")
+        if (!selectedSeason) return;
+
+        fetch(`https://asso-clash.fr/backend/api.php?season_id=${selectedSeason}`)
             .then((res) => res.json())
             .then((data) => setTeams(data))
             .catch((err) => console.error("Erreur chargement API:", err));
+    }, [selectedSeason]);
+
+    // Fetch des saisons
+    useEffect(() => {
+        fetch("https://asso-clash.fr/backend/season.php")
+            .then((res) => res.json())
+            .then((data) => {
+                setSeasons(data);
+                if (data.length > 0) {
+                    // trier par date et sélectionner la plus récente
+                    const sorted = [...data].sort(
+                        (a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+                    );
+                    setSelectedSeason(sorted[0].id.toString());
+                }
+            })
+            .catch((err) => console.error("Erreur chargement API saisons:", err));
     }, []);
 
     // Gestion des flèches du clavier
@@ -74,7 +113,6 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
             if (e.key === "ArrowRight") nextTeam();
             else if (e.key === "ArrowLeft") prevTeam();
         };
-
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [currentIndex]); // dépendance si nextTeam / prevTeam utilisent l’état
@@ -85,7 +123,7 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
             .flatMap((team) =>
                 team.players.map((player) => ({
                     ...player,
-                    team_id: team.id, // s’assurer que team_id est correct
+                    team_id: team.id,
                     team_name: team.name,
                 }))
             )
@@ -97,7 +135,19 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
 
     return (
         <div className="pt-20">
-            <title>CLASH – Équipes & Joueurs</title>
+            <Helmet>
+                <title>Équipes & Joueurs – Laser Game Evolution Le Havre | CLASH</title>
+                <meta
+                    name="description"
+                    content="Découvrez les équipes et joueurs d’Asso-Clash, spécialistes du laser game evolution au Havre. Compétitions et tournois à suivre !"
+                />
+                <meta property="og:title" content="Équipes & Joueurs – Laser Game Evolution Le Havre | CLASH" />
+                <meta
+                    property="og:description"
+                    content="Rencontrez les joueurs et équipes d’Asso-Clash, champions de laser game evolution au Havre."
+                />
+                <meta property="og:url" content="https://asso-clash.fr/teams" />
+            </Helmet>
 
             {/* Header Section */}
             <section className="relative py-20 px-4">
@@ -117,6 +167,30 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
             <section className="py-16 px-4">
                 <div className="container mx-auto max-w-6xl relative">
                     <h2 className="text-4xl font-bold text-center mb-12 text-primary">Nos équipes</h2>
+
+                    {/* Dropdown Saison */}
+                    {seasons.length > 0 && (
+                        <div className="flex justify-center mb-12 max-w-fit justify-self-center">
+                            <Select value={selectedSeason ?? ""} onValueChange={(value) => setSelectedSeason(value)}>
+                                <SelectTrigger className="px-4 py-2 rounded-xl border border-primary/40 bg-card text-white shadow-md focus:outline-none focus:ring-2 focus:ring-primary">
+                                    <SelectValue placeholder="Sélectionnez une saison" />
+                                </SelectTrigger>
+
+                                <SelectContent>
+                                    {seasons
+                                        .sort(
+                                            (a, b) =>
+                                                new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+                                        )
+                                        .map((season) => (
+                                            <SelectItem key={season.id} value={season.id.toString()}>
+                                                {season.name}
+                                            </SelectItem>
+                                        ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+                    )}
 
                     {/* Flèches */}
                     {teams.length > 1 && (
@@ -156,16 +230,16 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                                     <div className="flex justify-between">
                                                         <p className="text-gray-400">Victoires:</p>
                                                         <p className="text-primary font-bold">
-                                                            {team.players.reduce(
+                                                            {/* {team.players.reduce(
                                                                 (acc, player) => acc + player.total_wins,
                                                                 0
-                                                            ) / 5}
-                                                            {/* {Math.round(
+                                                            ) / 5} */}
+                                                            {Math.round(
                                                                 team.players.reduce(
                                                                     (acc, player) => acc + player.total_wins,
                                                                     0
                                                                 ) / 5
-                                                            )} */}
+                                                            )}
                                                         </p>
                                                     </div>
                                                     <div className="flex justify-between">
@@ -195,11 +269,27 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                                     </h4>
                                                     {(() => {
                                                         let achievements: string[] = [];
-                                                        try {
-                                                            achievements = JSON.parse(team.achievements);
-                                                        } catch {
-                                                            achievements = [team.achievements];
+
+                                                        if (team.achievements) {
+                                                            try {
+                                                                const parsed = JSON.parse(team.achievements);
+                                                                // S'assurer que parsed est bien un tableau
+                                                                achievements = Array.isArray(parsed)
+                                                                    ? parsed
+                                                                    : [parsed];
+                                                            } catch {
+                                                                achievements = [team.achievements];
+                                                            }
                                                         }
+
+                                                        if (achievements.length === 0) {
+                                                            return (
+                                                                <span className="text-sm text-gray-500">
+                                                                    Aucun succès
+                                                                </span>
+                                                            );
+                                                        }
+
                                                         return achievements.map((ach, i) => (
                                                             <div key={i} className="flex items-center space-x-2">
                                                                 <Trophy className="h-4 w-4 text-primary" />
@@ -219,11 +309,14 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                                             key={player.player_id}
                                                             className="bg-secondary/30 border-primary/10 p-4 hover:border-primary/30 transition-all duration-300 group">
                                                             <div className="flex items-center space-x-4">
-                                                                <div className="relative">
+                                                                <div className="relative w-14 h-14 border-2 border-primary/30 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300">
                                                                     <ImageWithFallback
-                                                                        src={player.photo}
-                                                                        alt={player.player_pseudo}
-                                                                        className="w-12 h-12 rounded-full object-cover border-2 border-primary/30 group-hover:scale-110 transition-transform duration-300"
+                                                                        src={
+                                                                            playerImages[player.player_pseudo] ||
+                                                                            default_player
+                                                                        }
+                                                                        alt={"Portrait de " + player.player_pseudo}
+                                                                        className="object-cover object-top scale-140 translate-y-5"
                                                                     />
                                                                 </div>
                                                                 <div className="flex-1">
@@ -380,11 +473,11 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                     onClick={() =>
                                         onPlayerSelect &&
                                         player.player_id &&
-                                        onPlayerSelect(player.player_id.toString())
+                                        navigate(`/player/${player.player_id}?season_id=${selectedSeason}`)
                                     }>
                                     <div className="flex items-start flex-col md:flex-row">
                                         <div
-                                            className="flex-2 relative flex-shrink-0"
+                                            className="relative flex-2 relative flex-shrink-0"
                                             style={{ height: "-webkit-fill-available" }}>
                                             <div
                                                 className="w-32 h-32 overflow-hidden max-h-70 md:max-h-none"
@@ -398,157 +491,192 @@ export function TeamsPage({ onPlayerSelect }: TeamsPageProps) {
                                                     className="w-full h-full object-cover"
                                                 />
                                                 <ImageWithFallback
-                                                    src={playerImages[player.player_pseudo]}
-                                                    alt={player.player_pseudo}
-                                                    className="absolute inset-0 w-full h-full object-cover object-top z-10 transition-transform duration-500 origin-bottom md:translate-y-2 md:group-hover:scale-102"
+                                                    src={playerImages[player.player_pseudo] || default_player}
+                                                    alt={"Portrait de " + player.player_pseudo}
+                                                    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 origin-bottom md:translate-y-2 md:group-hover:scale-102"
                                                 />
                                             </div>
                                         </div>
 
-                                        <div className="flex-8 p-6">
-                                            <div>
-                                                <div className="flex items-start justify-between mb-4">
-                                                    <div>
-                                                        <h3 className="text-2xl font-bold text-primary mb-1">
-                                                            {player.player_pseudo}
-                                                        </h3>
-                                                        <div className="flex items-center space-x-3">
-                                                            <span className="text-white font-medium">
-                                                                {player.firstName + " " + player.lastName}
-                                                            </span>
-                                                            <span className="text-gray-400">•</span>
-                                                            <span className="text-white">{player.team_name}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="text-right">
-                                                        <p className="flex items-center text-sm text-gray-400 mb-1">
-                                                            Voir le profil
-                                                            <div className="visible text-primary group-hover:scale-110 transition-transform duration-300">
-                                                                <svg
-                                                                    className="h-5 w-5 ml-1"
-                                                                    fill="none"
-                                                                    stroke="currentColor"
-                                                                    viewBox="0 0 24 24">
-                                                                    <path
-                                                                        strokeLinecap="round"
-                                                                        strokeLinejoin="round"
-                                                                        strokeWidth={2}
-                                                                        d="M9 5l7 7-7 7"
-                                                                    />
-                                                                </svg>
-                                                            </div>
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                                                    <div className="text-center">
-                                                        <p className="text-2xl font-bold text-primary">
-                                                            {player.career_score.toLocaleString()}
-                                                        </p>
-                                                        <p className="text-sm text-gray-400">Score</p>
-                                                    </div>
-                                                    <div className="text-center">
-                                                        <p className="text-2xl font-bold text-primary">
-                                                            {player.career_given.toLocaleString()}
-                                                        </p>
-                                                        <p className="text-sm text-gray-400">Données</p>
-                                                    </div>
-                                                    <div className="text-center">
-                                                        <p className="text-2xl font-bold text-primary">
-                                                            {player.career_received.toLocaleString()}
-                                                        </p>
-                                                        <p className="text-sm text-gray-400">Reçues</p>
-                                                    </div>
-                                                    <div className="text-center">
-                                                        <p className="text-2xl font-bold text-primary">
-                                                            {player.career_TK}
-                                                        </p>
-                                                        <p className="text-sm text-gray-400">Tirs alliés</p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                                                    <div className="text-center">
-                                                        <p className="text-2xl font-bold text-primary">
-                                                            {player.career_matches
-                                                                ? (
-                                                                      Number(player.career_score) /
-                                                                      Number(player.career_matches)
-                                                                  ).toFixed(2)
-                                                                : 0}
-                                                        </p>
-                                                        <p className="text-sm text-gray-400">Moyenne Score</p>
-                                                    </div>
-                                                    <div className="text-center">
-                                                        <p className="text-2xl font-bold text-primary">
-                                                            {player.career_matches
-                                                                ? (
-                                                                      Number(player.career_given) /
-                                                                      Number(player.career_matches)
-                                                                  ).toFixed(2)
-                                                                : 0}
-                                                        </p>
-                                                        <p className="text-sm text-gray-400">Moyenne Données</p>
-                                                    </div>
-                                                    <div className="text-center">
-                                                        <p className="text-2xl font-bold text-primary">
-                                                            {player.career_matches
-                                                                ? (
-                                                                      Number(player.career_received) /
-                                                                      Number(player.career_matches)
-                                                                  ).toFixed(2)
-                                                                : 0}
-                                                        </p>
-                                                        <p className="text-sm text-gray-400">Moyenne Reçues</p>
-                                                    </div>
-                                                    <div className="text-center">
-                                                        <p className="text-2xl font-bold text-primary">
-                                                            {player.career_matches}
-                                                        </p>
-                                                        <p className="text-sm text-gray-400">Total matchs</p>
-                                                    </div>
-                                                </div>
+                                        <div className="flex-8 p-6 w-full">
+                                            <div className="flex items-start justify-between mb-4">
                                                 <div>
-                                                    <h4 className="font-bold text-white mb-2">Succès</h4>
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {(() => {
-                                                            let achievements: string[] = [];
-                                                            try {
-                                                                // On essaie de parser comme un tableau JSON
-                                                                if (typeof player.player_achievements === "string") {
-                                                                    achievements = JSON.parse(
-                                                                        player.player_achievements
-                                                                    );
-                                                                    // Si ce n'est pas un tableau après parse, on le transforme en tableau
-                                                                    if (!Array.isArray(achievements))
-                                                                        achievements = [achievements];
-                                                                } else if (Array.isArray(player.player_achievements)) {
-                                                                    achievements = player.player_achievements;
-                                                                } else {
-                                                                    achievements = [String(player.player_achievements)];
-                                                                }
-                                                            } catch (e) {
-                                                                // Si JSON.parse échoue, on met juste la valeur dans un tableau
-                                                                achievements = [player.player_achievements];
-                                                            }
-
-                                                            return achievements.map((ach, i) => (
-                                                                <div
-                                                                    key={i}
-                                                                    className="flex items-center space-x-1 bg-primary/10 px-2 py-1 rounded-full">
-                                                                    <Trophy className="h-4 w-4 text-primary mr-2" />
-                                                                    <span className="text-sm text-gray-300">{ach}</span>
-                                                                </div>
-                                                            ));
-                                                        })()}
+                                                    <h3 className="text-2xl font-bold text-primary mb-1">
+                                                        {player.player_pseudo}
+                                                    </h3>
+                                                    <div className="flex items-center space-x-3">
+                                                        <span className="text-white font-medium">
+                                                            {player.firstName + " " + player.lastName}
+                                                        </span>
+                                                        <span className="text-gray-400">•</span>
+                                                        <span className="text-white">{player.team_name}</span>
                                                     </div>
+                                                </div>
+                                                <div className="text-right">
+                                                    <p className="flex items-center text-sm text-gray-400 mb-1">
+                                                        Voir le profil
+                                                        <div className="visible text-primary group-hover:scale-110 transition-transform duration-300">
+                                                            <svg
+                                                                className="h-5 w-5 ml-1"
+                                                                fill="none"
+                                                                stroke="currentColor"
+                                                                viewBox="0 0 24 24">
+                                                                <path
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                    strokeWidth={2}
+                                                                    d="M9 5l7 7-7 7"
+                                                                />
+                                                            </svg>
+                                                        </div>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                                                <div className="text-center">
+                                                    <p className="text-2xl font-bold text-primary">
+                                                        {player.career_score.toLocaleString()}
+                                                    </p>
+                                                    <p className="text-sm text-gray-400">Score</p>
+                                                </div>
+                                                <div className="text-center">
+                                                    <p className="text-2xl font-bold text-primary">
+                                                        {player.career_given.toLocaleString()}
+                                                    </p>
+                                                    <p className="text-sm text-gray-400">Données</p>
+                                                </div>
+                                                <div className="text-center">
+                                                    <p className="text-2xl font-bold text-primary">
+                                                        {player.career_received.toLocaleString()}
+                                                    </p>
+                                                    <p className="text-sm text-gray-400">Reçues</p>
+                                                </div>
+                                                <div className="text-center">
+                                                    <p className="text-2xl font-bold text-primary">
+                                                        {player.career_TK}
+                                                    </p>
+                                                    <p className="text-sm text-gray-400">Tirs alliés</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                                                <div className="text-center">
+                                                    <p className="text-2xl font-bold text-primary">
+                                                        {player.career_matches
+                                                            ? (
+                                                                  Number(player.career_score) /
+                                                                  Number(player.career_matches)
+                                                              ).toFixed(2)
+                                                            : 0}
+                                                    </p>
+                                                    <p className="text-sm text-gray-400">Moyenne Score</p>
+                                                </div>
+                                                <div className="text-center">
+                                                    <p className="text-2xl font-bold text-primary">
+                                                        {player.career_matches
+                                                            ? (
+                                                                  Number(player.career_given) /
+                                                                  Number(player.career_matches)
+                                                              ).toFixed(2)
+                                                            : 0}
+                                                    </p>
+                                                    <p className="text-sm text-gray-400">Moyenne Données</p>
+                                                </div>
+                                                <div className="text-center">
+                                                    <p className="text-2xl font-bold text-primary">
+                                                        {player.career_matches
+                                                            ? (
+                                                                  Number(player.career_received) /
+                                                                  Number(player.career_matches)
+                                                              ).toFixed(2)
+                                                            : 0}
+                                                    </p>
+                                                    <p className="text-sm text-gray-400">Moyenne Reçues</p>
+                                                </div>
+                                                <div className="text-center">
+                                                    <p className="text-2xl font-bold text-primary">
+                                                        {player.career_matches}
+                                                    </p>
+                                                    <p className="text-sm text-gray-400">Total matchs</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold text-white mb-2">Succès</h4>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {(() => {
+                                                        let achievements: string[] = [];
+
+                                                        try {
+                                                            if (typeof player.player_achievements === "string") {
+                                                                const parsed: unknown = JSON.parse(
+                                                                    player.player_achievements
+                                                                );
+
+                                                                if (Array.isArray(parsed)) {
+                                                                    achievements = (
+                                                                        parsed as (string | string[])[]
+                                                                    ).map((item) =>
+                                                                        Array.isArray(item)
+                                                                            ? String(item[0])
+                                                                            : String(item)
+                                                                    );
+                                                                } else {
+                                                                    achievements = [String(parsed)];
+                                                                }
+                                                            } else if (Array.isArray(player.player_achievements)) {
+                                                                achievements = (
+                                                                    player.player_achievements as (string | string[])[]
+                                                                ).map((item) =>
+                                                                    Array.isArray(item) ? String(item[0]) : String(item)
+                                                                );
+                                                            } else {
+                                                                achievements = [String(player.player_achievements)];
+                                                            }
+                                                        } catch (e) {
+                                                            achievements = [String(player.player_achievements)];
+                                                        }
+
+                                                        const maxBadges = 7;
+                                                        const visibleBadges = achievements.slice(0, maxBadges);
+                                                        const hiddenCount = achievements.length - visibleBadges.length;
+
+                                                        return (
+                                                            <>
+                                                                {visibleBadges.map((ach, i) => (
+                                                                    <div
+                                                                        key={i}
+                                                                        className="flex items-center space-x-1 bg-primary/10 px-2 py-1 rounded-full">
+                                                                        <Trophy className="h-4 w-4 text-primary mr-2" />
+                                                                        <span className="text-sm text-gray-300">
+                                                                            {ach}
+                                                                        </span>
+                                                                    </div>
+                                                                ))}
+                                                                {hiddenCount > 0 && (
+                                                                    <div className="flex items-center space-x-1 bg-primary/10 px-2 py-1 rounded-full">
+                                                                        <span className="text-sm text-gray-300">
+                                                                            … +{hiddenCount}
+                                                                        </span>
+                                                                    </div>
+                                                                )}
+                                                            </>
+                                                        );
+                                                    })()}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </Card>
                             ))}
+                    </div>
+                    <div className="container mx-auto max-w-6xl flex flex-col mt-8">
+                        <Button
+                            size="lg"
+                            onClick={() => navigate("/club")}
+                            className="bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4 mx-auto">
+                            Découvrez notre club
+                        </Button>
                     </div>
                 </div>
             </section>

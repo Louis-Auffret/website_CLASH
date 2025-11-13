@@ -1,9 +1,10 @@
+import { Helmet } from "react-helmet";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useNavigate } from "react-router-dom";
-import { Handshake, Target, Users, Trophy, Zap, Star, Mail, Phone, LayoutTemplate } from "lucide-react";
+import { Handshake, Target, Users, Trophy, Zap, Star, Mail, Phone, LayoutTemplate, Download } from "lucide-react";
 import sponsorPhoto from "../assets/TeamAjin_avec_sponsor_Laser_Game_Evolution_Le_Havre.webp";
 
 export function SponsorsPage() {
@@ -81,7 +82,20 @@ export function SponsorsPage() {
 
     return (
         <div className="pt-20">
-            <title>CLASH – Sponsors</title>
+            <Helmet>
+                <title>Sponsors – Laser Game Evolution Le Havre | CLASH</title>
+                <meta
+                    name="description"
+                    content="Découvrez les sponsors d’Asso-Clash, association de laser game au Havre, et nos partenaires qui soutiennent nos événements, compétitions et équipes."
+                />
+                <meta property="og:title" content="Sponsors – Laser Game Evolution Le Havre | CLASH" />
+                <meta
+                    property="og:description"
+                    content="Asso-Clash remercie ses sponsors pour leur soutien dans les compétitions et événements de laser game au Havre."
+                />
+                <meta property="og:url" content="https://asso-clash.fr/sponsors" />
+            </Helmet>
+
             {/* Header Section */}
             <section className="relative py-20 px-4">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />

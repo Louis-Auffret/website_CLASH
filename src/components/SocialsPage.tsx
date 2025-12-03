@@ -21,6 +21,9 @@ import {
     Users,
 } from "lucide-react";
 
+import AjinTrophée from "../assets/AJIN_trophée.webp";
+import BFMcover from "../assets/CLASH_CDF25.webp";
+
 export function SocialsPage() {
     const navigate = useNavigate();
     const socialLinks = [
@@ -107,7 +110,7 @@ export function SocialsPage() {
         },
         {
             title: "Nous avons défiés le champion de France de Laser Game",
-            thumbnail: "",
+            thumbnail: BFMcover,
             link: "https://www.facebook.com/lasergamelehavre/videos/-champion-de-france-et-sous-les-projecteurs-bfm-normandie-est-venu-interviewer-s/1262808381583012/",
             altText: "",
             channel: "BFM",
@@ -140,7 +143,7 @@ export function SocialsPage() {
             altText: "Couverture de l'article du Paris Normandie : CLASH l'équipe du Havre sacrée championne de France",
             excerpt:
                 "L’association havraise Clash vient de décrocher le titre de champion de France de laser game compétitif à Angoulême. Une première pour cette association créée en 2016.",
-            image: "../src/assets/AJIN_trophée.webp",
+            image: AjinTrophée,
             link: "https://www.paris-normandie.fr/id650248/article/2025-08-04/laser-game-competitif-lequipe-du-havre-sacree-championne-de-france",
             readTime: "2 min",
             category: "Championnat de France",
@@ -365,7 +368,7 @@ export function SocialsPage() {
                                     <ImageWithFallback
                                         src={article.image}
                                         alt={article.altText}
-                                        className="w-full h-full object-cover"
+                                        className="w-full h-full object-cover "
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                                     {/* <div className="absolute top-4 left-4">

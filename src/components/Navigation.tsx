@@ -12,7 +12,7 @@ export function Navigation() {
 
     const navItems = [
         { path: "/", label: "Accueil" },
-        { path: "/sport", label: "La Discipline" },
+        { path: "/laser-game", label: "La Discipline" },
         { path: "/club", label: "Notre Club" },
         { path: "/teams", label: "Équipes & Joueurs" },
         { path: "/sponsors", label: "Sponsors" },
@@ -53,7 +53,7 @@ export function Navigation() {
                 </div>
 
                 {/* Desktop menu */}
-                <div className="hidden md:flex items-center space-x-6">
+                <div className="hidden lg:flex items-center space-x-6">
                     {navItems.map((item) => (
                         <NavLink
                             key={item.path}
@@ -71,7 +71,7 @@ export function Navigation() {
                 </div>
 
                 {/* Mobile menu */}
-                <div className="md:hidden relative" ref={menuRef}>
+                <div className="lg:hidden relative" ref={menuRef}>
                     <Button
                         variant="ghost"
                         className="border-primary border-1"

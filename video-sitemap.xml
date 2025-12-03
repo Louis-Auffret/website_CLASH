@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+  <url>
+    <loc>https://asso-clash.fr/</loc>
+
+    <video:video>
+      <video:title>Trailer Ajin</video:title>
+      <video:description>Bande-annonce Ajin disponible sur votre site.</video:description>
+      <video:thumbnail_loc>https://asso-clash.fr/assets/Trailer_Ajin_thumbnail-B_rQCJaI.webp</video:thumbnail_loc>
+      <video:content_loc>https://asso-clash.fr/assets/Trailer_Ajin_CDF-CBj0wsIV.mp4</video:content_loc>
+      <video:duration>97</video:duration>
+      <video:publication_date>2025-11-15T00:00:00+00:00</video:publication_date>
+    </video:video>
+
+  </url>
+
+</urlset>

@@ -75,7 +75,7 @@ export function NotFoundPage() {
                             </div>
 
                             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                                Oups ! La page que vous cherchez n'existe pas. Revenez à la page d'accueil ou explorez
+                                Oups ! La page que vous cherchez n’existe pas. Revenez à la page d’accueil ou explorez
                                 nos sections.
                             </p>
 

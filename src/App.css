@@ -41,6 +41,21 @@
     --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* .text-outline-green {
+    color: transparent;
+    -webkit-text-stroke: 2px #0bd700;
+} */
+
+.gpu-fix {
+    transform: rotate(0deg) translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+.outline-fix {
+    filter: blur(0.1px);
+}
+
 .dark {
     --background: #0a0a0a;
     --foreground: #ffffff;

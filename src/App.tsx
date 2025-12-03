@@ -56,7 +56,7 @@ export default function App() {
                 <main>
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <Route path="/sport" element={<SportPage />} />
+                        <Route path="/laser-game" element={<SportPage />} />
                         <Route path="/club" element={<ClubPage />} />
                         <Route path="/teams" element={<TeamsPageWrapper />} />
                         <Route path="/player/:id" element={<PlayerProfilePage />} />

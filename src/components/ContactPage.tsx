@@ -10,6 +10,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import clubLogo from "../assets/Cover.webp";
+import logo from "../assets/logo-clash.svg";
 import {
     Mail,
     Phone,
@@ -148,7 +149,7 @@ export function ContactPage() {
                     </h1>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                         Envie de rejoindre le club ? Vous voulez essayer la compétition ? Vous avez des questions sur la
-                        discipline, l'association ou autre ? Contactez-nous par mail ou téléphone, nous vous répondrons
+                        discipline, l’association ou autre ? Contactez-nous par mail ou téléphone, nous vous répondrons
                         avec précision.
                     </p>
                 </div>
@@ -308,17 +309,17 @@ export function ContactPage() {
                                                         </SelectTrigger>
                                                         <SelectContent className="bg-card border-primary/20">
                                                             <SelectItem value="Débutant">
-                                                                Débutant (j'ai déjà joué un peu)
+                                                                Débutant (j’ai déjà joué un peu)
                                                             </SelectItem>
                                                             <SelectItem value="Intermédiaire">
-                                                                Intermédiaire (j'ai déjà joué de nombreuses parties)
+                                                                Intermédiaire (j’ai déjà joué de nombreuses parties)
                                                             </SelectItem>
                                                             <SelectItem value="Expert">
                                                                 Expert (je joue régulièrement, je participe aux
                                                                 no-limits de mon centre)
                                                             </SelectItem>
                                                             <SelectItem value="Joueur Pro">
-                                                                Joueur pro (joueur d'une équipe)
+                                                                Joueur pro (joueur d’une équipe)
                                                             </SelectItem>
                                                         </SelectContent>
                                                     </Select>
@@ -333,7 +334,7 @@ export function ContactPage() {
                                                             handleInputChange("availability", value)
                                                         }>
                                                         <SelectTrigger className="bg-input border-primary/20 focus:border-primary/50 text-white">
-                                                            <SelectValue placeholder="Quand peux-tu t'entraîner ?" />
+                                                            <SelectValue placeholder="Quand peux-tu t’entraîner ?" />
                                                         </SelectTrigger>
                                                         <SelectContent className="bg-card border-primary/20">
                                                             <SelectItem value="Dimanche">Dimanche</SelectItem>
@@ -376,7 +377,7 @@ export function ContactPage() {
                                                 REJOINS NOS ÉQUIPES
                                             </Button>
                                             <p className="text-sm text-gray-400 mt-4 text-center">
-                                                En soumettant ce formulaire, vous acceptez d'être contacté par les
+                                                En soumettant ce formulaire, vous acceptez d’être contacté par les
                                                 représentants du CLASH au sujet de votre adhésion.
                                             </p>
                                         </div>
@@ -404,7 +405,7 @@ export function ContactPage() {
                                             </div>
                                             <h4 className="font-bold text-white mb-2">Évaluation des compétences</h4>
                                             <p className="text-gray-400 text-sm">
-                                                Rejoins-nous pour une session d'évaluation ludique
+                                                Rejoins-nous pour une session d’évaluation ludique
                                             </p>
                                         </div>
                                         <div className="text-center">
@@ -482,7 +483,7 @@ export function ContactPage() {
                                         )
                                     }>
                                     <MapPin className="h-4 w-4 mr-2" />
-                                    Obtenir l'adresse
+                                    Obtenir l’adresse
                                 </Button>
                             </div>
                         </Card>
@@ -504,7 +505,7 @@ export function ContactPage() {
 
                         {/* Arena Image */}
                         <div className="relative cursor-pointer overflow-hidden group rounded-lg border border-primary/20">
-                            <a onClick={() => navigate("/sport")}>
+                            <a onClick={() => navigate("/laser-game")}>
                                 <ImageWithFallback
                                     src={clubLogo}
                                     alt="CLASH Gaming Center"
@@ -522,8 +523,31 @@ export function ContactPage() {
                 </div>
             </div>
 
-            {/* FAQ Section */}
+            {/* Press Kit Section */}
             <section className="py-16 px-4 bg-secondary/30">
+                <div>
+                    <h2 className="text-4xl font-bold text-center mb-12 text-primary">Kit de Presse</h2>
+                    <div className="flex justify-center">
+                        <Button
+                            size="lg"
+                            onClick={() => {
+                                // Création d'un lien temporaire pour le téléchargement
+                                const link = document.createElement("a");
+                                link.href = logo; // Remplacez par le chemin réel de votre fichier
+                                link.download = "logo-CLASH.svg"; // Nom du fichier téléchargé
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                            }}
+                            className="bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4 mx-auto">
+                            Télécharger le logo CLASH
+                        </Button>
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ Section */}
+            {/* <section className="py-16 px-4 bg-secondary/30">
                 <div className="container mx-auto max-w-4xl flex flex-col justify-center">
                     <h2 className="text-4xl font-bold text-center mb-12 text-primary">Foire aux questions</h2>
 
@@ -531,8 +555,8 @@ export function ContactPage() {
                         <Card className="bg-card border-primary/20 p-6 hover:border-primary/40 transition-all duration-300">
                             <h3 className="font-bold text-white mb-3">Comment rejoindre le CLASH ?</h3>
                             <p className="text-gray-400 text-sm">
-                                Viens faire une session d'essais avec nos équipes le lundi ou dimanche. En fonction de
-                                ton niveau, nous te redirigerons vers l'entraînement le plus adapté. Tout en te
+                                Viens faire une session d’essais avec nos équipes le lundi ou dimanche. En fonction de
+                                ton niveau, nous te redirigerons vers l’entraînement le plus adapté. Tout en te
                                 conseillant par rapport à tes envies.
                             </p>
                         </Card>
@@ -558,10 +582,10 @@ export function ContactPage() {
                         </Card>
 
                         <Card className="bg-card border-primary/20 p-6 hover:border-primary/40 transition-all duration-300">
-                            <h3 className="font-bold text-white mb-3">Ai-je besoins d'équipement ?</h3>
+                            <h3 className="font-bold text-white mb-3">Ai-je besoins d’équipement ?</h3>
                             <p className="text-gray-400 text-sm">
                                 Nous te conseillons de prendre un short et des basquettes (éviter les semelles lisses).
-                                De quoi attacher correctement tes cheveux s'ils sont longs. Certains joueurs apprécient
+                                De quoi attacher correctement tes cheveux s’ils sont longs. Certains joueurs apprécient
                                 jouer avec des coudières ou genouillères souples (type volley).
                             </p>
                         </Card>
@@ -569,12 +593,12 @@ export function ContactPage() {
 
                     <Button
                         size="lg"
-                        onClick={() => navigate("/sport")}
+                        onClick={() => navigate("/laser-game")}
                         className="bg-primary text-black hover:bg-primary/90 text-lg px-12 py-4 mx-auto">
                         En apprendre plus sur notre discipline
                     </Button>
                 </div>
-            </section>
+            </section> */}
         </div>
     );
 }

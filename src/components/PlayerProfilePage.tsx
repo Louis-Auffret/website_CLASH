@@ -354,7 +354,7 @@ export function PlayerProfilePage() {
                                                 {playerHistory.map((entry) => (
                                                     <div
                                                         key={entry.season.id}
-                                                        className="flex items-center gap-4 p-3 bg-secondary/40 rounded-lg">
+                                                        className="flex items-center gap-4 p-3 m-0 bg-secondary/40 rounded-lg">
                                                         <img
                                                             src={entry.team_logo ? entry.team_logo : CLASHLogo}
                                                             alt={entry.team_name}
@@ -825,7 +825,7 @@ export function PlayerProfilePage() {
             {/* All Seasons Stats Overview */}
             <section className="py-16 px-4 ">
                 <div className="container mx-auto max-w-6xl">
-                    <h2 className="text-3xl font-bold text-primary mb-8">Performances de la carrière globale</h2>
+                    <h2 className="text-3xl font-bold text-primary mb-8">Performances de la carrière</h2>
                     <div className="flex flex-row gap-6">
                         <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
                             <Card className="bg-card border-primary/20 p-4 text-center">
@@ -877,39 +877,39 @@ export function PlayerProfilePage() {
                         </div>
 
                         {/* Career Overview */}
-                        <Card className="bg-card border-primary/20 p-6 flex-1 min-w-[220px]">
-                            <h3 className="text-xl font-bold text-white mb-4">Statistiques de carrière</h3>
+                        <Card className="bg-card border-primary/20 p-6 flex-1 min-w-[150px]">
+                            <h3 className="text-xl font-bold text-white mb-4">Statistiques</h3>
                             <div className="space-y-4">
                                 <div className="flex justify-between">
-                                    <span className="text-gray-400">Score total&nbsp;:</span>
+                                    <span className="text-gray-400">Score</span>
                                     <span className="text-primary font-bold">{player.career_score}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-400">Total données&nbsp;:</span>
+                                    <span className="text-gray-400">Données</span>
                                     <span className="text-primary font-bold">{player.career_given}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-400">Total reçues&nbsp;:</span>
+                                    <span className="text-gray-400">Reçues</span>
                                     <span className="text-red-500">{player.career_received}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-400">Total Tirs alliés&nbsp;:</span>
+                                    <span className="text-gray-400">TK</span>
                                     <span className="text-red-500">{player.career_TK}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-400">Victoires&nbsp;:</span>
+                                    <span className="text-gray-400">Victoires</span>
                                     <span className="text-primary font-bold">{player.career_wins}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-400">Défaites&nbsp;:</span>
+                                    <span className="text-gray-400">Défaites</span>
                                     <span className="text-red-500">{player.career_defeats}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-400">Égalités&nbsp;:</span>
+                                    <span className="text-gray-400">Égalités</span>
                                     <span className="text-white">{player.career_draws}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-400">Tournois joués&nbsp;:</span>
+                                    <span className="text-gray-400">Tournois</span>
                                     <span className="text-white">{player.career_competition}</span>
                                 </div>
                             </div>

@@ -6,6 +6,11 @@ import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Trophy, ArrowLeft, Star, Calendar, Users, TrendingUp } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import EnpireLogo from "../assets/teams_logo/Enpire.webp";
+import CLASHLogo from "../assets/teams_logo/CLASH.webp";
+import PingWinLogo from "../assets/teams_logo/Ping'Win.webp";
+import AjinLogo from "../assets/teams_logo/Team'Ajin.webp";
+import PlatypUsLogo from "../assets/teams_logo/Platyp'Us.webp";
 
 // Imports des images :
 import background from "../assets/avatar_background.webp";
@@ -94,6 +99,18 @@ export function PlayerProfilePage() {
     // --- Stats comparatives ---
     const [statsA, setStatsA] = useState<Player | null>(null);
     const [statsB, setStatsB] = useState<Player | null>(null);
+
+    const [playerHistory, setPlayerHistory] = useState<
+        { season: Season; team_name: string; team_logo: string | null }[]
+    >([]);
+
+    const teamLogos: Record<string, string> = {
+        Enpire: EnpireLogo,
+        CLASH: CLASHLogo,
+        "Ping'Win": PingWinLogo,
+        "Team'Ajin": AjinLogo,
+        "Platyp'Us": PlatypUsLogo,
+    };
 
     // ------- UTILITAIRES -------
     const getAge = (birthdate: string) => {
@@ -204,6 +221,41 @@ export function PlayerProfilePage() {
             .catch((err) => console.error("Erreur chargement stats B:", err));
     }, [id, selectedSeasonB]);
 
+    useEffect(() => {
+        if (!id || seasons.length === 0) return;
+
+        const loadHistory = async () => {
+            const history: { season: Season; team_name: string; team_logo: string | null }[] = [];
+
+            for (const season of seasons) {
+                const res = await fetch(`https://asso-clash.fr/backend/api.php?season_id=${season.id}`);
+                const teams = await res.json();
+
+                const allPlayers = teams.flatMap((team: any) =>
+                    team.players.map((p: any) => ({
+                        ...p,
+                        team_name: team.name,
+                        team_logo: team.logo ?? null, // si tu as un logo
+                    }))
+                );
+
+                const found = allPlayers.find((p) => p.player_id.toString() === id);
+
+                if (found) {
+                    history.push({
+                        season,
+                        team_name: found.team_name,
+                        team_logo: teamLogos[found.team_name] ?? null,
+                    });
+                }
+            }
+
+            setPlayerHistory(history);
+        };
+
+        loadHistory();
+    }, [id, seasons]);
+
     // ------- Gestion du chargement et erreurs -------
     if (loading) {
         return <div className="pt-20 min-h-screen flex items-center justify-center text-white">Chargement...</div>;
@@ -264,26 +316,23 @@ export function PlayerProfilePage() {
                             <div className="lg:col-span-2">
                                 {player && (
                                     <>
-                                        <h1 className="text-4xl font-bold text-primary mb-2">
+                                        <h1 className="text-4xl font-bold text-primary mb-4">
                                             {player.player_pseudo}
                                             <span className="text-white font-normal">
                                                 {" "}
                                                 - {player.firstName} {player.lastName}
                                             </span>
                                         </h1>
-                                        <div className="flex items-center space-x-4 mb-4">
-                                            <Badge variant="secondary">{player.team_name}</Badge>
-                                        </div>
                                         <div className="grid md:grid-cols-3 gap-4 text-sm mb-6">
-                                            <div className="flex items-center space-x-2">
-                                                <Calendar className="h-4 w-4 text-primary" />
-                                                <span className="text-gray-400">Inscrit:</span>
-                                                <span className="text-white">{player.registration}</span>
-                                            </div>
                                             <div className="flex items-center space-x-2">
                                                 <Users className="h-4 w-4 text-primary" />
                                                 <span className="text-gray-400">Âge:</span>
                                                 <span className="text-white">{getAge(player.birthdate)} ans</span>
+                                            </div>
+                                            <div className="flex items-center space-x-2">
+                                                <Calendar className="h-4 w-4 text-primary" />
+                                                <span className="text-gray-400">Inscrit:</span>
+                                                <span className="text-white">{player.registration}</span>
                                             </div>
                                             <div className="flex items-center space-x-2">
                                                 <TrendingUp className="h-4 w-4 text-primary" />
@@ -295,42 +344,30 @@ export function PlayerProfilePage() {
                                             </div>
                                         </div>
 
-                                        {/* 
-                                        {(() => {
-                                            // Utilise les scores de toutes les compétitions s'ils existent, sinon le total global
-                                            const scores =
-                                                player.competitions?.length > 0
-                                                    ? player.competitions.map((c) => c.score)
-                                                    : [player.total_score];
+                                        {/* Teams */}
+                                        <div className="mt-6">
+                                            <h3 className="text-xl font-bold text-primary mb-3">
+                                                Historique des équipes
+                                            </h3>
 
-                                            const minScore = Math.min(...scores);
-                                            const maxScore = Math.max(...scores);
-                                            const currentScore = player.total_score ?? 0;
-
-                                            // Normalisation pour éviter division par 0
-                                            const percent =
-                                                maxScore === minScore
-                                                    ? 100
-                                                    : ((currentScore - minScore) / (maxScore - minScore)) * 100;
-
-                                            // Clamp la valeur entre 0 et 100
-                                            const clamped = Math.max(0, Math.min(100, percent));
-
-                                            return (
-                                                <div className="mt-6">
-                                                    <div className="flex justify-between text-xs text-gray-400 mb-1">
-                                                        <span>Performance globale</span>
-                                                        <span>{clamped.toFixed(1)}%</span>
+                                            <div className="space-y-3 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                                {playerHistory.map((entry) => (
+                                                    <div
+                                                        key={entry.season.id}
+                                                        className="flex items-center gap-4 p-3 bg-secondary/40 rounded-lg">
+                                                        <img
+                                                            src={entry.team_logo ? entry.team_logo : CLASHLogo}
+                                                            alt={entry.team_name}
+                                                            className="h-10 w-10 rounded object-contain bg-black/20"
+                                                        />
+                                                        <div>
+                                                            <p className="text-white font-medium">{entry.team_name}</p>
+                                                            <p className="text-gray-400 text-sm">{entry.season.name}</p>
+                                                        </div>
                                                     </div>
-                                                    <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
-                                                        <div
-                                                            className="h-3 bg-gradient-to-r from-primary to-green-500 rounded-full transition-all duration-500"
-                                                            style={{ width: `${clamped}%` }}></div>
-                                                    </div>
-                                                </div>
-                                            );
-                                        })()}
-                                             */}
+                                                ))}
+                                            </div>
+                                        </div>
                                     </>
                                 )}
                             </div>
@@ -345,12 +382,11 @@ export function PlayerProfilePage() {
                     {/* HEADER */}
                     <div className="flex flex-row items-center gap-6 mb-12">
                         <h2 className="text-3xl font-bold text-primary">Statistiques</h2>
-                        <Badge variant="secondary">{player.team_name}</Badge>
                     </div>
 
                     <div className="flex flex-row gap-4">
                         {/* ---------------- CARD 1 – SAISON A ---------------- */}
-                        <Card className="bg-card border-primary/20 p-6 flex-1">
+                        <Card className="bg-card border-primary/20 p-3 sm:p-6 flex-1">
                             {/* Select Saison A */}
                             <Select value={selectedSeasonA ?? ""} onValueChange={setSelectedSeasonA}>
                                 <SelectTrigger className="mt-1 mb-6 px-4 py-3 rounded-xl border border-primary/40 bg-card text-white">
@@ -370,25 +406,40 @@ export function PlayerProfilePage() {
                                 </SelectContent>
                             </Select>
 
+                            <div className="flex flex-col sm:flex-row  sm:justify-between gap-3 mb-4">
+                                <img
+                                    src={
+                                        statsA?.team_name && teamLogos[statsA.team_name]
+                                            ? teamLogos[statsA.team_name]
+                                            : CLASHLogo
+                                    }
+                                    alt={statsA?.team_name ?? "Logo par défaut"}
+                                    className="h-40 w-40 rounded object-contain order-2 sm:order-1"
+                                />
+                                <Badge variant="secondary" className="h-8 order-1 sm:order-2">
+                                    {statsA?.team_name ?? "Équipe inconnue"}
+                                </Badge>
+                            </div>
+
                             {/* Statistiques Saison A */}
                             <div className="space-y-3">
                                 <div className="flex justify-between">
-                                    <span className="text-sm text-gray-400">Score total</span>
+                                    <span className="text-sm text-gray-400">Score</span>
                                     <span className="text-primary font-bold">{statsA?.total_score ?? "-"}</span>
                                 </div>
 
                                 <div className="flex justify-between">
-                                    <span className="text-sm text-gray-400">Touches données</span>
+                                    <span className="text-sm text-gray-400">T.Données</span>
                                     <span className="text-primary">{statsA?.total_given ?? "-"}</span>
                                 </div>
 
                                 <div className="flex justify-between">
-                                    <span className="text-sm text-gray-400">Touches reçues</span>
+                                    <span className="text-sm text-gray-400">T.Reçues</span>
                                     <span className="text-red-500">{statsA?.total_received ?? "-"}</span>
                                 </div>
 
                                 <div className="flex justify-between border-b border-gray-700 pb-3">
-                                    <span className="text-sm text-gray-400">Tirs alliés (TK)</span>
+                                    <span className="text-sm text-gray-400">Tirs alliés</span>
                                     <span className="text-red-500">{statsA?.total_TK ?? "-"}</span>
                                 </div>
 
@@ -432,12 +483,15 @@ export function PlayerProfilePage() {
                                 </div>
 
                                 <div className="flex justify-between border-b border-gray-700 pb-3">
-                                    <span className="text-sm text-gray-400">Egalités</span>
+                                    <span className="text-sm text-gray-400">Égalités</span>
                                     <span className="text-white font-bold">{statsA?.total_draws ?? "-"}</span>
                                 </div>
 
                                 <div className="flex justify-between">
-                                    <span className="text-sm text-gray-400">Taux de victoire</span>
+                                    <span className="text-sm text-gray-400">
+                                        <span className="hidden sm:block">Taux de victoire</span>
+                                        <span className="sm:hidden block">Winrate</span>
+                                    </span>
                                     <span className="text-white font-bold">
                                         {(statsA?.total_matches ?? 0) > 0
                                             ? (
@@ -457,9 +511,7 @@ export function PlayerProfilePage() {
                         </Card>
 
                         {/* ---------------- CARD 2 – DIFFERENCE ---------------- */}
-                        <Card className="border-none py-6 flex justify-end max-w-30">
-                            {/* <h3 className="text-xl font-bold text-white mb-4 text-center">Différence</h3> */}
-
+                        <Card className="border-none py-3 sm:py-6 flex justify-end max-w-30">
                             {/* Fonction utilitaire pour colorer selon la différence */}
                             {(() => {
                                 const diff = (a, b) => (a != null && b != null ? b - a : null);
@@ -643,7 +695,7 @@ export function PlayerProfilePage() {
                         </Card>
 
                         {/* ---------------- CARD 3 – SAISON B ---------------- */}
-                        <Card className="bg-card border-primary/20 p-6 flex-1">
+                        <Card className="bg-card border-primary/20 p-3 sm:p-6 flex-1">
                             {/* Select Saison B */}
                             <Select value={selectedSeasonB ?? ""} onValueChange={setSelectedSeasonB}>
                                 <SelectTrigger className="mt-1 mb-6 px-4 py-3 rounded-xl border border-primary/40 bg-card text-white">
@@ -663,26 +715,41 @@ export function PlayerProfilePage() {
                                 </SelectContent>
                             </Select>
 
+                            <div className="flex flex-col sm:flex-row justify-between gap-3 mb-4">
+                                <Badge variant="secondary" className="h-8">
+                                    {statsB?.team_name ?? "Équipe inconnue"}
+                                </Badge>
+                                <img
+                                    src={
+                                        statsB?.team_name && teamLogos[statsB.team_name]
+                                            ? teamLogos[statsB.team_name]
+                                            : CLASHLogo
+                                    }
+                                    alt={statsB?.team_name ?? "Logo par défaut"}
+                                    className="h-40 w-40 rounded object-contain"
+                                />
+                            </div>
+
                             {/* Stats Saison B */}
                             <div className="space-y-3">
                                 <div className="flex justify-between">
                                     <span className="text-primary font-bold">{statsB?.total_score ?? "-"}</span>
-                                    <span className="text-sm text-gray-400">Score total</span>
+                                    <span className="text-sm text-gray-400">Score</span>
                                 </div>
 
                                 <div className="flex justify-between">
                                     <span className="text-primary">{statsB?.total_given ?? "-"}</span>
-                                    <span className="text-sm text-gray-400">Touches données</span>
+                                    <span className="text-sm text-gray-400">T.Données</span>
                                 </div>
 
                                 <div className="flex justify-between">
                                     <span className="text-red-500">{statsB?.total_received ?? "-"}</span>
-                                    <span className="text-sm text-gray-400">Touches reçues</span>
+                                    <span className="text-sm text-gray-400">T.Reçues</span>
                                 </div>
 
                                 <div className="flex justify-between border-b border-gray-700 pb-3">
                                     <span className="text-red-500">{statsB?.total_TK ?? "-"}</span>
-                                    <span className="text-sm text-gray-400">Tirs alliés (TK)</span>
+                                    <span className="text-sm text-gray-400">Tirs alliés</span>
                                 </div>
 
                                 <div className="flex justify-between">
@@ -726,7 +793,7 @@ export function PlayerProfilePage() {
 
                                 <div className="flex justify-between border-b border-gray-700 pb-3">
                                     <span className="text-white font-bold">{statsB?.total_draws ?? "-"}</span>
-                                    <span className="text-sm text-gray-400">Egalités</span>
+                                    <span className="text-sm text-gray-400">Égalités</span>
                                 </div>
 
                                 <div className="flex justify-between">
@@ -739,7 +806,10 @@ export function PlayerProfilePage() {
                                               ).toFixed(1) + "%"
                                             : "0%"}
                                     </span>
-                                    <span className="text-sm text-gray-400">Taux de victoire</span>
+                                    <span className="text-sm text-gray-400">
+                                        <span className="hidden sm:block">Taux de victoire</span>
+                                        <span className="sm:hidden block">Winrate</span>
+                                    </span>
                                 </div>
 
                                 <div className="flex justify-between">
@@ -807,7 +877,7 @@ export function PlayerProfilePage() {
                         </div>
 
                         {/* Career Overview */}
-                        <Card className="bg-card border-primary/20 p-6 flex-1">
+                        <Card className="bg-card border-primary/20 p-6 flex-1 min-w-[220px]">
                             <h3 className="text-xl font-bold text-white mb-4">Statistiques de carrière</h3>
                             <div className="space-y-4">
                                 <div className="flex justify-between">
@@ -815,15 +885,15 @@ export function PlayerProfilePage() {
                                     <span className="text-primary font-bold">{player.career_score}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-400">Total de touches données&nbsp;:</span>
+                                    <span className="text-gray-400">Total données&nbsp;:</span>
                                     <span className="text-primary font-bold">{player.career_given}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-400">Total de touches reçues&nbsp;:</span>
+                                    <span className="text-gray-400">Total reçues&nbsp;:</span>
                                     <span className="text-red-500">{player.career_received}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-400">Total de Tirs alliés donnés&nbsp;:</span>
+                                    <span className="text-gray-400">Total Tirs alliés&nbsp;:</span>
                                     <span className="text-red-500">{player.career_TK}</span>
                                 </div>
                                 <div className="flex justify-between">
@@ -842,20 +912,13 @@ export function PlayerProfilePage() {
                                     <span className="text-gray-400">Tournois joués&nbsp;:</span>
                                     <span className="text-white">{player.career_competition}</span>
                                 </div>
-                                {/* <div className="flex justify-between">
-                                    <span className="text-gray-400">Saisons jouées&nbsp;:</span>
-                                    <span className="text-white">
-                                        {getExperience(player.registration)}
-                                        {getExperience(player.registration) > 1}
-                                    </span>
-                                </div> */}
                             </div>
                         </Card>
                     </div>
                 </div>
             </section>
 
-            {/* Achievements Section */}
+            {/* Competition Section */}
             <section className="py-16 px-4 bg-secondary/50">
                 <div className="container mx-auto max-w-6xl">
                     <div className="flex flex-row items-center gap-6 mb-8">
@@ -870,27 +933,23 @@ export function PlayerProfilePage() {
                                     <div className="flex flex-row gap-15 justify-between">
                                         <div className="flex flex-col items-center ">
                                             <div className="text-sm text-gray-400 pb-0 md:pb-4">Score</div>
-                                            <div className="text-3xl font-bold text-white mb-4 md:mb-2">
-                                                {comp.score}
-                                            </div>
+                                            <div className="text-3xl font-bold text-white md:mb-2">{comp.score}</div>
                                         </div>
                                         <div className="flex flex-col items-center">
                                             <div className="text-sm text-gray-400 pb-0 md:pb-4">Données</div>
-                                            <div className="text-3xl font-bold text-primary mb-4 md:mb-2">
-                                                {comp.given}
-                                            </div>
+                                            <div className="text-3xl font-bold text-primary md:mb-2">{comp.given}</div>
                                         </div>
                                         <div className="flex flex-col items-center">
                                             <div className="text-sm text-gray-400 pb-0 md:pb-4">Reçues</div>
-                                            <div className="text-3xl font-bold text-destructive mb-4 md:mb-2">
+                                            <div className="text-3xl font-bold text-destructive md:mb-2">
                                                 {comp.received}
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-row gap-10 justify-between">
+                                    <div className="flex flex-row gap-10 justify-between border-y-2 py-2 my-2 md:border-none md:py-0 md:my-0">
                                         <div className="flex flex-col items-center">
-                                            <div className="text-sm text-gray-400 pb-0 md:pb-4">Score Moy</div>
-                                            <div className="text-3xl font-bold text-white mb-4 md:mb-2">
+                                            <div className="text-sm text-gray-400 pb-0 md:pb-4">Score&nbsp;Moy</div>
+                                            <div className="text-3xl font-bold text-white md:mb-2">
                                                 {(
                                                     Number(comp.score) /
                                                     (Number(comp.draws) + Number(comp.defeats) + Number(comp.wins))
@@ -898,8 +957,8 @@ export function PlayerProfilePage() {
                                             </div>
                                         </div>
                                         <div className="flex flex-col items-center">
-                                            <div className="text-sm text-gray-400 pb-0 md:pb-4">Données Moy</div>
-                                            <div className="text-3xl font-bold text-primary mb-4 md:mb-2">
+                                            <div className="text-sm text-gray-400 pb-0 md:pb-4">Données&nbsp;Moy</div>
+                                            <div className="text-3xl font-bold text-primary md:mb-2">
                                                 {(
                                                     Number(comp.given) /
                                                     (Number(comp.draws) + Number(comp.defeats) + Number(comp.wins))
@@ -907,8 +966,8 @@ export function PlayerProfilePage() {
                                             </div>
                                         </div>
                                         <div className="flex flex-col items-center">
-                                            <div className="text-sm text-gray-400 pb-0 md:pb-4">Reçues Moy</div>
-                                            <div className="text-3xl font-bold text-destructive mb-4 md:mb-2">
+                                            <div className="text-sm text-gray-400 pb-0 md:pb-4">Reçues&nbsp;Moy</div>
+                                            <div className="text-3xl font-bold text-destructive md:mb-2">
                                                 {(
                                                     Number(comp.received) /
                                                     (Number(comp.draws) + Number(comp.defeats) + Number(comp.wins))
@@ -919,21 +978,17 @@ export function PlayerProfilePage() {
                                     <div className="flex flex-row gap-10 justify-between">
                                         <div className="flex flex-col items-center">
                                             <div className="text-sm text-gray-400 pb-0 md:pb-4">Victoires</div>
-                                            <div className="text-3xl font-bold text-primary mb-4 md:mb-2">
-                                                {comp.wins}
-                                            </div>
+                                            <div className="text-3xl font-bold text-primary md:mb-2">{comp.wins}</div>
                                         </div>
                                         <div className="flex flex-col items-center">
                                             <div className="text-sm text-gray-400 pb-0 md:pb-4">Défaites</div>
-                                            <div className="text-3xl font-bold text-destructive mb-4 md:mb-2">
+                                            <div className="text-3xl font-bold text-destructive md:mb-2">
                                                 {comp.defeats}
                                             </div>
                                         </div>
                                         <div className="flex flex-col items-center">
                                             <div className="text-sm text-gray-400 pb-0 md:pb-4">Égalités</div>
-                                            <div className="text-3xl font-bold text-white mb-4 md:mb-2">
-                                                {comp.draws}
-                                            </div>
+                                            <div className="text-3xl font-bold text-white md:mb-2">{comp.draws}</div>
                                         </div>
                                     </div>
                                 </div>

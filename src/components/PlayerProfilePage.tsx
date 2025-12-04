@@ -921,9 +921,27 @@ export function PlayerProfilePage() {
             {/* Competition Section */}
             <section className="py-16 px-4 bg-secondary/50">
                 <div className="container mx-auto max-w-6xl">
-                    <div className="flex flex-row items-center gap-6 mb-8">
-                        <h2 className="text-3xl font-bold text-primary">Compétitions</h2>
-                        <Badge variant="secondary">{player.team_name}</Badge>
+                    <div className="flex flex-row items-center justify-between gap-6 mb-8">
+                        <div className="flex flex-row items-center gap-6">
+                            <h2 className="text-3xl font-bold text-primary">Compétitions</h2>
+                            <Badge variant="secondary">{player.team_name}</Badge>
+                        </div>
+
+                        <Select value={selectedSeason ?? ""} onValueChange={(value) => setSelectedSeason(value)}>
+                            <SelectTrigger className="w-[180px] bg-card border border-primary/30">
+                                <SelectValue placeholder="Saison" />
+                            </SelectTrigger>
+
+                            <SelectContent>
+                                {seasons
+                                    .sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime())
+                                    .map((season) => (
+                                        <SelectItem key={season.id} value={season.id.toString()}>
+                                            {season.name}
+                                        </SelectItem>
+                                    ))}
+                            </SelectContent>
+                        </Select>
                     </div>
                     <div>
                         {player.competitions.map((comp) => (
@@ -1033,7 +1051,9 @@ export function PlayerProfilePage() {
                                         <div className="flex-col">
                                             <h3 className="font-bold text-white pb-2">{title}</h3>
                                             {date && <p className="text-sm text-primary pb-2">{formatDate(date)}</p>}
-                                            {description && <p className="text-sm text-gray-400">{description}</p>}
+                                            {description && (
+                                                <p className="text-sm text-gray-400">{description + "."}</p>
+                                            )}
                                         </div>
                                     </div>
                                 </Card>

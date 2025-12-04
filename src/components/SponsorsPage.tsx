@@ -1278,7 +1278,7 @@ export function SponsorsPage() {
                                     ) : (
                                         <>
                                             <Send className="h-6 w-6 mr-3 group-hover:translate-x-1 transition-transform" />
-                                            SOUMETTRE LE FORMULAIRE DE PARTENARIAT
+                                            SOUMETTRE LE FORMULAIRE
                                             <ArrowDown className="h-5 w-5 ml-3 rotate-[-90deg] group-hover:translate-x-1 transition-transform" />
                                         </>
                                     )}
